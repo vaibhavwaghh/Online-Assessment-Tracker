@@ -65,11 +65,11 @@ function MainNav() {
             <HiOutlineCalendarDays />
             <span>H.O.D</span>
           </StyledNavLink>
-          <StyledNavLink to="/cabins">
+          <StyledNavLink to="/teacher">
             <HiOutlineHomeModern />
             <span>Teacher</span>
           </StyledNavLink>
-          <StyledNavLink to="/users">
+          <StyledNavLink to="/student">
             <HiOutlineUser />
             <span>Student</span>
           </StyledNavLink>

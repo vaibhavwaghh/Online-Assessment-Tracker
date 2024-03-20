@@ -1,5 +1,5 @@
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
-// import { ReactQueryDevtools } from "@react-query/devtools";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import PageNotFound from "./pages/PageNotFound";
 import Login from "./pages/Login";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -8,6 +8,8 @@ import ProtectedRoute from "./ui/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
 import AppLayout from "./ui/AppLayout";
 import Dashboard from "./pages/Dashboard";
+import Student from "./pages/Student";
+import Teacher from "./pages/Teacher";
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 0 } },
 });
@@ -16,7 +18,7 @@ function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <GlobalStyles />
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+        <ReactQueryDevtools initialIsOpen={false} />
         <BrowserRouter>
           <Routes>
             <Route
@@ -36,6 +38,8 @@ function App() {
             <Route path="cabins" element={<Cabins />} />
             <Route path="settings" element={<Settings />} />
             <Route path="account" element={<Account />} /> */}
+              <Route path="student" element={<Student />} />
+              <Route path="/teacher" element={<Teacher />} />
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="*" element={<PageNotFound />} />
