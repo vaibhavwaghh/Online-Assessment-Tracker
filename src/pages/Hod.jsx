@@ -1,20 +1,20 @@
-import StudentTable from "../features/student/StudentTable";
+import HodTable from "../features/hod/HodTable";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 
-function Student() {
+function Hod() {
   return (
     <div>
       <Row type="horizontal">
-        <Heading as="h1">All Student</Heading>
+        <Heading as="h1">All Hods</Heading>
         {/* <CabinTableOperations /> */}
       </Row>
       <Row>
-        <StudentTable />
+        <HodTable />
       </Row>
       {/* <AddCabin /> */}
     </div>
   );
 }
 
-export default Student;
+export default Hod;

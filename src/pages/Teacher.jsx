@@ -7,7 +7,7 @@ function Teacher() {
   return (
     <div>
       <Row type="horizontal">
-        <Heading as="h1">All Subjects</Heading>
+        <Heading as="h1">All Teacher</Heading>
         {/* <CabinTableOperations /> */}
       </Row>
       <Row>

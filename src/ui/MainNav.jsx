@@ -61,7 +61,7 @@ function MainNav() {
             <AiOutlineHome />
             <span>Admin</span>
           </StyledNavLink>
-          <StyledNavLink to="/bookings">
+          <StyledNavLink to="/hod">
             <HiOutlineCalendarDays />
             <span>H.O.D</span>
           </StyledNavLink>

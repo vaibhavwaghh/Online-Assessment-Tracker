@@ -10,6 +10,7 @@ import AppLayout from "./ui/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import Student from "./pages/Student";
 import Teacher from "./pages/Teacher";
+import Hod from "./pages/Hod";
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 0 } },
 });
@@ -40,6 +41,7 @@ function App() {
             <Route path="account" element={<Account />} /> */}
               <Route path="student" element={<Student />} />
               <Route path="/teacher" element={<Teacher />} />
+              <Route path="/hod" element={<Hod />} />
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="*" element={<PageNotFound />} />
