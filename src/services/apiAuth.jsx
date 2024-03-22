@@ -1,17 +1,40 @@
 import supabase from "./supaBase";
 
 export async function login({ email, password }) {
-  let { data, error } = await supabase.auth.signInWithPassword({
+  /**1) FIND THE USER ROLE OF THE USER */
+  const { data: studentId, error } = await supabase
+    .from("userRole")
+    .select(" student  ")
+    .eq("emailId", email);
+  console.log("THIS IS STUDENTID ", studentId);
+  const { data: currUserDetails, error3 } = await supabase
+    .from("students")
+    .select(
+      "departmentName (departmentName), currentYear(currentYear)  , currentDiv (currentDivision), studentName "
+    )
+    .eq("id", studentId[0].student);
+  console.log("THIS IS STUDENT DETAILS", currUserDetails);
+
+  /**2) CHECK WHETHER EMAIL ID AND PASSWORD IS CORRECT */
+  const { data: currentUser, error1 } = await supabase.auth.signInWithPassword({
     email,
     password,
   });
 
-  if (error) {
-    throw new Error(error.message);
-  }
-  console.log(data);
-  return data;
+  /**3) UPDATE THE USER-ROLE OF THE CURRENT USER */
+  const { data: currentUser2, error2 } = supabase.auth.updateUser({
+    data: {
+      details: currUserDetails,
+    },
+  });
+
+  // if (error || error1) {
+  //   throw new Error(error.message);
+  // }
+  console.log(currentUser2);
+  return currentUser2;
 }
+
 export async function getCurrentUser() {
   const { data: session } = await supabase.auth.getSession();
   if (!session.session) return null;
@@ -22,4 +45,11 @@ export async function getCurrentUser() {
     throw new Error(error.message);
   }
   return data?.user;
+}
+
+export async function logOut() {
+  const { error } = await supabase.auth.signOut();
+  if (error) {
+    throw new Error(error.message);
+  }
 }

@@ -7,6 +7,7 @@ import {
   HiOutlineHomeModern,
   HiOutlineUser,
 } from "react-icons/hi2";
+
 const NavList = styled.ul`
   display: flex;
   flex-direction: column;
@@ -51,36 +52,46 @@ const StyledNavLink = styled(NavLink)`
     color: var(--color-brand-600);
   }
 `;
-
-function MainNav() {
+function MainNav({ data }) {
   return (
     <nav>
       <NavList>
-        <li>
-          <StyledNavLink to="/">
-            <AiOutlineHome />
-            <span>Admin</span>
-          </StyledNavLink>
-          <StyledNavLink to="/hod">
-            <HiOutlineCalendarDays />
-            <span>H.O.D</span>
-          </StyledNavLink>
-          <StyledNavLink to="/teacher">
-            <HiOutlineHomeModern />
-            <span>Teacher</span>
-          </StyledNavLink>
-          <StyledNavLink to="/student">
-            <HiOutlineUser />
-            <span>Student</span>
-          </StyledNavLink>
-          <StyledNavLink to="/settings">
-            <HiOutlineCog6Tooth />
-            <span>Principal</span>
-          </StyledNavLink>
-        </li>
+        {data?.map((subject) => (
+          <li key={subject.id}>
+            <StyledNavLink to={`/assessment/${subject.subjectName}`}>
+              <AiOutlineHome />
+              <span>{subject.subjectName}</span>
+            </StyledNavLink>
+          </li>
+        ))}
       </NavList>
     </nav>
   );
 }
 
+{
+  /* 
+ <li>
+   <StyledNavLink to="/">
+     <AiOutlineHome />
+     <span>Admin</span>
+   </StyledNavLink>
+   <StyledNavLink to="/hod">
+     <HiOutlineCalendarDays />
+     <span>H.O.D</span>
+   </StyledNavLink>
+   <StyledNavLink to="/teacher">
+     <HiOutlineHomeModern />
+     <span>Teacher</span>
+   </StyledNavLink>
+   <StyledNavLink to="/student">
+     <HiOutlineUser />
+     <span>Student</span>
+   </StyledNavLink>
+   <StyledNavLink to="/settings">
+     <HiOutlineCog6Tooth />
+     <span>Principal</span>
+   </StyledNavLink>
+ </li>; */
+}
 export default MainNav;

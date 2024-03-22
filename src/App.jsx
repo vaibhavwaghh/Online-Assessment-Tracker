@@ -11,6 +11,8 @@ import Dashboard from "./pages/Dashboard";
 import Student from "./pages/Student";
 import Teacher from "./pages/Teacher";
 import Hod from "./pages/Hod";
+import Account from "./pages/Account";
+import AllAssessmentOfThisSubject from "./pages/AllAssessmentOfThisSubject";
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 0 } },
 });
@@ -42,6 +44,11 @@ function App() {
               <Route path="student" element={<Student />} />
               <Route path="/teacher" element={<Teacher />} />
               <Route path="/hod" element={<Hod />} />
+              <Route path="/account" element={<Account />} />
+              <Route
+                path="/assessment/:subjectName"
+                element={<AllAssessmentOfThisSubject />}
+              />
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="*" element={<PageNotFound />} />

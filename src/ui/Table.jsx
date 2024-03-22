@@ -87,8 +87,9 @@ function Row({ children }) {
   );
 }
 function Body({ data, render }) {
-  if (data.length === 0) return <Empty>No data to show</Empty>;
-  return <StyledBody>{data.map(render)}</StyledBody>;
+  console.log(data);
+  if (data?.length === 0) return <Empty>No data to show</Empty>;
+  return <StyledBody>{data?.map(render)}</StyledBody>;
 }
 
 // function Footer() {

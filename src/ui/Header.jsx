@@ -1,4 +1,7 @@
 import styled from "styled-components";
+import Logout from "../features/authentication/LogOut";
+import HeaderMenu from "./HeaderMenu";
+import UserAvatar from "../features/authentication/UserAvatar";
 // import HeaderMenu from "./HeaderMenu";
 // import UserAvatar from "../features/authentication/UserAvatar";
 
@@ -15,8 +18,8 @@ function Header() {
   `;
   return (
     <StyledHeader>
-      {/* <UserAvatar /> */}
-      {/* <HeaderMenu /> */}HEADER
+      <UserAvatar />
+      <HeaderMenu />
     </StyledHeader>
   );
 }
