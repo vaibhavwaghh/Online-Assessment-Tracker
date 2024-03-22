@@ -1,24 +1,27 @@
 import { useParams } from "react-router-dom";
 import Table from "../../ui/Table";
-import useAssessment from "./useAssessment";
+
 import AssesmentRow from "./AssesmentRow";
 import Spinner from "../../ui/Spinner";
+import { useGetAllAssessment } from "./useAssessment";
 
 function AssessmentTable() {
   const { subjectName } = useParams();
   console.log(subjectName);
 
-  const { assessmentData, isLoading, teacher } = useAssessment(subjectName);
+  const { assessmentData, isLoading, teacher } =
+    useGetAllAssessment(subjectName);
   console.log(assessmentData);
   if (isLoading) return <Spinner />;
   return (
-    <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
+    <Table columns="100px 100px 160px 100px 200px 200px 100px">
       <Table.Header>
-        <div></div>
         <div>Name</div>
         <div>Teacher</div>
+        <div>Assignment PDF</div>
+        <div>Deadline</div>
         <div>Status</div>
-        <div>Marks</div>
+        <div>Upload</div>
         <div></div>
       </Table.Header>
       <Table.Body
