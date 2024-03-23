@@ -21,12 +21,12 @@ function AssesmentRow({ assesment, teacher }) {
   let allIds = { asssignmentId, subjectId, studentId };
 
   const { isLoading, data } = useGetStatusOfAsssessment(allIds);
-  console.log("DATA FROM STATUS", data);
+  // console.log("DATA FROM STATUS", data);
   const handleDownload = () => {
     window.open(assignmentInformation, "_blank");
   };
 
-  if (isLoading) return <Spinner />;
+  // if (isLoading) return <Spinner />;
   return (
     <Table.Row>
       <div>{assignmentName}</div>

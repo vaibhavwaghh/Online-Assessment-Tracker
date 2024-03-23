@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 function AssesmentFile({ allIds }) {
   const [fileUploaded, setFileUploaded] = useState(false);
   const [file, setFile] = useState(null);
-  const { isUploading, uploadFile } = useUploadAssesment();
+  const { isUploading, uploadFile } = useUploadAssesment(allIds);
 
   // Function to handle file change
   const handleFileChange = (event) => {

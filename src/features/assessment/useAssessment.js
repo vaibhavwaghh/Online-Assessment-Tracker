@@ -19,14 +19,17 @@ export function useGetAllAssessment(subjectName) {
   return { isLoading, teacher, assessmentData };
 }
 
-export function useUploadAssesment() {
+export function useUploadAssesment(allIds) {
+  const { subjectId, asssignmentId: assignmentId } = allIds;
   const queryClient = useQueryClient();
   const { isLoading: isUploading, mutate: uploadFile } = useMutation({
     mutationFn: (data) => submitNewAssessment(data),
     onSuccess: () => {
-      toast.success("SUCCESSFULLY CREATED A NEW CABIN");
+      toast.success("SUCCESSFULLY SUBMITED A NEW ASSIGNMENT");
       queryClient.invalidateQueries({
-        queryKey: ["cabins"],
+        queryKey: [
+          `statusOfAssessmentSubject_${subjectId}_Assignment_${assignmentId}`,
+        ],
       });
     },
     onError: (err) => {
