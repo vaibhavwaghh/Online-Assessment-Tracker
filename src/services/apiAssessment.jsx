@@ -10,26 +10,21 @@ export async function getAssessmentOfSubject(subjectName) {
       .select("id")
       .eq("subjectName", subjectName);
 
-    /**GET THE TEACHER NAME */
-    const { data: teacherName, error2 } = await supabase
-      .from("teacher")
-      .select("teacherName")
-      .eq("teachingSubject", subjectId[0].id);
-
-    let teacher = teacherName[0]?.teacherName;
-    /**2) GET ALL ASSESSMENTS OF SUBJECT */
+    /**2) GET ALL ASSESSMENTS OF SUBJECT ALONG WITH TEACHERNAME*/
     let { data: assessmentData, error3 } = await supabase
       .from("assignments")
-      .select("*")
+      .select(
+        "assignmentInformation , assignmentName , deadline ,id , subjectOfAssignment , teacherId(teacherName)"
+      )
       .eq("subjectOfAssignment", subjectId[0]?.id);
 
-    if (error1 || error2 || error3) {
-      console.error(error1 || error2 || error3);
+    if (error1 || error3) {
+      console.error(error1 || error3);
       throw new Error("DATA NOT LOADED");
     }
-    console.log(teacher, assessmentData);
+
     // Return an object containing both teacher name and assessment data
-    return { teacher, assessmentData };
+    return assessmentData;
   } catch (error) {
     console.error(error);
     throw new Error("DATA NOT LOADED");

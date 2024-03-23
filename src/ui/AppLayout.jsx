@@ -4,6 +4,9 @@ import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./Header";
 import SideBar from "./SideBar";
+import { useDispatch } from "react-redux";
+import { useUser } from "../features/authentication/useUser";
+import { updatestudentId, updateteacherId } from "../redux/userSlice";
 // import Logout from "../features/authentication/Logout";
 function AppLayout() {
   const StyledAppLayout = styled.div`
@@ -25,11 +28,32 @@ function AppLayout() {
     flex-direction: column;
     gap: 3.2rem;
   `;
+  const {
+    user: {
+      user_metadata: { details },
+    },
+  } = useUser();
+  const dispatch = useDispatch();
+
+  if (details?.studentId) {
+    var { currstudentDetails, studentId } = details;
+    dispatch(updatestudentId(studentId));
+  }
+  if (details?.teacherId) {
+    var { currteacherDetails, teacherId } = details;
+    dispatch(updateteacherId(teacherId));
+  }
+
   return (
     <>
       <StyledAppLayout>
-        <Header />
-        <SideBar />
+        <Header
+          curruserDetails={studentId ? currstudentDetails : currteacherDetails}
+        />
+
+        <SideBar
+          curruserDetails={studentId ? currstudentDetails : currteacherDetails}
+        />
         <Main>
           <Container>
             <Outlet />

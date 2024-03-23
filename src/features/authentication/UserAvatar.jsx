@@ -22,15 +22,14 @@ const Avatar = styled.img`
   border-radius: 50%;
   outline: 2px solid var(--color-grey-100);
 `;
-function UserAvatar() {
-  const {
-    user: {
-      user_metadata: {
-        details: { currUserDetails },
-      },
-    },
-  } = useUser();
-  const { studentName } = currUserDetails[0];
+function UserAvatar({ curruserDetails }) {
+  let username;
+  if (curruserDetails[0]?.studentName) {
+    username = curruserDetails[0]?.studentName;
+  }
+  if (curruserDetails[0]?.teacherName) {
+    username = curruserDetails[0]?.teacherName;
+  }
   return (
     <StyledUserAvatar>
       {/* <Avatar
@@ -38,7 +37,7 @@ function UserAvatar() {
         alt={`Avatar of ${fullName}`}
       /> */}
       <Avatar src={"default-user.jpg"} alt={`Avatar of Vaibhav`} />
-      <span>{studentName}</span>
+      <span>{username}</span>
     </StyledUserAvatar>
   );
 }

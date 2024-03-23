@@ -9,8 +9,7 @@ function AssessmentTable() {
   const { subjectName } = useParams();
   console.log(subjectName);
 
-  const { assessmentData, isLoading, teacher } =
-    useGetAllAssessment(subjectName);
+  const { assessmentData, isLoading } = useGetAllAssessment(subjectName);
   console.log(assessmentData);
   if (isLoading) return <Spinner />;
   return (
@@ -27,11 +26,7 @@ function AssessmentTable() {
       <Table.Body
         data={assessmentData}
         render={(assesment) => (
-          <AssesmentRow
-            teacher={teacher}
-            assesment={assesment}
-            key={assesment.id}
-          />
+          <AssesmentRow assesment={assesment} key={assesment.id} />
         )}
       />
     </Table>

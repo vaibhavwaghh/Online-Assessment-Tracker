@@ -10,9 +10,7 @@ function Teacher() {
         <Heading as="h1">All Teacher</Heading>
         {/* <CabinTableOperations /> */}
       </Row>
-      <Row>
-        <TeacherTable />
-      </Row>
+      <Row>{/* <TeacherTable /> */}</Row>
       {/* <AddCabin /> */}
     </div>
   );

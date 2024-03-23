@@ -5,7 +5,7 @@ import UserAvatar from "../features/authentication/UserAvatar";
 // import HeaderMenu from "./HeaderMenu";
 // import UserAvatar from "../features/authentication/UserAvatar";
 
-function Header() {
+function Header({ curruserDetails }) {
   const StyledHeader = styled.header`
     background-color: var(--color-grey-0);
     padding: 1.2rem 4.8rem;
@@ -18,7 +18,7 @@ function Header() {
   `;
   return (
     <StyledHeader>
-      <UserAvatar />
+      <UserAvatar curruserDetails={curruserDetails} />
       <HeaderMenu />
     </StyledHeader>
   );

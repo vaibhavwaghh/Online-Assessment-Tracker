@@ -7,16 +7,14 @@ import {
 import toast from "react-hot-toast";
 
 export function useGetAllAssessment(subjectName) {
-  const { isLoading, data } = useQuery({
+  const { isLoading, data: assessmentData } = useQuery({
     queryKey: [`assessmentOf${subjectName}`],
     queryFn: () => getAssessmentOfSubject(subjectName),
   });
 
   // Extract teacher and assessment data from the returned data
-  const teacher = data?.teacher;
-  const assessmentData = data?.assessmentData;
 
-  return { isLoading, teacher, assessmentData };
+  return { isLoading, assessmentData };
 }
 
 export function useUploadAssesment(allIds) {

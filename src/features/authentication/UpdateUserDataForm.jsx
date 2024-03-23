@@ -8,51 +8,45 @@ function UpdateUserDataForm() {
   const {
     user: {
       email,
-      user_metadata: {
-        details: { currUserDetails },
-      },
+      user_metadata: { details },
     },
   } = useUser();
 
-  const {
-    currentYear: { currentYear },
-    currentDiv: { currentDivision },
-    departmentName: { departmentName },
-    studentName,
-  } = currUserDetails[0];
-  console.log(
-    email,
-    departmentName,
-    currentDivision,
-    studentName,
+  let curruserDetails; // Define curruserDetails outside the if statements
 
-    currentYear
-  );
+  let currentYear, currentDivision, departmentName, userName, userRole; // Declare variables outside the if blocks
 
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   if (!fullName) return;
-  //   updateUser(
-  //     { fullName, avatar },
-  //     {
-  //       onSuccess: () => {
-  //         setAvatar(null);
-  //         e.target.reset();
-  //       },
-  //     }
-  //   );
-  // }
-  // function handleCancel() {
-  //   setFullName(currentFullName);
-  //   setAvatar(null);
-  // }
+  if (details?.studentId) {
+    userRole = "student";
+    curruserDetails = details.currstudentDetails;
+    // Assign values to variables declared outside
+    ({
+      currentYear: { currentYear },
+      currentDiv: { currentDivision },
+      departmentName: { departmentName },
+      studentName: userName,
+    } = curruserDetails[0]);
+  }
+
+  if (details?.teacherId) {
+    userRole = "teacher";
+    curruserDetails = details.currteacherDetails;
+    // Assign values to variables declared outside
+    ({
+      teachingInYear: { currentYear },
+      teachingInDiv: { currentDivision },
+      teachingInDepartment: { departmentName },
+      teacherName: userName,
+    } = curruserDetails[0]);
+  }
+
   return (
     <Form>
       <FormRow label="Email address">
         <Input value={email} disabled />
       </FormRow>
       <FormRow label="Full name">
-        <Input type="text" value={studentName} disabled />
+        <Input type="text" value={userName} disabled />
       </FormRow>
       <FormRow label="Department Name">
         <Input type="text" value={departmentName} disabled />
@@ -64,7 +58,7 @@ function UpdateUserDataForm() {
         <Input type="number" value={currentDivision} disabled />
       </FormRow>
       <FormRow label="Role">
-        <Input type="text" value="student" disabled />
+        <Input type="text" value={userRole} disabled />
       </FormRow>
       {/* <FormRow>
         <Button

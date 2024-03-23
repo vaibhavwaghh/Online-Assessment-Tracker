@@ -7,7 +7,7 @@ import Spinner from "./Spinner";
 import { useDispatch } from "react-redux";
 import { updatestudentId } from "../redux/userSlice";
 // import Uploader from "../data/Uploader";
-function SideBar() {
+function SideBar({ curruserDetails }) {
   const StyledSideBar = styled.aside`
     background-color: var(--color-grey-0);
     /* background-color: green; */
@@ -18,20 +18,14 @@ function SideBar() {
     flex-direction: column;
     gap: 3.2rem;
   `;
-  const {
-    user: {
-      email,
-      user_metadata: {
-        details: { currUserDetails, studentId },
-      },
-    },
-  } = useUser();
-  const dispatch = useDispatch();
-  dispatch(updatestudentId(studentId));
-  const {
-    currentYear: { currentYear },
-    departmentName: { departmentName },
-  } = currUserDetails[0];
+
+  if (curruserDetails[0]?.studentName) {
+    var {
+      currentYear: { currentYear },
+      departmentName: { departmentName },
+    } = curruserDetails[0];
+  }
+
   const { isLoading: isLoadingStudents, data } = useStudent(
     currentYear,
     departmentName
@@ -41,7 +35,7 @@ function SideBar() {
   return (
     <StyledSideBar>
       <Logo />
-
+      <div></div>
       <MainNav data={data} />
       {/* <Uploader /> */}
     </StyledSideBar>

@@ -8,12 +8,13 @@ import Spinner from "../../ui/Spinner";
 import { useDispatch, useSelector } from "react-redux";
 
 import AssesmentFile from "./AssesmentFile";
-function AssesmentRow({ assesment, teacher }) {
+function AssesmentRow({ assesment }) {
   const {
     assignmentName,
     deadline,
     assignmentInformation,
     id: asssignmentId,
+    teacherId: { teacherName },
   } = assesment;
   const subjectId = useSelector((state) => state.student.subjectId);
   const studentId = useSelector((state) => state.student.studentId);
@@ -30,7 +31,7 @@ function AssesmentRow({ assesment, teacher }) {
   return (
     <Table.Row>
       <div>{assignmentName}</div>
-      <div>{teacher}</div>
+      <div>{teacherName}</div>
       <div>
         {/* Render a button to trigger download */}
         <Button onClick={handleDownload}>View</Button>
