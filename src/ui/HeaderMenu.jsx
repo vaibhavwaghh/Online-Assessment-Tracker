@@ -21,7 +21,7 @@ function HeaderMenu() {
       </li>
       <li>{/* <DarkModeToggle /> */}</li>
       <li>
-        <Logout />
+        <Logout /> 
       </li>
     </StyledHeaderMenu>
   );

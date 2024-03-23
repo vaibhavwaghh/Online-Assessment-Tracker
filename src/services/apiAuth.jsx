@@ -40,7 +40,7 @@ export async function login({ email, password }) {
     const { data: currteacherDetails, error: error4 } = await supabase
       .from("teacher")
       .select(
-        "teachingInDepartment (departmentName), teachingInYear (currentYear)  , teachingInDiv (currentDivision), teacherName"
+        "teachingInDepartment (departmentName), teachingInYear (currentYear),teachingSubject(id, subjectName)  , teachingInDiv (currentDivision), teacherName"
       )
       .eq("id", userId[0].teacher);
     console.log("THIS IS TEACHER DETAILS", currteacherDetails);

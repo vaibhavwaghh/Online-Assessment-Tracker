@@ -6,8 +6,15 @@ import { useUser } from "../features/authentication/useUser";
 import Spinner from "./Spinner";
 import { useDispatch } from "react-redux";
 import { updatestudentId } from "../redux/userSlice";
+import { AiOutlineHome } from "react-icons/ai";
+import TeacherSideBar from "./TeacherSideBar";
 // import Uploader from "../data/Uploader";
 function SideBar({ curruserDetails }) {
+  const NavList = styled.ul`
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+  `;
   const StyledSideBar = styled.aside`
     background-color: var(--color-grey-0);
     /* background-color: green; */
@@ -19,13 +26,15 @@ function SideBar({ curruserDetails }) {
     gap: 3.2rem;
   `;
 
+  if (curruserDetails[0]?.teacherName) {
+    return <TeacherSideBar teacherDetails={curruserDetails[0]} />;
+  }
   if (curruserDetails[0]?.studentName) {
     var {
       currentYear: { currentYear },
       departmentName: { departmentName },
     } = curruserDetails[0];
   }
-
   const { isLoading: isLoadingStudents, data } = useStudent(
     currentYear,
     departmentName

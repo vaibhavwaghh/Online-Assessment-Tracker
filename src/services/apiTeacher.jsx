@@ -37,3 +37,19 @@ export async function getAssignmentOfEachStudent(currentAssignmentOfSubject) {
   }
   return data;
 }
+
+export async function getAllAssignmentOfTeacher(allIds) {
+  console.log("FROM GETALL ASS TEACHER", allIds);
+  const { teacherId, subjectId } = allIds;
+  let query = supabase
+    .from("assignments")
+    .select("*")
+    .eq("subjectOfAssignment", subjectId)
+    .eq("teacherId", teacherId);
+  let { data, error } = await query;
+  if (error) {
+    console.error(error);
+    throw new Error("DATA NOT LOADED");
+  }
+  return data;
+}
