@@ -3,44 +3,30 @@ import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
 import Table from "../../ui/Table";
 import { formatDate } from "../../utils/helpers";
-import { useUploadAssesment } from "./useAssessment";
+import { useGetStatusOfAsssessment } from "./useAssessment";
 import Spinner from "../../ui/Spinner";
+import { useDispatch, useSelector } from "react-redux";
+
+import AssesmentFile from "./AssesmentFile";
 function AssesmentRow({ assesment, teacher }) {
-  const { assignmentName, deadline, assignmentInformation, id } = assesment;
-  console.log(id);
-  const [fileUploaded, setFileUploaded] = useState(false);
-  const [file, setFile] = useState(null);
-  const { isUploading, uploadFile } = useUploadAssesment();
+  const {
+    assignmentName,
+    deadline,
+    assignmentInformation,
+    id: asssignmentId,
+  } = assesment;
+  const subjectId = useSelector((state) => state.student.subjectId);
+  const studentId = useSelector((state) => state.student.studentId);
   // Function to handle the download of the PDF file
+  let allIds = { asssignmentId, subjectId, studentId };
+
+  const { isLoading, data } = useGetStatusOfAsssessment(allIds);
+  console.log("DATA FROM STATUS", data);
   const handleDownload = () => {
     window.open(assignmentInformation, "_blank");
   };
 
-  // Function to handle file change
-  const handleFileChange = (event) => {
-    // Check if files are uploaded
-    if (event.target.files.length > 0) {
-      setFile(event.target.files[0]);
-      setFileUploaded(true);
-    } else {
-      setFile(null);
-      setFileUploaded(false);
-    }
-  };
-
-  // Function to handle form submission
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    if (fileUploaded && file) {
-      console.log("File uploaded:", file);
-      uploadFile(file);
-      // Perform form submission logic
-      console.log("Form submitted successfully");
-    } else {
-      alert("Please upload a PDF file before submitting");
-    }
-  };
-  if (isUploading) return <Spinner />;
+  if (isLoading) return <Spinner />;
   return (
     <Table.Row>
       <div>{assignmentName}</div>
@@ -50,20 +36,12 @@ function AssesmentRow({ assesment, teacher }) {
         <Button onClick={handleDownload}>View</Button>
       </div>
       <div>{formatDate(deadline)}</div>
-      <div>PENDING</div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <FileInput
-            id="pdfFile" // Give it a descriptive ID
-            accept=".pdf" // Specify that only PDF files are allowed
-            type="file"
-            onChange={handleFileChange} // Handle file change
-          />
-        </div>
-        <Button size="small" type="submit">
-          Submit
-        </Button>
-      </form>
+      {data === true ? (
+        <span style={{ color: "BLUE" }}>SUBMITTED</span>
+      ) : (
+        <span style={{ color: "red" }}>PENDING</span>
+      )}
+      <AssesmentFile allIds={allIds} />
     </Table.Row>
   );
 }

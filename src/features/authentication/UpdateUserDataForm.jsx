@@ -8,7 +8,9 @@ function UpdateUserDataForm() {
   const {
     user: {
       email,
-      user_metadata: { details },
+      user_metadata: {
+        details: { currUserDetails },
+      },
     },
   } = useUser();
 
@@ -17,7 +19,7 @@ function UpdateUserDataForm() {
     currentDiv: { currentDivision },
     departmentName: { departmentName },
     studentName,
-  } = details[0];
+  } = currUserDetails[0];
   console.log(
     email,
     departmentName,

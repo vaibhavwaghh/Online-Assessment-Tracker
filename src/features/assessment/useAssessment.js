@@ -1,6 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   getAssessmentOfSubject,
+  getStatusOfCurrentAssignment,
   submitNewAssessment,
 } from "../../services/apiAssessment";
 import toast from "react-hot-toast";
@@ -33,4 +34,25 @@ export function useUploadAssesment() {
     },
   });
   return { isUploading, uploadFile };
+}
+
+export function useGetStatusOfAsssessment(allIds) {
+  const { subjectId, asssignmentId: assignmentId } = allIds;
+
+  const { isLoading, data } = useQuery({
+    queryKey: [
+      `statusOfAssessmentSubject_${subjectId}_Assignment_${assignmentId}`,
+    ],
+    queryFn: () => getStatusOfCurrentAssignment(allIds),
+  });
+
+  console.log("DATA FROM STATUS HOOK", data);
+
+  // Check if data is undefined or loading
+  // if (isLoading || data === undefined) {
+  //   return { isLoading: true, data: false }; // Return null or any other appropriate loading state
+  // }
+  // Extract teacher and assessment data from the returned data
+
+  return { isLoading, data };
 }

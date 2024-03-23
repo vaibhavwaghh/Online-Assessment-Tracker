@@ -24,12 +24,13 @@ export async function getSubjectOfStudent(
   /**3) GET ALL SUBJECTS */
   let { data, error3 } = await supabase
     .from("allSubject") // Replace "YourTableNameHere" with the actual name of your table
-    .select(" subjectName")
+    .select(" *")
     .eq("subjectForYear", yearId[0]?.id);
 
   if (error1 || error2 || error3) {
     console.error(error1);
     throw new Error("DATA NOT LOADED");
   }
+  console.log("this is subj", data);
   return data;
 }

@@ -1,12 +1,16 @@
+import { useDispatch } from "react-redux";
 import supabase from "./supaBase";
+import { updatestudentId } from "../redux/userSlice";
 
 export async function login({ email, password }) {
-  /**1) FIND THE USER ROLE OF THE USER */
+  /**1) FIND THE ID OF THE STUDENT*/
   const { data: studentId, error } = await supabase
     .from("userRole")
     .select(" student  ")
     .eq("emailId", email);
   console.log("THIS IS STUDENTID ", studentId);
+
+  /**2) FIND ALL DETAILS OF STUDENT */
   const { data: currUserDetails, error3 } = await supabase
     .from("students")
     .select(
@@ -15,16 +19,21 @@ export async function login({ email, password }) {
     .eq("id", studentId[0].student);
   console.log("THIS IS STUDENT DETAILS", currUserDetails);
 
-  /**2) CHECK WHETHER EMAIL ID AND PASSWORD IS CORRECT */
+  let allDetails = {
+    currUserDetails,
+    studentId: studentId[0].student,
+  };
+
+  /**3) CHECK WHETHER EMAIL ID AND PASSWORD IS CORRECT */
   const { data: currentUser, error1 } = await supabase.auth.signInWithPassword({
     email,
     password,
   });
 
-  /**3) UPDATE THE USER-ROLE OF THE CURRENT USER */
+  /**4) UPDATE THE USER-ROLE OF THE CURRENT USER */
   const { data: currentUser2, error2 } = supabase.auth.updateUser({
     data: {
-      details: currUserDetails,
+      details: allDetails,
     },
   });
 

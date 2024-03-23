@@ -4,6 +4,8 @@ import Logo from "./Logo";
 import { useStudent } from "../features/student/useStudent";
 import { useUser } from "../features/authentication/useUser";
 import Spinner from "./Spinner";
+import { useDispatch } from "react-redux";
+import { updatestudentId } from "../redux/userSlice";
 // import Uploader from "../data/Uploader";
 function SideBar() {
   const StyledSideBar = styled.aside`
@@ -19,18 +21,22 @@ function SideBar() {
   const {
     user: {
       email,
-      user_metadata: { details },
+      user_metadata: {
+        details: { currUserDetails, studentId },
+      },
     },
   } = useUser();
+  const dispatch = useDispatch();
+  dispatch(updatestudentId(studentId));
   const {
     currentYear: { currentYear },
     departmentName: { departmentName },
-  } = details[0];
+  } = currUserDetails[0];
   const { isLoading: isLoadingStudents, data } = useStudent(
     currentYear,
     departmentName
   );
-  console.log(data);
+  console.log("THIS IS STUDENT SUBJECT DATA", data);
   if (isLoadingStudents) return <Spinner />;
   return (
     <StyledSideBar>
