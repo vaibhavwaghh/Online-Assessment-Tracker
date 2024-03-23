@@ -94,3 +94,25 @@ export async function getStatusOfCurrentAssignment(allIds) {
     return false;
   }
 }
+
+export async function createNewAssignment(newAssignment) {
+  console.log("THIS IS NEW ASSIGNMENT", newAssignment);
+  const { assignmentInformation: file } = newAssignment;
+  const pdfFileName = `${Math.random()}-${file.name}`.replaceAll("/", "");
+
+  const pdfFilePath = `${
+    import.meta.env.VITE_SUPABASE_URL
+  }/storage/v1/object/public/studentUploadedAssignments/${pdfFileName}`;
+
+  const { error: storageError } = await supabase.storage
+    .from("studentUploadedAssignments")
+    .upload(pdfFileName, file);
+
+  /**2) Insert data into submitted assignment */
+  const { data: data1, error } = await supabase
+    .from("assignments")
+    .insert([{ ...newAssignment, assignmentInformation: pdfFilePath }]);
+
+  console.log(data1);
+  console.error(error);
+}

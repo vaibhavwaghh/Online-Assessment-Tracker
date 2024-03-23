@@ -65,22 +65,12 @@ function TeacherSideBar({ teacherDetails }) {
   const {
     teachingSubject: { id, subjectName },
   } = teacherDetails;
-
-  const teacherId = useSelector((state) => state.student.teacherId);
-  const subjectId = id;
-  const allIds = { teacherId, subjectId };
   const dispatch = useDispatch();
-
-  // Function to dispatch subjectId when NavLink is clicked
   const handleClick = () => {
     console.log("THIS SUBJECT WAS CLICKED", id);
     dispatch(updateSubjectId(id));
   };
-  console.log(allIds);
-  const { isLoading, data } = useTeacherAllAssignment(allIds);
-  if (isLoading) return <Spinner />;
-  console.log("ALL ASS OF TEACHER", data);
-  console.log("DATA OF ALL ASSIGNMENT");
+
   return (
     <StyledSideBar>
       <Logo />

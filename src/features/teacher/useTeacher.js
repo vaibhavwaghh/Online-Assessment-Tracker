@@ -17,7 +17,7 @@ export function useTeacherAllAssignment(allIds) {
   const { subjectId, teacherId } = allIds;
 
   const { isLoading, data } = useQuery({
-    queryKey: [`currTeacherAllAssignment${teacherId}subject${subjectId}`],
+    queryKey: [`currTeacherAllAssignment`],
     queryFn: () => getAllAssignmentOfTeacher(allIds),
   });
 

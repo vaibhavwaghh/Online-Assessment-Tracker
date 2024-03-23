@@ -55,3 +55,46 @@ export function getCurrentDateTime() {
 
   return formattedDateTime;
 }
+
+export function convertToCustomFormat(isoDate) {
+  const date = new Date(isoDate);
+  const day = date.getDate();
+  const month = getMonthName(date.getMonth());
+  const year = date.getFullYear();
+  const daySuffix = getDaySuffix(day);
+  return `${day}${daySuffix} ${month} ${year}`;
+}
+
+function getMonthName(monthIndex) {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  return months[monthIndex];
+}
+
+function getDaySuffix(day) {
+  if (day >= 11 && day <= 13) {
+    return "th";
+  }
+  switch (day % 10) {
+    case 1:
+      return "st";
+    case 2:
+      return "nd";
+    case 3:
+      return "rd";
+    default:
+      return "th";
+  }
+}
