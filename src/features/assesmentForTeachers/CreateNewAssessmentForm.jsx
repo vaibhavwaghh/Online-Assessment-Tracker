@@ -69,19 +69,19 @@ function CreateNewAssessmentForm({ onCloseModal }) {
         />
       </FormRow>
 
-      {/* <FormRow label="Regular price" error={errors?.regularPrice?.message}>
+      <FormRow label="Marks" error={errors?.marks?.message}>
         <Input
           type="number"
-          id="regularPrice"
+          id="marks"
           disabled={isCreating}
-          {...register("regularPrice", {
+          {...register("marks", {
             required: "This field is required",
-            min: { value: 1, message: "Regular Price should be atleast 1 " },
+            min: { value: 100, message: "Marks must be less than 100" },
           })}
         />
       </FormRow>
 
-      <FormRow label="Discount" error={errors?.discount?.message}>
+      {/* <FormRow label="Discount" error={errors?.discount?.message}>
         <Input
           type="number"
           id="discount"
@@ -94,7 +94,7 @@ function CreateNewAssessmentForm({ onCloseModal }) {
               "Discount should be less than regular Price",
           })}
         />
-      </FormRow> */}
+      </FormRow>  */}
 
       <FormRow
         label="Description for assignment"

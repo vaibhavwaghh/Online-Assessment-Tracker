@@ -46,10 +46,10 @@ function AssesmentFile({ allIds }) {
           type="file"
           onChange={handleFileChange} // Handle file change
         />
+        <Button size="small" type="submit">
+          Submit
+        </Button>{" "}
       </div>
-      <Button size="small" type="submit">
-        Submit
-      </Button>
     </form>
   );
 }

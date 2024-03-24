@@ -15,6 +15,8 @@ function AssesmentRow({ assesment }) {
     assignmentInformation,
     id: asssignmentId,
     teacherId: { teacherName },
+    description,
+    assignedMarks,
   } = assesment;
   const subjectId = useSelector((state) => state.student.subjectId);
   const studentId = useSelector((state) => state.student.studentId);
@@ -22,6 +24,7 @@ function AssesmentRow({ assesment }) {
   let allIds = { asssignmentId, subjectId, studentId };
 
   const { isLoading, data } = useGetStatusOfAsssessment(allIds);
+
   // console.log("DATA FROM STATUS", data);
   const handleDownload = () => {
     window.open(assignmentInformation, "_blank");
@@ -37,11 +40,26 @@ function AssesmentRow({ assesment }) {
         <Button onClick={handleDownload}>View</Button>
       </div>
       <div>{formatDate(deadline)}</div>
-      {data === true ? (
-        <span style={{ color: "BLUE" }}>SUBMITTED</span>
+      {data?.status ? (
+        <div style={{ color: "BLUE" }}>SUBMITTED</div>
       ) : (
-        <span style={{ color: "red" }}>PENDING</span>
+        <div style={{ color: "red" }}>PENDING</div>
       )}
+      {data?.approved ? (
+        <div style={{ color: "BLUE" }}>YES</div>
+      ) : (
+        <div style={{ color: "red" }}>NO</div>
+      )}
+      {data?.submittedMarks ? (
+        <div style={{ color: "BLUE" }}>
+          {data.submittedMarks}/{assignedMarks}
+        </div>
+      ) : (
+        <div style={{ color: "red" }}>0/{assignedMarks}</div>
+      )}
+
+      <div>{description}</div>
+
       <AssesmentFile allIds={allIds} />
     </Table.Row>
   );

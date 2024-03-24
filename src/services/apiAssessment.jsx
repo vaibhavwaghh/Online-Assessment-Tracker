@@ -14,7 +14,7 @@ export async function getAssessmentOfSubject(subjectName) {
     let { data: assessmentData, error3 } = await supabase
       .from("assignments")
       .select(
-        "assignmentInformation , assignmentName , deadline ,id , subjectOfAssignment , teacherId(teacherName)"
+        "assignmentInformation , assignmentName , deadline ,id , subjectOfAssignment , teacherId(teacherName) , description,assignedMarks"
       )
       .eq("subjectOfAssignment", subjectId[0]?.id);
 
@@ -74,21 +74,21 @@ export async function getStatusOfCurrentAssignment(allIds) {
   console.log("THIS IS STUDENT ID", studentId);
 
   try {
-    const { data: status, error } = await supabase
+    const { data: submittedData, error } = await supabase
       .from("submittedAssignment")
-      .select("status")
+      .select("status , submittedMarks , approved")
       .eq("studentId", studentId)
       .eq("assignmentId", assignmentId)
       .eq("subjectId", subjectId);
 
-    console.log("STATUS OF THIS ASS", status);
+    // console.log("STATUS OF THIS ASS", status);
 
     if (error) {
       console.error(error);
       return false;
     }
 
-    return status ? status[0]?.status : false;
+    return submittedData ? submittedData[0] : {};
   } catch (error) {
     console.error("Error fetching status:", error);
     return false;

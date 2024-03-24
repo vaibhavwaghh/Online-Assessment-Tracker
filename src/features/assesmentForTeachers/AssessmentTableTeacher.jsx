@@ -21,11 +21,13 @@ function AssessmentTableForTeacher() {
   // console.log(assessmentData);
   // if (isLoading) return <Spinner />;
   return (
-    <Table columns="150px 200px 150px 250px 200px">
+    <Table columns="150px 200px 150px 100px 100px 150px 200px">
       <Table.Header>
         <div>Name</div>
         <div>Created</div>
         <div>Deadline</div>
+        <div>Marks</div>
+        <div>Description</div>
         <div>Assignment PDF</div>
         <div>Student Details</div>
       </Table.Header>
