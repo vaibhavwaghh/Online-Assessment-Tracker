@@ -69,17 +69,22 @@ export async function submitNewAssessment(data) {
 }
 
 export async function getStatusOfCurrentAssignment(allIds) {
-  console.log(allIds);
   const { subjectId, studentId, asssignmentId: assignmentId } = allIds;
-  console.log("THIS IS STUDENT ID", studentId);
+
+  console.log(
+    "THIS IS STUDENT SUBJECT TEACHER FROM API",
+    subjectId,
+    assignmentId,
+    studentId
+  );
 
   try {
     const { data: submittedData, error } = await supabase
       .from("submittedAssignment")
-      .select("status , submittedMarks , approved")
+      .select("*")
+      .eq("subjectId", subjectId)
       .eq("studentId", studentId)
-      .eq("assignmentId", assignmentId)
-      .eq("subjectId", subjectId);
+      .eq("assignmentId", assignmentId);
 
     // console.log("STATUS OF THIS ASS", status);
 
@@ -115,4 +120,23 @@ export async function createNewAssignment(newAssignment) {
 
   console.log(data1);
   console.error(error);
+}
+
+export async function updateCurrentAssignment(updatedData) {
+  const { data, allIds } = updatedData;
+  const { subjectId, assignmentId, studentId } = allIds;
+  console.log("DATA AND ID", data, allIds);
+  let query = supabase
+    .from("submittedAssignment")
+    .update({ ...data })
+    .eq("subjectId", subjectId)
+    .eq("studentId", studentId)
+    .eq("assignmentId", assignmentId)
+    .select("*");
+
+  const { data: updated, error } = await query;
+  console.log(updated);
+  if (error) console.log(error);
+  return updated;
+  // .eq("teacherId", teacherId);
 }

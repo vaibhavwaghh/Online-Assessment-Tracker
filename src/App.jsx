@@ -14,6 +14,7 @@ import Hod from "./pages/Hod";
 import Account from "./pages/Account";
 import AllAssessmentOfThisSubject from "./pages/AllAssessmentOfThisSubject";
 import AllAssessmentForTeacher from "./pages/AllAssessmentForTeacher";
+import AllStudentsOfTeacher from "./ui/AllStudentsOfTeacher";
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 0 } },
 });
@@ -50,8 +51,13 @@ function App() {
               <Route
                 path="/teacher/:subjectName"
                 element={<AllAssessmentForTeacher />}
+              ></Route>
+              <Route
+                path="/teacher/:subjectName/:assignmentName"
+                element={<AllStudentsOfTeacher />}
               />
             </Route>
+
             <Route path="login" element={<Login />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>

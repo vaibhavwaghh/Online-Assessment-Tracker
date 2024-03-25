@@ -38,16 +38,16 @@ export function useUploadAssesment(allIds) {
 }
 
 export function useGetStatusOfAsssessment(allIds) {
-  const { subjectId, asssignmentId: assignmentId } = allIds;
+  const { subjectId, asssignmentId: assignmentId, studentId } = allIds;
 
   const { isLoading, data } = useQuery({
     queryKey: [
-      `statusOfAssessmentSubject_${subjectId}_Assignment_${assignmentId}`,
+      `statusOfAssessmentSubject_${subjectId}_Assignment_${assignmentId}_Student_${studentId}`,
     ],
     queryFn: () => getStatusOfCurrentAssignment(allIds),
   });
 
-  console.log("DATA FROM STATUS HOOK", data);
+  // console.log("DATA FROM STATUS HOOK", data);
 
   // Check if data is undefined or loading
   // if (isLoading || data === undefined) {

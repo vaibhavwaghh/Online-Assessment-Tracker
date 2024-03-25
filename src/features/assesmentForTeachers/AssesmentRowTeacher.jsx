@@ -8,6 +8,11 @@ import Spinner from "../../ui/Spinner";
 import { useDispatch, useSelector } from "react-redux";
 import AssesmentFile from "../assessmentForStudents/AssesmentFile";
 import { NavLink, useParams } from "react-router-dom";
+import {
+  updateAssignmentId,
+  updateAssignmentMarks,
+  updateLastDate,
+} from "../../redux/userSlice";
 
 function AssesmentRowTeacher({ assesment }) {
   const {
@@ -19,10 +24,22 @@ function AssesmentRowTeacher({ assesment }) {
     assignmentInformation,
     id: assignmentId,
   } = assesment;
-
+  const dispatch = useDispatch();
   const handleDownload = () => {
     window.open(assignmentInformation, "_blank");
   };
+
+  function handleClick() {
+    console.log(
+      "THIS IS ASSID AND ASS MARKS FROM ASSROWTEACHEER",
+      assignedMarks,
+      assignmentId
+    );
+    dispatch(updateAssignmentMarks(assignedMarks));
+    dispatch(updateAssignmentId(assignmentId));
+    dispatch(updateLastDate(formatDate(deadline)));
+  }
+
   const { subjectName } = useParams();
   let goto = `/teacher/${subjectName}/${assignmentName}`;
   return (
@@ -38,7 +55,7 @@ function AssesmentRowTeacher({ assesment }) {
       </div>
       <div>
         <NavLink to={goto}>
-          <Button>View details</Button>
+          <Button onClick={handleClick}>View details</Button>
         </NavLink>
       </div>
     </Table.Row>

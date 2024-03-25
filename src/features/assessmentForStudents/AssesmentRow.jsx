@@ -8,6 +8,7 @@ import Spinner from "../../ui/Spinner";
 import { useDispatch, useSelector } from "react-redux";
 
 import AssesmentFile from "./AssesmentFile";
+import { updateAssignmentId } from "../../redux/userSlice";
 function AssesmentRow({ assesment }) {
   const {
     assignmentName,
@@ -18,6 +19,8 @@ function AssesmentRow({ assesment }) {
     description,
     assignedMarks,
   } = assesment;
+  const dispatch = useDispatch();
+  dispatch(updateAssignmentId(asssignmentId));
   const subjectId = useSelector((state) => state.student.subjectId);
   const studentId = useSelector((state) => state.student.studentId);
   // Function to handle the download of the PDF file

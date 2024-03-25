@@ -53,3 +53,25 @@ export async function getAllAssignmentOfTeacher(allIds) {
   }
   return data;
 }
+
+export async function getAllTeachersAllStudents(teacherId) {
+  /**GET THE TEACHERS DIVISION */
+  let query = supabase
+    .from("teacher")
+    .select("teachingInDiv")
+    .eq("id", teacherId);
+  let { data, error } = await query;
+
+  let query1 = supabase
+    .from("students")
+    .select("*")
+    .eq("currentDiv", data[0].teachingInDiv)
+    .order("rollNo");
+
+  let { data: studentData, error: error1 } = await query1;
+  if (error || error1) {
+    console.error(error);
+    throw new Error("DATA NOT LOADED");
+  }
+  return studentData;
+}
