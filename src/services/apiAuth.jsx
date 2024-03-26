@@ -34,13 +34,13 @@ export async function login({ email, password }) {
     };
   }
   console.log("BEFORE IF", role[0].roleOfUser);
+  /**3) FIND ALL DETAILS OF TEACHER */
   if (role[0].roleOfUser === "teacher") {
     console.log("INSIDE IF", role[0].roleOfUser);
-    /**3) FIND ALL DETAILS OF TEACHER */
     const { data: currteacherDetails, error: error4 } = await supabase
       .from("teacher")
       .select(
-        "teachingInDepartment (departmentName), teachingInYear (currentYear),teachingSubject(id, subjectName)  , teachingInDiv (currentDivision), teacherName"
+        "teachingInDepartment (departmentName), teachingInYear (currentYear),teachingSubject(id, subjectName) , teacherName"
       )
       .eq("id", userId[0].teacher);
     console.log("THIS IS TEACHER DETAILS", currteacherDetails);

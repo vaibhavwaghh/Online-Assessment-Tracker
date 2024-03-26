@@ -33,15 +33,16 @@ function App() {
                 </ProtectedRoute>
               }
             >
-              <Route path="/student" element={<Dashboard />} />
-              <Route path="/account" element={<Account />} />
+              {/* <Route index element={<Navigate replace to="/student" />} /> */}
+              <Route path="student" element={<Dashboard />} />
+              <Route path="account" element={<Account />} />
               <Route
-                path="/assessment/:subjectName"
+                path="assessment/:subjectName"
                 element={<AllAssessmentOfThisSubject />}
               />
             </Route>
             <Route
-              path="/teacher"
+              path="teacher"
               element={
                 <ProtectedRoute>
                   <AppLayout />

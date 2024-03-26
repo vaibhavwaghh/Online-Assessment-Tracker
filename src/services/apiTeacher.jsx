@@ -1,3 +1,4 @@
+import { fromUnixTime } from "date-fns";
 import supabase from "./supaBase";
 
 export async function getTeacher() {
@@ -54,24 +55,69 @@ export async function getAllAssignmentOfTeacher(allIds) {
   return data;
 }
 
-export async function getAllTeachersAllStudents(teacherId) {
-  /**GET THE TEACHERS DIVISION */
-  let query = supabase
-    .from("teacher")
-    .select("teachingInDiv")
-    .eq("id", teacherId);
-  let { data, error } = await query;
+export async function getAllTeachersAllStudents(divisionNo) {
+  /**GET THE  DIVISION ID */
+  const { data, error } = await getDivIdFromDivNumber(divisionNo);
 
-  let query1 = supabase
+  /**GET THE STUDENTS OF THAT DIVISION */
+  let query = supabase
     .from("students")
     .select("*")
-    .eq("currentDiv", data[0].teachingInDiv)
+    .eq("currentDiv", data[0].id)
     .order("rollNo");
 
-  let { data: studentData, error: error1 } = await query1;
+  let { data: studentData, error: error1 } = await query;
   if (error || error1) {
     console.error(error);
     throw new Error("DATA NOT LOADED");
   }
   return studentData;
+}
+
+export async function getDivIdFromDivNumber(divisionNo) {
+  let query = supabase
+    .from("division")
+    .select("id")
+    .eq("currentDivision", divisionNo);
+  let { data, errror } = await query;
+  return { data, errror };
+}
+
+export async function getTeachersDivNumberUsingTeacherId(teacherId) {
+  const { data, error } = await getTeachersAllDivId(teacherId);
+  console.log("these are all div id", data);
+  const allDiv = [];
+  if (data) {
+    for (let i = 0; i < data.length; i++) {
+      // Assuming you want to loop over the first 3 elements
+      const { data: data1, error: error1 } = await getTeachersAllDivisionNumber(
+        data[i].divisionId
+      );
+      allDiv.push(data1);
+      console.log("THIS IS ALL DIV", allDiv);
+    }
+  }
+  return allDiv; // Move the return statement outside the loop
+}
+
+export async function getTeachersAllDivId(teacherId) {
+  let query2 = supabase
+    .from("teacherDivision")
+    .select("divisionId")
+    .eq("teacherId", teacherId);
+  let { data, error } = await query2;
+
+  return { data, error };
+}
+
+export async function getTeachersAllDivisionNumber(divisionId) {
+  console.log("DIVISION ID WAS CALLED", divisionId);
+  let query3 = supabase
+    .from("division")
+    .select("currentDivision")
+    .eq("id", divisionId);
+
+  let { data, error } = await query3;
+  if (error) console.log(error);
+  return { data, error };
 }

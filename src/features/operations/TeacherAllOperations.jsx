@@ -1,12 +1,22 @@
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Filter from "../../ui/Filter";
 import SortBy from "../../ui/SortBy";
 import TableOperations from "../../ui/TableOperations";
+import { useGetTeachersAllDivisions } from "./useTeacherOperation";
+import Spinner from "../../ui/Spinner";
 
 function TeacherAllOperations() {
   const deadline = useSelector((state) => state.student.lastdate);
   const assignedMarks = useSelector((state) => state.student.marks);
-
+  const teacherId = useSelector((state) => state.student.teacherId);
+  const { data, isLoading } = useGetTeachersAllDivisions(teacherId);
+  let divArray = [];
+  if (isLoading) return <Spinner />;
+  for (let i = 0; i < data.length; i++) {
+    divArray.push(data[i][0].currentDivision);
+  }
+  console.log("INSIDE TEACHER TABLE OPERATION", data);
   return (
     <>
       <div>Deadline : {deadline}</div>
@@ -15,11 +25,10 @@ function TeacherAllOperations() {
       <TableOperations>
         <Filter
           filterField="division"
-          options={[
-            { value: "Div 3", label: "Div 3" },
-            { value: "Div 4", label: "Div 4" },
-            { value: "Div 9", label: "Div 9" },
-          ]}
+          options={divArray.map((div) => ({
+            value: `Div${div}`,
+            label: `Div ${div}`, // Assuming your divArray elements have the format "divX"
+          }))}
         />
         <SortBy
           filterField="discount"

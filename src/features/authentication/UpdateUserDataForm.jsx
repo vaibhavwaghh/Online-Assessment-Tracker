@@ -34,7 +34,7 @@ function UpdateUserDataForm() {
     // Assign values to variables declared outside
     ({
       teachingInYear: { currentYear },
-      teachingInDiv: { currentDivision },
+      // teachingInDiv: { currentDivision },
       teachingInDepartment: { departmentName },
       teacherName: userName,
     } = curruserDetails[0]);
@@ -54,9 +54,9 @@ function UpdateUserDataForm() {
       <FormRow label="Current Year">
         <Input type="number" value={currentYear} disabled />
       </FormRow>
-      <FormRow label="Current Division">
+      {/* <FormRow label="Current Division">
         <Input type="number" value={currentDivision} disabled />
-      </FormRow>
+      </FormRow> */}
       <FormRow label="Role">
         <Input type="text" value={userRole} disabled />
       </FormRow>

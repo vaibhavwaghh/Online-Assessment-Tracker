@@ -3,11 +3,21 @@ import Table from "../../ui/Table";
 import { useGetTeachersAllStudents } from "./useTeacher";
 import Spinner from "../../ui/Spinner";
 import TeacherRow from "./TeacherRow";
+import { useSearchParams } from "react-router-dom";
 
 function TeacherTable() {
-  const teacherId = useSelector((state) => state.student.teacherId);
+  const [searchParams] = useSearchParams();
+  let divNo = 3;
+  if (searchParams?.get("division")) {
+    divNo = searchParams?.get("division")[3];
+    console.log("THIS IS DIV NUMBER", divNo);
+  }
 
-  const { isLoading, data: studentData } = useGetTeachersAllStudents(teacherId);
+  const { isLoading, data: studentData } = useGetTeachersAllStudents(divNo);
+  let sort;
+  if (searchParams?.get("sortBy")) {
+    sort = searchParams?.get("sortBy");
+  }
 
   if (isLoading) return <Spinner />;
   return (
