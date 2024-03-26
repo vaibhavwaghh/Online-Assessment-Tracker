@@ -30,7 +30,7 @@ function TeacherAllOperations() {
             label: `Div ${div}`, // Assuming your divArray elements have the format "divX"
           }))}
         />
-        <SortBy
+        {/* <SortBy
           filterField="discount"
           options={[
             { value: "rollNo", label: "Sort By Roll No " },
@@ -43,7 +43,7 @@ function TeacherAllOperations() {
             //   label: "Sort By Capacity (high first)",
             // },
           ]}
-        />
+        /> */}
       </TableOperations>
     </>
   );
