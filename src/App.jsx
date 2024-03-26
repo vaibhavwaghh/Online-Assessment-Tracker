@@ -33,7 +33,7 @@ function App() {
                 </ProtectedRoute>
               }
             >
-              {/* <Route index element={<Navigate replace to="/student" />} /> */}
+              <Route index element={<Navigate replace to="/student" />} />
               <Route path="student" element={<Dashboard />} />
               <Route path="account" element={<Account />} />
               <Route
