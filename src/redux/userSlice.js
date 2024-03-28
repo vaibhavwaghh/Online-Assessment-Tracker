@@ -7,6 +7,7 @@ const initialState = {
   assignmentId: 1,
   marks: 1,
   lastdate: 1,
+  allDivTeacher: [],
 };
 
 const userSlice = createSlice({
@@ -31,6 +32,9 @@ const userSlice = createSlice({
     updateLastDate(state, action) {
       state.lastdate = action.payload;
     },
+    updateAllDivOfTeacher(state, action) {
+      state.allDivTeacher = action.payload;
+    },
   },
 });
 
@@ -41,6 +45,7 @@ export const {
   updateAssignmentId,
   updateAssignmentMarks,
   updateLastDate,
+  updateAllDivOfTeacher,
 } = userSlice.actions;
 
 export default userSlice.reducer;

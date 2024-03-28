@@ -7,38 +7,36 @@ import { convertToCustomFormat } from "../../utils/helpers";
 import UpdateStudentForm from "../assesmentForTeachers/UpdateStudentForm";
 import UpdateStudentAssesment from "../assesmentForTeachers/UpdateStudentAssesment";
 import { updatestudentId } from "../../redux/userSlice";
+import { useEffect } from "react";
 
-function TeacherRow({ student }) {
-  const { rollNo, studentName, id: studentId } = student;
-
-  const assignedMarks = useSelector((state) => state.student.marks);
-  const asssignmentId = useSelector((state) => state.student.assignmentId);
-
-  const subjectId = useSelector((state) => state.student.subjectId);
-
-  const allIds = { asssignmentId, subjectId, studentId };
-
-  const { isLoading, data } = useGetStatusOfAsssessment(allIds);
-  if (isLoading) return <Spinner />;
+function TeacherRow({ allData }) {
   // console.log("data in st row", data);
-  let status1 = "PENDING";
-  let approved = "NO";
-  let marks = `0`;
-  let dataOfSubmission = "-";
-  let button = "Update ";
-  if (data) {
-    status1 = data.status === true ? "SUBMITTED" : "PENDING";
-    approved = data.approved === true ? "YES" : "NO";
-    dataOfSubmission = convertToCustomFormat(data.created_at);
-    // view = data.solutionPdf;
-  }
-  if (data?.submittedMarks) {
-    marks = data.submittedMarks;
-  }
+  const {
+    rollNo,
+    studentName,
+    dataOfSubmission,
+    status1,
+    approved,
+    marks,
+    assignedMarks,
+    studentId,
+    solution,
+  } = allData;
+  // const assignedMarks1 = useSelector((state) => state.student.marks);
+  // const asssignmentId = useSelector((state) => state.student.assignmentId);
+  // const subjectId = useSelector((state) => state.student.subjectId);
+  // allData.map((student) => {
+  //   const { id: studentId } = student;
+  //   const allIds = { asssignmentId, subjectId, studentId };
+  //   const { isLoading, data } = useGetStatusOfAsssessment(allIds);
+  //   return { studentId, data, isLoading };
+  // });
+  // console.log("THIS IS ALL DATA", allData);
 
   const handleDownload = () => {
-    window.open(data.solutionPdf, "_blank");
+    window.open(solution, "_blank");
   };
+
   return (
     <>
       <Table.Row>
@@ -55,13 +53,13 @@ function TeacherRow({ student }) {
         <div>
           {marks}/{assignedMarks}
         </div>
-        {data?.solutionPdf ? (
+        {solution !== "" ? (
           <Button onClick={handleDownload}>VIEW</Button>
         ) : (
           <div>-</div>
         )}
 
-        {data?.solutionPdf ? (
+        {solution !== "" ? (
           <UpdateStudentAssesment studentId={studentId} />
         ) : (
           <div>-</div>

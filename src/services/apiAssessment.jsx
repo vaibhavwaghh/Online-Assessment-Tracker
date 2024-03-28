@@ -81,7 +81,9 @@ export async function getStatusOfCurrentAssignment(allIds) {
   try {
     const { data: submittedData, error } = await supabase
       .from("submittedAssignment")
-      .select("*")
+      .select(
+        "studentId , approved , created_at , solutionPdf , status , submittedMarks"
+      )
       .eq("subjectId", subjectId)
       .eq("studentId", studentId)
       .eq("assignmentId", assignmentId);

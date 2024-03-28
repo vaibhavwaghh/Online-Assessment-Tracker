@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
@@ -5,6 +6,7 @@ import Input from "../../ui/Input";
 import { useUser } from "./useUser";
 
 function UpdateUserDataForm() {
+  const divisions = useSelector((state) => state.student.allDivTeacher);
   const {
     user: {
       email,
@@ -14,18 +16,19 @@ function UpdateUserDataForm() {
 
   let curruserDetails; // Define curruserDetails outside the if statements
 
-  let currentYear, currentDivision, departmentName, userName, userRole; // Declare variables outside the if blocks
-
+  var currentYear, currentDivision, departmentName, userName, userRole; // Declare variables outside the if blocks
   if (details?.studentId) {
     userRole = "student";
     curruserDetails = details.currstudentDetails;
     // Assign values to variables declared outside
     ({
-      currentYear: { currentYear },
       currentDiv: { currentDivision },
       departmentName: { departmentName },
+      currentYear: { currentYear },
       studentName: userName,
     } = curruserDetails[0]);
+    console.log("THIS IS CURRENT USER DETAILS ", curruserDetails[0]);
+    console.log(currentYear);
   }
 
   if (details?.teacherId) {
@@ -38,6 +41,8 @@ function UpdateUserDataForm() {
       teachingInDepartment: { departmentName },
       teacherName: userName,
     } = curruserDetails[0]);
+
+    currentDivision = divisions?.join(",");
   }
 
   return (
@@ -52,11 +57,11 @@ function UpdateUserDataForm() {
         <Input type="text" value={departmentName} disabled />
       </FormRow>
       <FormRow label="Current Year">
-        <Input type="number" value={currentYear} disabled />
+        <Input type="text" value={currentYear} disabled />
       </FormRow>
-      {/* <FormRow label="Current Division">
-        <Input type="number" value={currentDivision} disabled />
-      </FormRow> */}
+      <FormRow label="Current Division">
+        <Input type="text" value={currentDivision} disabled />
+      </FormRow>
       <FormRow label="Role">
         <Input type="text" value={userRole} disabled />
       </FormRow>
