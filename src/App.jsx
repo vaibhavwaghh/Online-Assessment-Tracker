@@ -8,13 +8,14 @@ import ProtectedRoute from "./ui/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
 import AppLayout from "./ui/AppLayout";
 import Dashboard from "./pages/Dashboard";
-import Student from "./pages/Student";
-import Teacher from "./pages/Teacher";
-import Hod from "./pages/Hod";
+
 import Account from "./pages/Account";
 import AllAssessmentOfThisSubject from "./pages/AllAssessmentOfThisSubject";
 import AllAssessmentForTeacher from "./pages/AllAssessmentForTeacher";
 import AllStudentsOfTeacher from "./ui/AllStudentsOfTeacher";
+import AllSubjectsForHod from "./features/hod/AllSubjectsForHod";
+import AllAssesmentOfTeacher from "./pages/AllAssesmentOfHod";
+import AllAssesmentOfHod from "./pages/AllAssesmentOfHod";
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 0 } },
 });
@@ -56,6 +57,20 @@ function App() {
               <Route
                 path="/teacher/:subjectName/:assignmentName"
                 element={<AllStudentsOfTeacher />}
+              />
+            </Route>
+            <Route
+              path="/hod/*"
+              element={
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route path=":year" element={<AllSubjectsForHod />} />
+              <Route
+                path=":year/:subjectName"
+                element={<AllAssesmentOfHod />}
               />
             </Route>
 

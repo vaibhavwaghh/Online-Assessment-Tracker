@@ -6,7 +6,7 @@ import {
 
 export function useTeacherAllAssignment(allIds) {
   const { subjectId, teacherId } = allIds;
-
+  console.log("THESE ARE LATEST ID", allIds);
   const { isLoading, data } = useQuery({
     queryKey: [`currTeacherAllAssignment`],
     queryFn: () => getAllAssignmentOfTeacher(allIds),

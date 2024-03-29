@@ -8,6 +8,8 @@ const initialState = {
   marks: 1,
   lastdate: 1,
   allDivTeacher: [],
+  hodId: 1,
+  currYearId: 1,
 };
 
 const userSlice = createSlice({
@@ -19,6 +21,12 @@ const userSlice = createSlice({
     },
     updateteacherId(state, action) {
       state.teacherId = action.payload;
+    },
+    updateHodId(state, action) {
+      state.hodId = action.payload;
+    },
+    updateYearId(state, action) {
+      state.currYearId = action.payload;
     },
     updateSubjectId(state, action) {
       state.subjectId = action.payload;
@@ -46,6 +54,8 @@ export const {
   updateAssignmentMarks,
   updateLastDate,
   updateAllDivOfTeacher,
+  updateHodId,
+  updateYearId,
 } = userSlice.actions;
 
 export default userSlice.reducer;

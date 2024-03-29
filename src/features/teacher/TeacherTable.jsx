@@ -25,10 +25,10 @@ function TeacherTable() {
   const { isLoading, data: studentData } = useGetTeachersAllStudents(
     divNo || divisions[0]
   );
-  let sort;
-  if (searchParams?.get("sortBy")) {
-    sort = searchParams?.get("sortBy");
-  }
+  // let sort;
+  // if (searchParams?.get("sortBy")) {
+  //   sort = searchParams?.get("sortBy");
+  // }
 
   if (isLoading) return <Spinner />;
   return (

@@ -44,7 +44,11 @@ function UpdateUserDataForm() {
 
     currentDivision = divisions?.join(",");
   }
-
+  if (details?.hodId) {
+    userRole = "H.O.D";
+    curruserDetails = details.currhodDetails;
+    ({ departmentName, hodName: userName } = curruserDetails[0]);
+  }
   return (
     <Form>
       <FormRow label="Email address">
@@ -56,12 +60,17 @@ function UpdateUserDataForm() {
       <FormRow label="Department Name">
         <Input type="text" value={departmentName} disabled />
       </FormRow>
-      <FormRow label="Current Year">
-        <Input type="text" value={currentYear} disabled />
-      </FormRow>
-      <FormRow label="Current Division">
-        <Input type="text" value={currentDivision} disabled />
-      </FormRow>
+      {!details?.hodId && (
+        <>
+          {" "}
+          <FormRow label="Current Year">
+            <Input type="text" value={currentYear} disabled />
+          </FormRow>
+          <FormRow label="Current Division">
+            <Input type="text" value={currentDivision} disabled />
+          </FormRow>
+        </>
+      )}
       <FormRow label="Role">
         <Input type="text" value={userRole} disabled />
       </FormRow>

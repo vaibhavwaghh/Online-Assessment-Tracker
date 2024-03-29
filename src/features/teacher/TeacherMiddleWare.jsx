@@ -40,6 +40,7 @@ function TeacherMiddleWare({ student }) {
     studentName,
     solution,
   };
+  console.log("ALL DATA", allData);
   if (isLoading) return <Spinner />;
   return (
     <>

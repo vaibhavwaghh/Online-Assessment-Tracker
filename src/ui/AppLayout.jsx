@@ -6,7 +6,11 @@ import Header from "./Header";
 import SideBar from "./SideBar";
 import { useDispatch } from "react-redux";
 import { useUser } from "../features/authentication/useUser";
-import { updatestudentId, updateteacherId } from "../redux/userSlice";
+import {
+  updateHodId,
+  updatestudentId,
+  updateteacherId,
+} from "../redux/userSlice";
 // import Logout from "../features/authentication/Logout";
 function AppLayout() {
   const StyledAppLayout = styled.div`
@@ -34,26 +38,29 @@ function AppLayout() {
     },
   } = useUser();
   const dispatch = useDispatch();
-
+  let curruserDetails;
   if (details?.studentId) {
     var { currstudentDetails, studentId } = details;
+    curruserDetails = currstudentDetails;
     dispatch(updatestudentId(studentId));
   }
   if (details?.teacherId) {
     var { currteacherDetails, teacherId } = details;
+    curruserDetails = currteacherDetails;
     dispatch(updateteacherId(teacherId));
+  }
+  if (details?.hodId) {
+    var { currhodDetails, hodId } = details;
+    curruserDetails = currhodDetails;
+    dispatch(updateHodId(teacherId));
   }
 
   return (
     <>
       <StyledAppLayout>
-        <Header
-          curruserDetails={studentId ? currstudentDetails : currteacherDetails}
-        />
+        <Header curruserDetails={curruserDetails} />
 
-        <SideBar
-          curruserDetails={studentId ? currstudentDetails : currteacherDetails}
-        />
+        <SideBar curruserDetails={curruserDetails} />
         <Main>
           <Container>
             <Outlet />

@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import Table from "../../ui/Table";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../ui/Spinner";
@@ -7,13 +7,16 @@ import AssesmentRowTeacher from "./AssesmentRowTeacher";
 import { useGetTeachersAllDivisions } from "../operations/useTeacherOperation";
 import { updateAllDivOfTeacher } from "../../redux/userSlice";
 
-function AssessmentTableForTeacher() {
-  const { subjectName } = useParams();
-  console.log(subjectName);
-
+function AssessmentTableForTeacher({ subject }) {
   const dispatch = useDispatch();
   const teacherId = useSelector((state) => state.student.teacherId);
   const subjectId = useSelector((state) => state.student.subjectId);
+  console.log(
+    "THIS IS NEW SUBJECT AND TEACHERID SUBJECTID",
+    subject,
+    teacherId,
+    subjectId
+  );
   const allIds = { teacherId, subjectId };
 
   /**1) GET ALL ASSIGNMENT OF TEACHER */

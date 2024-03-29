@@ -1,5 +1,9 @@
+import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import styled, { css } from "styled-components";
+import { updateSubjectId, updateteacherId } from "../redux/userSlice";
+import Spinner from "./Spinner";
+import { useTeacherSubject } from "../features/hod/useHod";
 
 const StyledFilter = styled.div`
   border: 1px solid var(--color-grey-100);
@@ -35,21 +39,37 @@ const FilterButton = styled.button`
   }
 `;
 
-function Filter({ filterField, options }) {
+function Filter({ filterField, options, hod = "" }) {
   const [searchParams, setSearchParams] = useSearchParams();
+  console.log("THIS IS FILTER", options);
+  const dispatch = useDispatch();
+  const { isCreating, getTeacherId } = useTeacherSubject();
   const currentFilter = searchParams.get(filterField) || options[0].value;
-  function handleClick(value) {
-    searchParams.set(filterField, value);
-    // if (searchParams.get("page")) searchParams.set("page", 1);
+
+  function handleClick(label, value) {
+    if (hod == "") {
+      searchParams.set(filterField, value);
+    }
+    if (hod !== "") {
+      dispatch(updateSubjectId(value));
+      searchParams.set(filterField, label);
+      getTeacherId(value);
+    }
+    // dispatch(updateteacherId());
     setSearchParams(searchParams);
   }
+  if (isCreating) return <Spinner />;
   return (
     <StyledFilter>
       {options.map((option) => (
         <FilterButton
           key={option.value}
-          onClick={() => handleClick(option.value)}
-          active={option.value === currentFilter}
+          onClick={() => handleClick(option.label, option.value)}
+          active={
+            hod == ""
+              ? option.value === currentFilter
+              : option.label === currentFilter
+          }
           // disabled={option.value === currentFilter}
         >
           {option.label}

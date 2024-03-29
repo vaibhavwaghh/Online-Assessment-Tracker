@@ -21,16 +21,33 @@ export async function getSubjectOfStudent(
     .eq("currentDepartment", departmentId[0].id);
   console.log(yearId);
 
-  /**3) GET ALL SUBJECTS */
-  let { data, error3 } = await supabase
-    .from("allSubject") // Replace "YourTableNameHere" with the actual name of your table
-    .select(" *")
-    .eq("subjectForYear", yearId[0]?.id);
-
-  if (error1 || error2 || error3) {
+  if (error1 || error2) {
     console.error(error1);
-    throw new Error("DATA NOT LOADED");
+    throw new Error("NOT LOADED");
   }
-  console.log("this is subj", data);
+  /**3) GET ALL SUBJECTS USING YEAR ID*/
+  let data = await getAllSubjectsUsingYearId(yearId[0]?.id);
+  return data;
+}
+
+export async function getAllSubjectsUsingYearId(id) {
+  let { data, error: error3 } = await supabase
+    .from("allSubject") // Replace "YourTableNameHere" with the actual name of your table
+    .select("*")
+    .eq("subjectForYear", id);
+
+  if (error3) {
+    console.error(error3);
+    throw new Error("NOT LOADED");
+  }
+  return data;
+}
+
+export async function getTeacherIdFromSubjectId(subjectId) {
+  let { data, error } = await supabase
+    .from("teacher")
+    .select("id")
+    .eq("teachingSubject", subjectId);
+  if (error) throw new Error("DATA NOT LOADED");
   return data;
 }

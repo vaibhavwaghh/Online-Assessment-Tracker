@@ -30,6 +30,9 @@ function UserAvatar({ curruserDetails }) {
   if (curruserDetails[0]?.teacherName) {
     username = curruserDetails[0]?.teacherName;
   }
+  if (curruserDetails[0]?.hodName) {
+    username = curruserDetails[0]?.hodName;
+  }
   return (
     <StyledUserAvatar>
       {/* <Avatar

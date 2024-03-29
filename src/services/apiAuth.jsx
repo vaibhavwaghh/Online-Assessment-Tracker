@@ -8,14 +8,14 @@ export async function login({ email, password }) {
     .from("admin")
     .select("roleOfUser")
     .eq("emailId", email);
-  // console.log("THIS IS STUDENT ROLE ", role[0].roleOfUser);
+  console.log("THIS IS USER ROLE ", role[0].roleOfUser);
 
   /**2) FIND THE ID OF USER */
   const { data: userId, error: error2 } = await supabase
     .from("admin")
     .select(role[0].roleOfUser)
     .eq("emailId", email);
-  console.log("THIS IS STUDENTID ", userId);
+  console.log("THIS IS USER ID ", userId);
   let allDetails = {};
 
   if (role[0].roleOfUser === "student") {
@@ -48,6 +48,22 @@ export async function login({ email, password }) {
     allDetails = {
       currteacherDetails,
       teacherId: userId[0].teacher,
+    };
+    console.log("THESE ARE ALL TEACHER DETAILS", allDetails);
+  }
+
+  /**4) FIND ALL DETAILS OF HOD */
+  if (role[0].roleOfUser === "hod") {
+    console.log("INSIDE IF", role[0].roleOfUser);
+    const { data: currhodDetails, error: error4 } = await supabase
+      .from("departments")
+      .select("*")
+      .eq("id", userId[0].hod);
+    console.log("THIS IS TEACHER DETAILS", currhodDetails);
+
+    allDetails = {
+      currhodDetails,
+      hodId: userId[0].hod,
     };
     console.log("THESE ARE ALL TEACHER DETAILS", allDetails);
   }

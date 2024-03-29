@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { updatestudentId } from "../redux/userSlice";
 import { AiOutlineHome } from "react-icons/ai";
 import TeacherSideBar from "./TeacherSideBar";
+import HodSideBar from "./HodSideBar";
 // import Uploader from "../data/Uploader";
 function SideBar({ curruserDetails }) {
   const NavList = styled.ul`
@@ -28,6 +29,9 @@ function SideBar({ curruserDetails }) {
 
   if (curruserDetails[0]?.teacherName) {
     return <TeacherSideBar teacherDetails={curruserDetails[0]} />;
+  }
+  if (curruserDetails[0]?.hodName) {
+    return <HodSideBar hodDetails={curruserDetails[0]} />;
   }
   if (curruserDetails[0]?.studentName) {
     var {

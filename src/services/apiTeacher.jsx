@@ -40,7 +40,7 @@ export async function getAssignmentOfEachStudent(currentAssignmentOfSubject) {
 }
 
 export async function getAllAssignmentOfTeacher(allIds) {
-  console.log("FROM GETALL ASS TEACHER", allIds);
+  console.log("THIS IS ALL LATEST ID", allIds);
   const { teacherId, subjectId } = allIds;
   let query = supabase
     .from("assignments")
