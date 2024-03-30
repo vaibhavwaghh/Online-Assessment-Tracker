@@ -13,7 +13,7 @@ function AllSubjectsForHod() {
   const { year } = useParams();
 
   const { data, isLoading } = useHodSubject(yearId);
-  console.log("ALL HOD SUBJECT", data);
+
   if (isLoading) return <Spinner />;
 
   return (

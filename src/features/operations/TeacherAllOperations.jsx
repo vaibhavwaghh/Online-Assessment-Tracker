@@ -11,6 +11,7 @@ function TeacherAllOperations() {
   const deadline = useSelector((state) => state.student.lastdate);
   const assignedMarks = useSelector((state) => state.student.marks);
   const divisions = useSelector((state) => state.student.allDivTeacher);
+  console.log("THESE ARE DIVISIONS", divisions);
   return (
     <>
       <div>Deadline : {deadline}</div>

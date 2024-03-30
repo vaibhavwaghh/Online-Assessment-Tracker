@@ -41,10 +41,23 @@ const FilterButton = styled.button`
 
 function Filter({ filterField, options, hod = "" }) {
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log("THIS IS FILTER", options);
+
   const dispatch = useDispatch();
   const { isCreating, getTeacherId } = useTeacherSubject();
-  const currentFilter = searchParams.get(filterField) || options[0].value;
+  let currentFilter;
+  if (hod == "") {
+    currentFilter = searchParams.get(filterField) || options[0]?.value;
+  } else {
+    if (searchParams.get(filterField)) {
+      currentFilter = searchParams.get(filterField);
+    } else {
+      searchParams.set(filterField, options[0].label);
+
+      currentFilter = options[0].label;
+
+      setSearchParams(searchParams);
+    }
+  }
 
   function handleClick(label, value) {
     if (hod == "") {
@@ -70,7 +83,7 @@ function Filter({ filterField, options, hod = "" }) {
               ? option.value === currentFilter
               : option.label === currentFilter
           }
-          // disabled={option.value === currentFilter}
+          disabled={option.value === currentFilter}
         >
           {option.label}
         </FilterButton>

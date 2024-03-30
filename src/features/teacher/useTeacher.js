@@ -1,18 +1,19 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   getAllAssignmentOfTeacher,
   getAllTeachersAllStudents,
 } from "../../services/apiTeacher";
+import toast from "react-hot-toast";
 
 export function useTeacherAllAssignment(allIds) {
   const { subjectId, teacherId } = allIds;
-  console.log("THESE ARE LATEST ID", allIds);
+
   const { isLoading, data } = useQuery({
-    queryKey: [`currTeacherAllAssignment`],
+    queryKey: [
+      `currTeacherAllAssignmentSubject${subjectId}Teacher${teacherId} , teachersAllStudentsDiv`,
+    ],
     queryFn: () => getAllAssignmentOfTeacher(allIds),
   });
-
-  console.log("DATA FROM STATUS HOOK", data);
 
   return { isLoading, data };
 }

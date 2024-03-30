@@ -40,7 +40,6 @@ export async function getAssignmentOfEachStudent(currentAssignmentOfSubject) {
 }
 
 export async function getAllAssignmentOfTeacher(allIds) {
-  console.log("THIS IS ALL LATEST ID", allIds);
   const { teacherId, subjectId } = allIds;
   let query = supabase
     .from("assignments")
@@ -52,6 +51,7 @@ export async function getAllAssignmentOfTeacher(allIds) {
     console.error(error);
     throw new Error("DATA NOT LOADED");
   }
+
   return data;
 }
 
@@ -84,8 +84,10 @@ export async function getDivIdFromDivNumber(divisionNo) {
 }
 
 export async function getTeachersDivNumberUsingTeacherId(teacherId) {
+  console.log("THIS IS GET TEACHER DIV NUMBER", teacherId);
   const { data, error } = await getTeachersAllDivId(teacherId);
-  console.log("these are all div id", data);
+  console.log("THIS IS TEACHER DIV IDS", data);
+  if (error) console.error(error);
   const allDiv = [];
   if (data) {
     for (let i = 0; i < data.length; i++) {
@@ -94,7 +96,6 @@ export async function getTeachersDivNumberUsingTeacherId(teacherId) {
         data[i].divisionId
       );
       allDiv.push(data1);
-      console.log("THIS IS ALL DIV", allDiv);
     }
   }
   return allDiv; // Move the return statement outside the loop

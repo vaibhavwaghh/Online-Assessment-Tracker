@@ -16,6 +16,7 @@ import AllStudentsOfTeacher from "./ui/AllStudentsOfTeacher";
 import AllSubjectsForHod from "./features/hod/AllSubjectsForHod";
 import AllAssesmentOfTeacher from "./pages/AllAssesmentOfHod";
 import AllAssesmentOfHod from "./pages/AllAssesmentOfHod";
+import AllStudentsOfHod from "./ui/AllStudentsOfHod";
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 0 } },
 });
@@ -69,8 +70,8 @@ function App() {
             >
               <Route path=":year" element={<AllSubjectsForHod />} />
               <Route
-                path=":year/:subjectName"
-                element={<AllAssesmentOfHod />}
+                path=":subjectName/:assignmentName"
+                element={<AllStudentsOfHod />}
               />
             </Route>
 

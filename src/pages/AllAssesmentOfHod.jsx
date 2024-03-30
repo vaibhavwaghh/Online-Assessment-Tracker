@@ -3,6 +3,7 @@ import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 import { useSearchParams } from "react-router-dom";
 import AssessmentTableForTeacher from "../features/assesmentForTeachers/AssessmentTableTeacher";
+import AssessmentTableForHod from "../features/assesmentForHod/AssesmentTableForHod";
 
 function AllAssesmentOfHod() {
   const [searchParams] = useSearchParams();
@@ -10,7 +11,6 @@ function AllAssesmentOfHod() {
   const teacherId = useSelector((state) => state.student.teacherId);
   const subjectId = useSelector((state) => state.student.subjectId);
 
-  console.log("THIS IS TEACHER AND SUBJECT ID", teacherId, subjectId);
   return (
     <>
       <Row type="horizontal">
@@ -18,7 +18,7 @@ function AllAssesmentOfHod() {
       </Row>
       <hr />
       <Row type="horizontal">
-        <AssessmentTableForTeacher subject={subject} />
+        <AssessmentTableForHod teacherId={teacherId} subjectId={subjectId} />
       </Row>
     </>
   );

@@ -3,25 +3,19 @@ import Table from "../../ui/Table";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../ui/Spinner";
 import { useTeacherAllAssignment } from "../teacher/useTeacher";
-import AssesmentRowTeacher from "./AssesmentRowTeacher";
+
 import { useGetTeachersAllDivisions } from "../operations/useTeacherOperation";
 import { updateAllDivOfTeacher } from "../../redux/userSlice";
+import AssesmentRowHod from "./AssesmentRowForHod";
 
-function AssessmentTableForTeacher() {
+function AssessmentTableForHod({ teacherId, subjectId }) {
   const dispatch = useDispatch();
-  const teacherId = useSelector((state) => state.student.teacherId);
-  const subjectId = useSelector((state) => state.student.subjectId);
-  console.log(
-    "THIS IS NEW SUBJECT AND TEACHERID SUBJECTID",
 
-    teacherId,
-    subjectId
-  );
   const allIds = { teacherId, subjectId };
 
   /**1) GET ALL ASSIGNMENT OF TEACHER */
-  const { isLoading, data } = useTeacherAllAssignment(allIds);
 
+  const { isLoading, data } = useTeacherAllAssignment(allIds);
   /**2) GET ALL DIVISIONS OF TEACHER */
   const { data: data1, isLoading: isLoading1 } =
     useGetTeachersAllDivisions(teacherId);
@@ -33,12 +27,6 @@ function AssessmentTableForTeacher() {
   console.log("THIS IS DIV ARRAY", divArray);
   dispatch(updateAllDivOfTeacher(divArray));
 
-  console.log(allIds);
-
-  console.log("ALL ASS OF TEACHER", data);
-  // const { assessmentData, isLoading } = useGetAllAssessment(subjectName);
-  // console.log(assessmentData);
-  // if (isLoading) return <Spinner />;
   return (
     <Table columns="150px 200px 150px 100px 100px 150px 200px">
       <Table.Header>
@@ -53,11 +41,11 @@ function AssessmentTableForTeacher() {
       <Table.Body
         data={data}
         render={(assesment) => (
-          <AssesmentRowTeacher assesment={assesment} key={assesment.id} />
+          <AssesmentRowHod assesment={assesment} key={assesment.id} />
         )}
       />
     </Table>
   );
 }
 
-export default AssessmentTableForTeacher;
+export default AssessmentTableForHod;
