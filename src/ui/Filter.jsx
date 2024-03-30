@@ -1,7 +1,11 @@
 import { useDispatch } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import styled, { css } from "styled-components";
-import { updateSubjectId, updateteacherId } from "../redux/userSlice";
+import {
+  updateSubjectId,
+  updateYearId,
+  updateteacherId,
+} from "../redux/userSlice";
 import Spinner from "./Spinner";
 import { useTeacherSubject } from "../features/hod/useHod";
 
@@ -39,34 +43,44 @@ const FilterButton = styled.button`
   }
 `;
 
-function Filter({ filterField, options, hod = "" }) {
+function Filter({ filterField, options, user }) {
+  console.log("THIS IS USER", user);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const dispatch = useDispatch();
   const { isCreating, getTeacherId } = useTeacherSubject();
   let currentFilter;
-  if (hod == "") {
+  if (user == "teacher") {
     currentFilter = searchParams.get(filterField) || options[0]?.value;
-  } else {
+  }
+  if (user == "hod" || user == "principal") {
     if (searchParams.get(filterField)) {
       currentFilter = searchParams.get(filterField);
     } else {
       searchParams.set(filterField, options[0].label);
 
-      currentFilter = options[0].label;
+      // currentFilter = options[0].label;
 
       setSearchParams(searchParams);
     }
   }
-
-  function handleClick(label, value) {
-    if (hod == "") {
+  // if (user == "principal") {
+  //   currentFilter = options[0].label;
+  // }
+  function handleClick(label, value, user) {
+    console.log(user);
+    if (user == "teacher") {
       searchParams.set(filterField, value);
     }
-    if (hod !== "") {
+    if (user == "hod") {
       dispatch(updateSubjectId(value));
       searchParams.set(filterField, label);
       getTeacherId(value);
+    }
+    if (user == "principal") {
+      console.log(filterField);
+      dispatch(updateYearId(value));
+      searchParams.set(filterField, label);
     }
     // dispatch(updateteacherId());
     setSearchParams(searchParams);
@@ -77,9 +91,9 @@ function Filter({ filterField, options, hod = "" }) {
       {options.map((option) => (
         <FilterButton
           key={option.value}
-          onClick={() => handleClick(option.label, option.value)}
+          onClick={() => handleClick(option.label, option.value, user)}
           active={
-            hod == ""
+            user == "teacher"
               ? option.value === currentFilter
               : option.label === currentFilter
           }

@@ -20,6 +20,9 @@ function useLogin() {
       if (user?.user?.user_metadata?.details?.hodId) {
         navigate("/hod", { replace: true });
       }
+      if (user?.user?.user_metadata?.details?.principalId) {
+        navigate("/principal", { replace: true });
+      }
       // if (user?.user?.user_metadata?.details?.teacherId) {
       //   navigate("/teacher", { replace: true });
       // }

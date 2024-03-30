@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { useUser } from "../features/authentication/useUser";
 import {
   updateHodId,
+  updatePrincipalId,
   updatestudentId,
   updateteacherId,
 } from "../redux/userSlice";
@@ -43,18 +44,19 @@ function AppLayout() {
     var { currstudentDetails, studentId } = details;
     curruserDetails = currstudentDetails;
     dispatch(updatestudentId(studentId));
-  }
-  if (details?.teacherId) {
+  } else if (details?.teacherId) {
     var { currteacherDetails, teacherId } = details;
     curruserDetails = currteacherDetails;
     dispatch(updateteacherId(teacherId));
-  }
-  if (details?.hodId) {
+  } else if (details?.hodId) {
     var { currhodDetails, hodId } = details;
     curruserDetails = currhodDetails;
-    dispatch(updateHodId(teacherId));
+    dispatch(updateHodId(hodId));
+  } else if (details?.principalId) {
+    var { currPrincipalDepartments, principalId, principalName } = details;
+    curruserDetails = { currPrincipalDepartments, principalName };
+    dispatch(updatePrincipalId(principalId));
   }
-
   return (
     <>
       <StyledAppLayout>

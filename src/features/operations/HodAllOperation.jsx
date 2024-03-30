@@ -10,7 +10,7 @@ function HodAllOperation({ data }) {
           value: `${subject.id}`,
           label: `${subject.subjectName}`, // Assuming your divArray elements have the format "divX"
         }))}
-        hod="hod"
+        user="hod"
       />
       {/* <SortBy
           filterField="discount"

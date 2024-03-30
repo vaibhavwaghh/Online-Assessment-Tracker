@@ -107,7 +107,7 @@ export async function getTeachersAllDivId(teacherId) {
     .select("divisionId")
     .eq("teacherId", teacherId);
   let { data, error } = await query2;
-
+  console.log("DIV DATA IN GET TEACHER", data);
   return { data, error };
 }
 

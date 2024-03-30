@@ -19,11 +19,11 @@ function AssessmentTableForHod({ teacherId, subjectId }) {
   /**2) GET ALL DIVISIONS OF TEACHER */
   const { data: data1, isLoading: isLoading1 } =
     useGetTeachersAllDivisions(teacherId);
-  if (isLoading || isLoading1) return <Spinner />;
   let divArray = [];
   for (let i = 0; i < data1?.length; i++) {
     divArray.push(data1[i][0].currentDivision);
   }
+  if (isLoading || isLoading1) return <Spinner />;
   console.log("THIS IS DIV ARRAY", divArray);
   dispatch(updateAllDivOfTeacher(divArray));
 

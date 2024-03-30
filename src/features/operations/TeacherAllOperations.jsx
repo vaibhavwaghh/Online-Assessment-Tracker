@@ -22,8 +22,10 @@ function TeacherAllOperations() {
           filterField="division"
           options={divisions.map((div) => ({
             value: `Div${div}`,
-            label: `Div ${div}`, // Assuming your divArray elements have the format "divX"
+            label: `Div ${div}`,
+            // Assuming your divArray elements have the format "divX"
           }))}
+          user="teacher"
         />
         {/* <SortBy
           filterField="discount"

@@ -11,7 +11,8 @@ import AllAssesmentOfHod from "../../pages/AllAssesmentOfHod";
 function AllSubjectsForHod() {
   const yearId = useSelector((state) => state.student.currYearId);
   const { year } = useParams();
-
+  const [searchParams] = useSearchParams();
+  let subjectName = searchParams.get("subject");
   const { data, isLoading } = useHodSubject(yearId);
 
   if (isLoading) return <Spinner />;
@@ -23,9 +24,11 @@ function AllSubjectsForHod() {
         <HodAllOperation data={data} />
       </Row>
       <hr />
-      <Row>
-        <AllAssesmentOfHod />
-      </Row>
+      {subjectName && (
+        <Row>
+          <AllAssesmentOfHod />
+        </Row>
+      )}
     </>
   );
 }

@@ -34,16 +34,12 @@ export function useTeacherSubject() {
     onSuccess: (data) => {
       console.log("THIS IS SUCCESS DATA", data);
       queryClient.invalidateQueries({
-        queryKey: ["currTeacherAllAssignment"],
+        queryKey: [
+          `currTeacherAllAssignment,teachersAllStudentsDiv${data[0].id}`,
+        ],
       });
       dispatch(updateteacherId(data[0].id));
     },
   });
   return { isCreating, getTeacherId };
-  // const { isLoading, data } = useQuery({
-  //   queryKey: [`teacherOfSubject${subjectId}`],
-  //   queryFn: () => getTeacherIdFromSubjectId(subjectId),
-  // });
-
-  // return { isLoading, data };
 }

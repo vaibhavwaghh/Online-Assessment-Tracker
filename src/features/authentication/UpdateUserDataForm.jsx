@@ -49,6 +49,10 @@ function UpdateUserDataForm() {
     curruserDetails = details.currhodDetails;
     ({ departmentName, hodName: userName } = curruserDetails[0]);
   }
+
+  if (details?.principalId) {
+    (userRole = "Principal"), (userName = details.principalName);
+  }
   return (
     <Form>
       <FormRow label="Email address">
@@ -57,12 +61,16 @@ function UpdateUserDataForm() {
       <FormRow label="Full name">
         <Input type="text" value={userName} disabled />
       </FormRow>
-      <FormRow label="Department Name">
-        <Input type="text" value={departmentName} disabled />
+      <FormRow label="Role">
+        <Input type="text" value={userRole} disabled />
       </FormRow>
-      {!details?.hodId && (
+      {!details?.principalId && (
+        <FormRow label="Department Name">
+          <Input type="text" value={departmentName} disabled />
+        </FormRow>
+      )}
+      {!details?.principalId && !details?.hodId && (
         <>
-          {" "}
           <FormRow label="Current Year">
             <Input type="text" value={currentYear} disabled />
           </FormRow>
@@ -71,20 +79,6 @@ function UpdateUserDataForm() {
           </FormRow>
         </>
       )}
-      <FormRow label="Role">
-        <Input type="text" value={userRole} disabled />
-      </FormRow>
-      {/* <FormRow>
-        <Button
-          onClick={handleCancel}
-          type="reset"
-          variation="secondary"
-          disabled={isUpdating}
-        >
-          Cancel
-        </Button>
-        <Button disabled={isUpdating}>Update account</Button>
-      </FormRow> */}
     </Form>
   );
 }

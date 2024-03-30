@@ -67,6 +67,27 @@ export async function login({ email, password }) {
     };
     console.log("THESE ARE ALL TEACHER DETAILS", allDetails);
   }
+
+  /**5) FIND ALL DETAILS OF PRINCIPAL */
+  if (role[0].roleOfUser === "principal") {
+    const { data: currPrincipalName, error: error10 } = await supabase
+      .from("principal")
+      .select("principalName")
+      .eq("id", userId[0].principal);
+
+    const { data: currPrincipalDepartments, error: error8 } = await supabase
+      .from("departments")
+      .select("*")
+      .eq("principalId", userId[0].principal);
+    console.log("THIS IS TEACHER DETAILS", currPrincipalDepartments);
+
+    allDetails = {
+      currPrincipalDepartments,
+      principalId: userId[0].principal,
+      principalName: currPrincipalName[0].principalName,
+    };
+    console.log("THESE ARE ALL TEACHER DETAILS", allDetails);
+  }
   /**3) CHECK WHETHER EMAIL ID AND PASSWORD IS CORRECT */
   const { data: currentUser, error: error4 } =
     await supabase.auth.signInWithPassword({

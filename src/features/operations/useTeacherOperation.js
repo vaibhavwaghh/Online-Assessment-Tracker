@@ -4,7 +4,7 @@ import { getTeachersDivNumberUsingTeacherId } from "../../services/apiTeacher";
 export function useGetTeachersAllDivisions(teacherId) {
   console.log("THIS IS TEACHER ID", teacherId);
   const { isLoading, data } = useQuery({
-    queryKey: [`teachersAllStudentsDiv`],
+    queryKey: [`teachersAllStudentsDiv${teacherId}`],
     queryFn: () => getTeachersDivNumberUsingTeacherId(teacherId),
   });
 

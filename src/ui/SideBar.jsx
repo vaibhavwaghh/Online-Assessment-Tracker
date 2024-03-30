@@ -9,6 +9,7 @@ import { updatestudentId } from "../redux/userSlice";
 import { AiOutlineHome } from "react-icons/ai";
 import TeacherSideBar from "./TeacherSideBar";
 import HodSideBar from "./HodSideBar";
+import PrincipalSideBar from "./PrincipalSideBar";
 // import Uploader from "../data/Uploader";
 function SideBar({ curruserDetails }) {
   const NavList = styled.ul`
@@ -27,12 +28,14 @@ function SideBar({ curruserDetails }) {
     gap: 3.2rem;
   `;
 
-  if (curruserDetails[0]?.teacherName) {
+  if (curruserDetails.principalName) {
+    return <PrincipalSideBar principalDetails={curruserDetails} />;
+  } else if (curruserDetails[0]?.teacherName) {
     return <TeacherSideBar teacherDetails={curruserDetails[0]} />;
-  }
-  if (curruserDetails[0]?.hodName) {
+  } else if (curruserDetails[0]?.hodName) {
     return <HodSideBar hodDetails={curruserDetails[0]} />;
   }
+
   if (curruserDetails[0]?.studentName) {
     var {
       currentYear: { currentYear },
