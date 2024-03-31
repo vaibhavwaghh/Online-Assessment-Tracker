@@ -31,10 +31,11 @@ function CreateNewAssessmentForm({ onCloseModal }) {
       subjectOfAssignment,
       teacherId,
     };
-    console.log(insertData);
+
+    console.log("THIS IS INSERTED DATA", insertData);
     createAssignment(insertData, {
       onSuccess: (data) => {
-        console.log(data);
+        console.log("this is success data", data);
         reset();
         onCloseModal?.();
       },
@@ -69,14 +70,14 @@ function CreateNewAssessmentForm({ onCloseModal }) {
         />
       </FormRow>
 
-      <FormRow label="Marks" error={errors?.marks?.message}>
+      <FormRow label="Marks" error={errors?.assignedMarks?.message}>
         <Input
           type="number"
-          id="marks"
+          id="assignedMarks"
           disabled={isCreating}
-          {...register("marks", {
+          {...register("assignedMarks", {
             required: "This field is required",
-            min: { value: 100, message: "Marks must be less than 100" },
+            // min: { value: 100, message: "Marks must be less than 100" },
           })}
         />
       </FormRow>

@@ -118,10 +118,10 @@ export async function createNewAssignment(newAssignment) {
   /**2) Insert data into submitted assignment */
   const { data: data1, error } = await supabase
     .from("assignments")
-    .insert([{ ...newAssignment, assignmentInformation: pdfFilePath }]);
+    .insert([{ ...newAssignment, assignmentInformation: pdfFilePath }])
+    .select("*");
 
-  console.log(data1);
-  console.error(error);
+  return data1;
 }
 
 export async function updateCurrentAssignment(updatedData) {
