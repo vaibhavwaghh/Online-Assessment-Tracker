@@ -14,6 +14,8 @@ const initialState = {
   totalNumberOfAssesment: 1,
   totalNumberOfSubmitted: 0,
   totalNumberOfApproved: 0,
+  allIds: 1,
+  data: 1,
 };
 
 const userSlice = createSlice({
@@ -59,6 +61,12 @@ const userSlice = createSlice({
     updatetotalNumberOfApproved(state, action) {
       state.totalNumberOfApproved = action.payload;
     },
+    updateAllIds(state, action) {
+      state.allIds = action.payload;
+    },
+    updateData(state, action) {
+      state.data = action.payload;
+    },
   },
 });
 
@@ -76,6 +84,8 @@ export const {
   updatetotalNumberOfAssesment,
   updatetotalNumberOfSubmitted,
   updatetotalNumberOfApproved,
+  updateData,
+  updateAllIds,
 } = userSlice.actions;
 
 export default userSlice.reducer;

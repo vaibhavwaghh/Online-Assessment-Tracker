@@ -77,7 +77,10 @@ function CreateNewAssessmentForm({ onCloseModal }) {
           disabled={isCreating}
           {...register("assignedMarks", {
             required: "This field is required",
-            // min: { value: 100, message: "Marks must be less than 100" },
+            max: {
+              value: 100,
+              message: "Marks must be less than or equal to 100",
+            },
           })}
         />
       </FormRow>
@@ -102,10 +105,15 @@ function CreateNewAssessmentForm({ onCloseModal }) {
         error={errors?.description?.message}
       >
         <Textarea
-          type="number"
           id="description"
           defaultValue=""
-          {...register("description", { required: "This field is required" })}
+          {...register("description", {
+            required: "This field is required",
+            maxLength: {
+              value: 30,
+              message: "Description must be less than 30 characters",
+            },
+          })}
         />
       </FormRow>
 

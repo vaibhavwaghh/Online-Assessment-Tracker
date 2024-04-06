@@ -21,6 +21,7 @@ import AllYearOfHod from "./ui/AllYearOfPrincipalHod";
 import AllYearOfPrincipalHod from "./ui/AllYearOfPrincipalHod";
 import { DarkModeProvider } from "./features/context/DarkModeContext";
 import DashboardForStudent from "./dashboard/DashboardForStudent";
+import AssesmentDetails from "./pages/AssesmentDetails";
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 0 } },
 });
@@ -40,22 +41,26 @@ function App() {
                   </ProtectedRoute>
                 }
               >
-                <Route index element={<Navigate replace to="/student" />} />
+                <Route element={<Navigate replace to="/student" />} />
                 <Route path="student" element={<DashboardForStudent />} />
                 <Route path="account" element={<Account />} />
                 <Route
                   path="assessment/:subjectName"
                   element={<AllAssessmentOfThisSubject />}
                 />
+                <Route
+                  path="assessment/:subjectName/:assesmentName"
+                  element={<AssesmentDetails />}
+                />
               </Route>
               <Route
-                path="teacher"
                 element={
                   <ProtectedRoute>
                     <AppLayout />
                   </ProtectedRoute>
                 }
               >
+                <Route path="teacher" element={<DashboardForStudent />} />
                 <Route
                   path="/teacher/:subjectName"
                   element={<AllAssessmentForTeacher />}
@@ -73,6 +78,7 @@ function App() {
                   </ProtectedRoute>
                 }
               >
+                <Route index element={<DashboardForStudent />} />
                 <Route path=":year" element={<AllSubjectsForHod />} />
                 <Route
                   path=":subjectName/:assignmentName"
@@ -87,6 +93,7 @@ function App() {
                   </ProtectedRoute>
                 }
               >
+                <Route index element={<DashboardForStudent />} />
                 <Route
                   path=":departmentName"
                   element={<AllYearOfPrincipalHod />}

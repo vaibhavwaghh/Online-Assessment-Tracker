@@ -28,14 +28,14 @@ function AssessmentTableForHod({ teacherId, subjectId }) {
   dispatch(updateAllDivOfTeacher(divArray));
 
   return (
-    <Table columns="150px 200px 150px 100px 100px 150px 200px">
+    <Table columns="1.5fr 1fr 1fr 1fr 2fr 1fr 1fr">
       <Table.Header>
         <div>Name</div>
         <div>Created</div>
         <div>Deadline</div>
         <div>Marks</div>
         <div>Description</div>
-        <div>Assignment PDF</div>
+        <div> PDF</div>
         <div>Student Details</div>
       </Table.Header>
       <Table.Body

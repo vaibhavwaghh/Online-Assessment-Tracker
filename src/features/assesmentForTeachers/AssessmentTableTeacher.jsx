@@ -40,7 +40,7 @@ function AssessmentTableForTeacher() {
   // console.log(assessmentData);
   // if (isLoading) return <Spinner />;
   return (
-    <Table columns="150px 200px 150px 100px 100px 150px 200px">
+    <Table columns="0.6fr 1fr 1fr 0.6fr 1.5fr 1fr 1.2fr">
       <Table.Header>
         <div>Name</div>
         <div>Created</div>

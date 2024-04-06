@@ -33,15 +33,15 @@ function TeacherTable() {
   if (isLoading) return <Spinner />;
   return (
     // <Menus>
-    <Table columns="0.6fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr">
+    <Table columns="1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr 1.5fr">
       <Table.Header>
         <div>Roll no</div>
-        <div>Student Name</div>
+        <div> Name</div>
         <div>Submission date</div>
         <div>Status</div>
         <div>Approved</div>
         <div>Marks</div>
-        <div> Student Assignment</div>
+        <div> STUDENTS PDF</div>
         <div>Update Marks</div>
       </Table.Header>
       <Table.Body

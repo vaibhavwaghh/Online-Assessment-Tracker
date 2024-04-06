@@ -1,7 +1,8 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import AssessmentTable from "../features/assessmentForStudents/assessmentTable";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
+import { updatetotalNumberOfSubmitted } from "../redux/userSlice";
 
 function AllAssessmentOfThisSubject() {
   const totalAssesment = useSelector(
@@ -13,17 +14,19 @@ function AllAssessmentOfThisSubject() {
   const numberOfApproved = useSelector(
     (state) => state.student.totalNumberOfApproved
   );
+  const dispatch = useDispatch();
+  // dispatch(updatetotalNumberOfSubmitted(0));
   console.log("THIS IS TOTAL ASSESMENT", totalAssesment);
   return (
     <>
       <Row type="horizontal">
         <Heading as="h1">All Assessments</Heading>
         <span>
-          TOTAL :- <span>{totalAssesment}</span>
+          TOTAL :- <span>{totalAssesment} Assesments</span>
         </span>
-
+        {/* 
         <span>SUBMITTED :- {numberOfSubmitted}</span>
-        <span>APPROVED :- {numberOfApproved}</span>
+        <span>APPROVED :- {numberOfApproved}</span> */}
       </Row>
       <Row>
         <AssessmentTable />

@@ -5,6 +5,7 @@ import {
   submitNewAssessment,
 } from "../../services/apiAssessment";
 import toast from "react-hot-toast";
+import { useMoveBack } from "../../hooks/useMoveBack";
 
 export function useGetAllAssessment(subjectName) {
   const { isLoading, data: assessmentData } = useQuery({
@@ -19,6 +20,7 @@ export function useGetAllAssessment(subjectName) {
 
 export function useUploadAssesment(allIds) {
   const { studentId, subjectId, asssignmentId: assignmentId } = allIds;
+  const moveBack = useMoveBack();
   console.log("THIS IS UPLOADED ASSESMENT", allIds);
   const queryClient = useQueryClient();
   const { isLoading: isUploading, mutate: uploadFile } = useMutation({
@@ -30,9 +32,11 @@ export function useUploadAssesment(allIds) {
           `statusOfAssessmentSubject_${subjectId}_Assignment_${assignmentId}_Student_${studentId}`,
         ],
       });
+      moveBack();
     },
     onError: (err) => {
       toast.error(err.message);
+      moveBack();
     },
   });
   return { isUploading, uploadFile };

@@ -21,7 +21,7 @@ function DashboardLayout() {
   // console.log(bookings, stays, confirmedStays);
   return (
     <StyledDashboardLayout>
-      <Stats bookings={5} confirmedStays={10} numDays={20} cabinCount={4} />
+      <Stats bookings={5} confirmedStays={5} numDays={4} cabinCount={3} />
       {/* <div>Statistics</div> */}
       {/* <div>Todays activity</div> */}
       {/* <div>Chart stay durations</div> */}

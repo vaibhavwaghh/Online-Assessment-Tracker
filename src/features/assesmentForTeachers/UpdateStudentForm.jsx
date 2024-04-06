@@ -74,6 +74,9 @@ function UpdateStudentForm({ onCloseModal, studentId }) {
             })}
           />
         </FormRow>
+        <FormRow label="Total Marks for this Assignment">
+          <Input type="number" disabled={true} defaultValue={assignedMarks} />
+        </FormRow>
         <FormRow>
           <Button
             variation="secondary"
