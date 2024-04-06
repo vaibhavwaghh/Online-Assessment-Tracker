@@ -8,7 +8,11 @@ import Spinner from "../../ui/Spinner";
 import { useDispatch, useSelector } from "react-redux";
 
 import AssesmentFile from "./AssesmentFile";
-import { updateAssignmentId } from "../../redux/userSlice";
+import {
+  updateAssignmentId,
+  updatetotalNumberOfApproved,
+  updatetotalNumberOfSubmitted,
+} from "../../redux/userSlice";
 function AssesmentRow({ assesment }) {
   const {
     assignmentName,
@@ -23,7 +27,17 @@ function AssesmentRow({ assesment }) {
   dispatch(updateAssignmentId(asssignmentId));
   const subjectId = useSelector((state) => state.student.subjectId);
   const studentId = useSelector((state) => state.student.studentId);
-  // Function to handle the download of the PDF file
+  const numberOfSubmitted = useSelector(
+    (state) => state.student.totalNumberOfSubmitted
+  );
+  const numberOfApproved = useSelector(
+    (state) => state.student.totalNumberOfApproved
+  );
+  console.log(
+    "THIS IS NUMBER OF SUBMITTED AND APPROVED",
+    numberOfApproved,
+    numberOfSubmitted
+  );
   let allIds = { asssignmentId, subjectId, studentId };
 
   const { isLoading, data } = useGetStatusOfAsssessment(allIds);
@@ -34,6 +48,14 @@ function AssesmentRow({ assesment }) {
   };
 
   // if (isLoading) return <Spinner />;
+  // if (data?.status) {
+  //   let newTotalSubmitted = Number(numberOfSubmitted) + 1;
+  //   dispatch(updatetotalNumberOfSubmitted(newTotalSubmitted));
+  // }
+  // if (data?.approved) {
+  //   let newTotalApproved = Number(numberOfApproved) + 1;
+  //   dispatch(updatetotalNumberOfApproved(newTotalApproved));
+  // }
   return (
     <Table.Row>
       <div>{assignmentName}</div>

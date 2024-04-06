@@ -18,7 +18,8 @@ export function useGetAllAssessment(subjectName) {
 }
 
 export function useUploadAssesment(allIds) {
-  const { subjectId, asssignmentId: assignmentId } = allIds;
+  const { studentId, subjectId, asssignmentId: assignmentId } = allIds;
+  console.log("THIS IS UPLOADED ASSESMENT", allIds);
   const queryClient = useQueryClient();
   const { isLoading: isUploading, mutate: uploadFile } = useMutation({
     mutationFn: (data) => submitNewAssessment(data),
@@ -26,7 +27,7 @@ export function useUploadAssesment(allIds) {
       toast.success("SUCCESSFULLY SUBMITED A NEW ASSIGNMENT");
       queryClient.invalidateQueries({
         queryKey: [
-          `statusOfAssessmentSubject_${subjectId}_Assignment_${assignmentId}`,
+          `statusOfAssessmentSubject_${subjectId}_Assignment_${assignmentId}_Student_${studentId}`,
         ],
       });
     },

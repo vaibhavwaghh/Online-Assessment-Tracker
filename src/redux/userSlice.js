@@ -11,6 +11,9 @@ const initialState = {
   hodId: 1,
   currYearId: 1,
   principalId: 1,
+  totalNumberOfAssesment: 1,
+  totalNumberOfSubmitted: 0,
+  totalNumberOfApproved: 0,
 };
 
 const userSlice = createSlice({
@@ -47,6 +50,15 @@ const userSlice = createSlice({
     updateAllDivOfTeacher(state, action) {
       state.allDivTeacher = action.payload;
     },
+    updatetotalNumberOfAssesment(state, action) {
+      state.totalNumberOfAssesment = action.payload;
+    },
+    updatetotalNumberOfSubmitted(state, action) {
+      state.totalNumberOfSubmitted = action.payload;
+    },
+    updatetotalNumberOfApproved(state, action) {
+      state.totalNumberOfApproved = action.payload;
+    },
   },
 });
 
@@ -61,6 +73,9 @@ export const {
   updateHodId,
   updatePrincipalId,
   updateYearId,
+  updatetotalNumberOfAssesment,
+  updatetotalNumberOfSubmitted,
+  updatetotalNumberOfApproved,
 } = userSlice.actions;
 
 export default userSlice.reducer;

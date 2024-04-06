@@ -19,102 +19,106 @@ import AllAssesmentOfHod from "./pages/AllAssesmentOfHod";
 import AllStudentsOfHod from "./ui/AllStudentsOfHod";
 import AllYearOfHod from "./ui/AllYearOfPrincipalHod";
 import AllYearOfPrincipalHod from "./ui/AllYearOfPrincipalHod";
+import { DarkModeProvider } from "./features/context/DarkModeContext";
+import DashboardForStudent from "./dashboard/DashboardForStudent";
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 0 } },
 });
 function App() {
   return (
     <>
-      <QueryClientProvider client={queryClient}>
-        <GlobalStyles />
-        <ReactQueryDevtools initialIsOpen={false} />
-        <BrowserRouter>
-          <Routes>
-            <Route
-              element={
-                <ProtectedRoute>
-                  <AppLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route index element={<Navigate replace to="/student" />} />
-              <Route path="student" element={<Dashboard />} />
-              <Route path="account" element={<Account />} />
+      <DarkModeProvider>
+        <QueryClientProvider client={queryClient}>
+          <GlobalStyles />
+          <ReactQueryDevtools initialIsOpen={false} />
+          <BrowserRouter>
+            <Routes>
               <Route
-                path="assessment/:subjectName"
-                element={<AllAssessmentOfThisSubject />}
-              />
-            </Route>
-            <Route
-              path="teacher"
-              element={
-                <ProtectedRoute>
-                  <AppLayout />
-                </ProtectedRoute>
-              }
-            >
+                element={
+                  <ProtectedRoute>
+                    <AppLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route index element={<Navigate replace to="/student" />} />
+                <Route path="student" element={<DashboardForStudent />} />
+                <Route path="account" element={<Account />} />
+                <Route
+                  path="assessment/:subjectName"
+                  element={<AllAssessmentOfThisSubject />}
+                />
+              </Route>
               <Route
-                path="/teacher/:subjectName"
-                element={<AllAssessmentForTeacher />}
-              ></Route>
+                path="teacher"
+                element={
+                  <ProtectedRoute>
+                    <AppLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route
+                  path="/teacher/:subjectName"
+                  element={<AllAssessmentForTeacher />}
+                ></Route>
+                <Route
+                  path="/teacher/:subjectName/:assignmentName"
+                  element={<AllStudentsOfTeacher />}
+                />
+              </Route>
               <Route
-                path="/teacher/:subjectName/:assignmentName"
-                element={<AllStudentsOfTeacher />}
-              />
-            </Route>
-            <Route
-              path="/hod/*"
-              element={
-                <ProtectedRoute>
-                  <AppLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route path=":year" element={<AllSubjectsForHod />} />
+                path="/hod/*"
+                element={
+                  <ProtectedRoute>
+                    <AppLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route path=":year" element={<AllSubjectsForHod />} />
+                <Route
+                  path=":subjectName/:assignmentName"
+                  element={<AllStudentsOfHod />}
+                />
+              </Route>
               <Route
-                path=":subjectName/:assignmentName"
-                element={<AllStudentsOfHod />}
-              />
-            </Route>
-            <Route
-              path="/principal/*"
-              element={
-                <ProtectedRoute>
-                  <AppLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route
-                path=":departmentName"
-                element={<AllYearOfPrincipalHod />}
-              />
-              <Route
-                path=":departmentName/:year/:subjectName"
-                element={<AllStudentsOfHod />}
-              />
-            </Route>
+                path="/principal/*"
+                element={
+                  <ProtectedRoute>
+                    <AppLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route
+                  path=":departmentName"
+                  element={<AllYearOfPrincipalHod />}
+                />
+                <Route
+                  path=":departmentName/:year/:subjectName"
+                  element={<AllStudentsOfHod />}
+                />
+              </Route>
 
-            <Route path="login" element={<Login />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </BrowserRouter>
-        <Toaster
-          position="top-center"
-          gutter={12}
-          containerStyle={{ margin: "8px" }}
-          toastOptions={{
-            success: { duration: 3000 },
-            error: { duration: 5000 },
-            style: {
-              fontSize: "16px",
-              maxWidth: "500px",
-              padding: "16px 24px",
-              backgroundColor: "var(--color-grey-0)",
-              color: "var(--color-grey-700)",
-            },
-          }}
-        />
-      </QueryClientProvider>
+              <Route path="login" element={<Login />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </BrowserRouter>
+          <Toaster
+            position="top-center"
+            gutter={12}
+            containerStyle={{ margin: "8px" }}
+            toastOptions={{
+              success: { duration: 3000 },
+              error: { duration: 5000 },
+              style: {
+                fontSize: "16px",
+                maxWidth: "500px",
+                padding: "16px 24px",
+                backgroundColor: "var(--color-grey-0)",
+                color: "var(--color-grey-700)",
+              },
+            }}
+          />
+        </QueryClientProvider>
+      </DarkModeProvider>
     </>
   );
 }
