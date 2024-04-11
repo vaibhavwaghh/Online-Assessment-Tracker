@@ -4,13 +4,16 @@ import Row from "../ui/Row";
 import { useSearchParams } from "react-router-dom";
 import AssessmentTableForTeacher from "../features/assesmentForTeachers/AssessmentTableTeacher";
 import AssessmentTableForHod from "../features/assesmentForHod/AssesmentTableForHod";
+import { useDispatch } from "react-redux";
+import { updateSubjectName } from "../redux/userSlice";
 
-function AllAssesmentOfHod() {
+function AllAssesmentOfHod({ isPrincipal }) {
   const [searchParams] = useSearchParams();
   const subject = searchParams.get("subject");
   const teacherId = useSelector((state) => state.student.teacherId);
   const subjectId = useSelector((state) => state.student.subjectId);
-
+  const dispatch = useDispatch();
+  dispatch(updateSubjectName(subject));
   return (
     <>
       <Row type="horizontal">
@@ -18,7 +21,11 @@ function AllAssesmentOfHod() {
       </Row>
       <hr />
       <Row type="horizontal">
-        <AssessmentTableForHod teacherId={teacherId} subjectId={subjectId} />
+        <AssessmentTableForHod
+          isPrincipal={isPrincipal}
+          teacherId={teacherId}
+          subjectId={subjectId}
+        />
       </Row>
     </>
   );

@@ -5,7 +5,7 @@ import {
   HiOutlineCalendarDays,
   HiOutlineChartBar,
 } from "react-icons/hi2";
-function Stats({ bookings, confirmedStays, numDays, cabinCount }) {
+function Stats({ tSubjects, tAssesment, tSubmitted, tApproved }) {
   // const numBookings = bookings.length;
 
   // // const sales = bookings.reduce((acc, cur) => acc + cur.totalPrice, 0);
@@ -21,25 +21,25 @@ function Stats({ bookings, confirmedStays, numDays, cabinCount }) {
         title="Total Subjects"
         color="yellow"
         icon={<HiOutlineChartBar />}
-        value={cabinCount}
+        value={tSubjects}
       />
       <Stat
         title="Total Assesment"
         color="blue"
         icon={<HiOutlineBriefcase />}
-        value={bookings}
+        value={tAssesment}
       />
       <Stat
         title="Submitted Assesment"
         color="green"
         icon={<HiOutlineBanknotes />}
-        value={confirmedStays}
+        value={tSubmitted}
       />
       <Stat
         title="Approved Assesment"
         color="indigo"
         icon={<HiOutlineCalendarDays />}
-        value={numDays}
+        value={tApproved}
       />
     </>
   );

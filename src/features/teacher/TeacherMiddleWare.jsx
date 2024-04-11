@@ -4,7 +4,7 @@ import Spinner from "../../ui/Spinner";
 import TeacherRow from "./TeacherRow";
 import { convertToCustomFormat } from "../../utils/helpers";
 
-function TeacherMiddleWare({ student }) {
+function TeacherMiddleWare({ student, isTeacher }) {
   const { rollNo, studentName, id: studentId } = student;
 
   const assignedMarks = useSelector((state) => state.student.marks);
@@ -44,7 +44,7 @@ function TeacherMiddleWare({ student }) {
   if (isLoading) return <Spinner />;
   return (
     <>
-      <TeacherRow allData={allData} />
+      <TeacherRow allData={allData} isTeacher={isTeacher} />
     </>
   );
 }

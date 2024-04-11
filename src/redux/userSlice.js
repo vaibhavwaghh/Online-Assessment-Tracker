@@ -16,6 +16,9 @@ const initialState = {
   totalNumberOfApproved: 0,
   allIds: 1,
   data: 1,
+  tSubjects: 1,
+  currYear: 1,
+  subjName: "v",
 };
 
 const userSlice = createSlice({
@@ -67,6 +70,15 @@ const userSlice = createSlice({
     updateData(state, action) {
       state.data = action.payload;
     },
+    updateTotalSubject(state, action) {
+      state.tSubjects = action.payload;
+    },
+    updateSubjectName(state, action) {
+      state.subjName = action.payload;
+    },
+    updateCurrentYear(state, action) {
+      state.currYear = action.payload;
+    },
   },
 });
 
@@ -77,6 +89,7 @@ export const {
   updateAssignmentId,
   updateAssignmentMarks,
   updateLastDate,
+  updateSubjectName,
   updateAllDivOfTeacher,
   updateHodId,
   updatePrincipalId,
@@ -85,7 +98,9 @@ export const {
   updatetotalNumberOfSubmitted,
   updatetotalNumberOfApproved,
   updateData,
+  updateCurrentYear,
   updateAllIds,
+  updateTotalSubject,
 } = userSlice.actions;
 
 export default userSlice.reducer;

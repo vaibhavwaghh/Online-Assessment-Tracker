@@ -1,4 +1,10 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter,
+  Navigate,
+  Route,
+  Routes,
+  useSearchParams,
+} from "react-router-dom";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import PageNotFound from "./pages/PageNotFound";
 import Login from "./pages/Login";
@@ -25,7 +31,13 @@ import AssesmentDetails from "./pages/AssesmentDetails";
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 0 } },
 });
+let show = false;
 function App() {
+  // const [searchParams] = useSearchParams();
+  // let show = false;
+  // if (searchParams.get("assesment")) {
+  //   show = true;
+  // }
   return (
     <>
       <DarkModeProvider>
@@ -41,7 +53,7 @@ function App() {
                   </ProtectedRoute>
                 }
               >
-                <Route element={<Navigate replace to="/student" />} />
+                <Route index element={<Navigate replace to="/student" />} />
                 <Route path="student" element={<DashboardForStudent />} />
                 <Route path="account" element={<Account />} />
                 <Route
@@ -81,7 +93,7 @@ function App() {
                 <Route index element={<DashboardForStudent />} />
                 <Route path=":year" element={<AllSubjectsForHod />} />
                 <Route
-                  path=":subjectName/:assignmentName"
+                  path=":year/:assignmentName"
                   element={<AllStudentsOfHod />}
                 />
               </Route>
@@ -99,8 +111,8 @@ function App() {
                   element={<AllYearOfPrincipalHod />}
                 />
                 <Route
-                  path=":departmentName/:year/:subjectName"
-                  element={<AllStudentsOfHod />}
+                  path=":subjectName/:assesment"
+                  element={<AllStudentsOfHod isPrincipal={1} />}
                 />
               </Route>
 

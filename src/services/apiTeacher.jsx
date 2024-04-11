@@ -43,7 +43,9 @@ export async function getAllAssignmentOfTeacher(allIds) {
   const { teacherId, subjectId } = allIds;
   let query = supabase
     .from("assignments")
-    .select("*")
+    .select(
+      "id, created_at,assignmentName,subjectOfAssignment,deadline,assignmentInformation,teacherId(teacherName),description ,assignedMarks"
+    )
     .eq("subjectOfAssignment", subjectId)
     .eq("teacherId", teacherId);
   let { data, error } = await query;

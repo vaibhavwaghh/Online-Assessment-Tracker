@@ -9,7 +9,7 @@ import UpdateStudentAssesment from "../assesmentForTeachers/UpdateStudentAssesme
 import { updatestudentId } from "../../redux/userSlice";
 import { useEffect } from "react";
 
-function TeacherRow({ allData }) {
+function TeacherRow({ allData, isTeacher }) {
   // console.log("data in st row", data);
   const {
     rollNo,
@@ -58,11 +58,14 @@ function TeacherRow({ allData }) {
         ) : (
           <div>-</div>
         )}
-
-        {solution !== "" ? (
-          <UpdateStudentAssesment studentId={studentId} />
+        {isTeacher ? (
+          solution !== "" ? (
+            <UpdateStudentAssesment studentId={studentId} />
+          ) : (
+            <div>-</div>
+          )
         ) : (
-          <div>-</div>
+          ""
         )}
       </Table.Row>
     </>

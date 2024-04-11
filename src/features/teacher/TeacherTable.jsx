@@ -10,7 +10,7 @@ import { useEffect, useState } from "react";
 import { useGetTeachersAllDivisions } from "../operations/useTeacherOperation";
 import { updateAllDivOfTeacher } from "../../redux/userSlice";
 
-function TeacherTable() {
+function TeacherTable({ isTeacher = 1 }) {
   const [searchParams] = useSearchParams();
 
   const teacherId = useSelector((state) => state.student.teacherId);
@@ -29,11 +29,17 @@ function TeacherTable() {
   // if (searchParams?.get("sortBy")) {
   //   sort = searchParams?.get("sortBy");
   // }
+  let columns;
+  if (isTeacher) {
+    columns = "1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr 1.5fr";
+  } else {
+    columns = "1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr ";
+  }
 
   if (isLoading) return <Spinner />;
   return (
     // <Menus>
-    <Table columns="1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr 1.5fr">
+    <Table columns={columns}>
       <Table.Header>
         <div>Roll no</div>
         <div> Name</div>
@@ -42,12 +48,16 @@ function TeacherTable() {
         <div>Approved</div>
         <div>Marks</div>
         <div> STUDENTS PDF</div>
-        <div>Update Marks</div>
+        {isTeacher ? <div>Update Marks</div> : ""}
       </Table.Header>
       <Table.Body
         data={studentData}
         render={(student) => (
-          <TeacherMiddleWare student={student} key={student.id} />
+          <TeacherMiddleWare
+            isTeacher={isTeacher}
+            student={student}
+            key={student.id}
+          />
         )}
       />
     </Table>

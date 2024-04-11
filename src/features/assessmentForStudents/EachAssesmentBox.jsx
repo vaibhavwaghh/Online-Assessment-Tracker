@@ -1,218 +1,107 @@
 import styled from "styled-components";
-
 import AssesmentFile from "./AssesmentFile";
 import Button from "../../ui/Button";
 import { useSelector } from "react-redux";
 
-const StyledBookingDataBox = styled.section`
-  /* Box */
-  background-color: var(--color-grey-0);
-  border: 1px solid var(--color-grey-100);
-  border-radius: var(--border-radius-md);
-
-  overflow: hidden;
-`;
-
-const Header = styled.header`
-  background-color: var(--color-brand-500);
-  padding: 2rem 4rem;
-  color: #e0e7ff;
-  font-size: 1.8rem;
-  font-weight: 500;
+// Styled components for the box
+const Box = styled.div`
+  border: 2px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
-
-  svg {
-    height: 3.2rem;
-    width: 3.2rem;
-  }
-
-  & div:first-child {
-    display: flex;
-    align-items: center;
-    gap: 1.6rem;
-    font-weight: 600;
-    font-size: 1.8rem;
-  }
-
-  & span {
-    font-family: "Sono";
-    font-size: 2rem;
-    margin-left: 4px;
-  }
 `;
 
-const Section = styled.section`
-  padding: 3.2rem 4rem 1.2rem;
+const Column = styled.div`
+  flex-basis: calc(50% - 2rem); /* 50% width with a gap of 4rem */
 `;
 
-const Guest = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1.2rem;
-  margin-bottom: 1.6rem;
-  color: var(--color-grey-500);
-
-  & p:first-of-type {
-    font-weight: 500;
-    color: var(--color-grey-700);
-  }
+const Info = styled.div`
+  margin-top: 10px;
 `;
 
-const Price = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 1.6rem 3.2rem;
-  border-radius: var(--border-radius-sm);
-  margin-top: 2.4rem;
-
-  background-color: ${(props) =>
-    props.isPaid ? "var(--color-green-100)" : "var(--color-yellow-100)"};
-  color: ${(props) =>
-    props.isPaid ? "var(--color-green-700)" : "var(--color-yellow-700)"};
-
-  & p:last-child {
-    text-transform: uppercase;
-    font-size: 1.4rem;
-    font-weight: 600;
-  }
-
-  svg {
-    height: 2.4rem;
-    width: 2.4rem;
-    color: currentColor !important;
-  }
+const Label = styled.span`
+  font-weight: bold;
 `;
 
-const Footer = styled.footer`
-  padding: 1.6rem 4rem;
-  font-size: 1.2rem;
-  color: var(--color-grey-500);
-  text-align: right;
+const Value = styled.span`
+  margin-left: 10px;
 `;
 
-// A purely presentational component
 function EachAssesmentBox() {
   const currData = useSelector((state) => state.student.data);
   const allIds = useSelector((state) => state.student.allIds);
-  console.log("THIS IS IDS AND DATA", currData, allIds);
   let { assignedMarks, description, teacherName, data } = currData;
+
   const handleDownload2 = () => {
     window.open(data?.solutionPdf, "_blank");
   };
+
   return (
-    <>
-      <div>Teacher Name :- {teacherName}</div>
-      <div>Description :- {description}</div>
-      <div>
-        Marks :-{" "}
-        {data?.submittedMarks ? (
-          <span style={{ color: "BLUE" }}>
-            {data.submittedMarks}/{assignedMarks}
-          </span>
-        ) : (
-          <span style={{ color: "red" }}>0/{assignedMarks}</span>
+    <Box>
+      <Column>
+        <Info>
+          <Label>Teacher Name:</Label>
+          <Value>{teacherName}</Value>
+        </Info>
+        <Info>
+          <Label>Description:</Label>
+          <Value>{description}</Value>
+        </Info>
+        <Info>
+          <Label>Marks:</Label>
+          <Value>
+            {data?.submittedMarks ? (
+              <span style={{ color: "blue" }}>
+                {data.submittedMarks}/{assignedMarks}
+              </span>
+            ) : (
+              <span style={{ color: "red" }}>0/{assignedMarks}</span>
+            )}
+          </Value>
+        </Info>
+      </Column>
+      <Column>
+        {data?.status && (
+          <Info>
+            <Label>Status:</Label>
+            <Value>
+              <span style={{ color: "blue" }}>Submitted</span>{" "}
+            </Value>
+          </Info>
         )}
-      </div>
-      {data?.status && (
-        <div>
-          Status :- <span style={{ color: "BLUE" }}>Submitted</span>{" "}
-        </div>
-      )}{" "}
-      {data?.status && (
-        <div>
-          Approved :-
-          {data?.approved ? (
-            <span style={{ color: "BLUE" }}>YES</span>
-          ) : (
-            <span style={{ color: "red" }}>NO</span>
-          )}
-        </div>
-      )}
-      {data?.solutionPdf && (
-        <div>
-          Solution PDF :- <Button onClick={handleDownload2}>View</Button>
-        </div>
-      )}
-      {/* <div>{data?.description}</div>
-      <div>
-        {data?.solutionPdf ? (
-          <Button onClick={handleDownload2}>View</Button>
-        ) : (
-          "-"
+        {data?.status && (
+          <Info>
+            <Label>Approved:</Label>
+            <Value>
+              {data?.approved ? (
+                <span style={{ color: "blue" }}>YES</span>
+              ) : (
+                <span style={{ color: "red" }}>NO</span>
+              )}
+            </Value>
+          </Info>
         )}
-      </div> */}
-      {!data?.solutionPdf && (
-        <div style={{ display: "flex", gap: "3rem" }}>
-          <span>Upload File :-</span>
-          <AssesmentFile allIds={allIds} />
-        </div>
-      )}
-    </>
+        {data?.solutionPdf && (
+          <Info>
+            <Label>Solution PDF:</Label>
+            <Value>
+              <Button onClick={handleDownload2}>View</Button>
+            </Value>
+          </Info>
+        )}
+        {!data?.solutionPdf && (
+          <Info style={{ display: "flex", alignItems: "center" }}>
+            <Label>Upload File:</Label>
+            <Value>
+              <AssesmentFile allIds={allIds} />
+            </Value>
+          </Info>
+        )}
+      </Column>
+    </Box>
   );
-  // <StyledBookingDataBox>
-  //   <Header>
-  //     <div>
-  //       <HiOutlineHomeModern />
-  //       <p>
-  //         {numNights} nights in Cabin <span>{cabinName}</span>
-  //       </p>
-  //     </div>
-
-  //     <p>
-  //       {format(new Date(startDate), "EEE, MMM dd yyyy")} (
-  //       {isToday(new Date(startDate))
-  //         ? "Today"
-  //         : formatDistanceFromNow(startDate)}
-  //       ) &mdash; {format(new Date(endDate), "EEE, MMM dd yyyy")}
-  //     </p>
-  //   </Header>
-
-  //   <Section>
-  //     <Guest>
-  //       {countryFlag && <Flag src={countryFlag} alt={`Flag of ${country}`} />}
-  //       <p>
-  //         {guestName} {numGuests > 1 ? `+ ${numGuests - 1} guests` : ""}
-  //       </p>
-  //       <span>&bull;</span>
-  //       <p>{email}</p>
-  //       <span>&bull;</span>
-  //       <p>National ID {nationalID}</p>
-  //     </Guest>
-
-  //     {observations && (
-  //       <DataItem
-  //         icon={<HiOutlineChatBubbleBottomCenterText />}
-  //         label="Observations"
-  //       >
-  //         {observations}
-  //       </DataItem>
-  //     )}
-
-  //     <DataItem icon={<HiOutlineCheckCircle />} label="Breakfast included?">
-  //       {hasBreakfast ? "Yes" : "No"}
-  //     </DataItem>
-
-  //     <Price isPaid={isPaid}>
-  //       <DataItem icon={<HiOutlineCurrencyDollar />} label={`Total price`}>
-  //         {formatCurrency(totalPrice)}
-
-  //         {hasBreakfast &&
-  //           ` (${formatCurrency(cabinPrice)} cabin + ${formatCurrency(
-  //             extrasPrice
-  //           )} breakfast)`}
-  //       </DataItem>
-
-  //       <p>{isPaid ? "Paid" : "Will pay at property"}</p>
-  //     </Price>
-  //   </Section>
-
-  //   <Footer>
-  //     <p>Booked {format(new Date(created_at), "EEE, MMM dd yyyy, p")}</p>
-  //   </Footer>
-  // </StyledBookingDataBox>
 }
 
 export default EachAssesmentBox;

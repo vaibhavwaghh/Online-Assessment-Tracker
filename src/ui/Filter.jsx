@@ -50,23 +50,16 @@ function Filter({ filterField, options, user }) {
   const dispatch = useDispatch();
   const { isCreating, getTeacherId } = useTeacherSubject();
   let currentFilter;
+  console.log("THIS IS 1ST VALUE", options[0]?.label);
   if (user == "teacher") {
     currentFilter = searchParams.get(filterField) || options[0]?.value;
   }
   if (user == "hod" || user == "principal") {
     if (searchParams.get(filterField)) {
       currentFilter = searchParams.get(filterField);
-    } else {
-      searchParams.set(filterField, options[0].label);
-
-      // currentFilter = options[0].label;
-
-      setSearchParams(searchParams);
     }
   }
-  // if (user == "principal") {
-  //   currentFilter = options[0].label;
-  // }
+
   function handleClick(label, value, user) {
     console.log(user);
     if (user == "teacher") {
@@ -75,12 +68,25 @@ function Filter({ filterField, options, user }) {
     if (user == "hod") {
       dispatch(updateSubjectId(value));
       searchParams.set(filterField, label);
+      console.log(
+        "this is filters from hod",
+        searchParams.get("year"),
+        searchParams.get("subject"),
+        options[0]?.label
+      );
       getTeacherId(value);
     }
     if (user == "principal") {
       console.log(filterField);
       dispatch(updateYearId(value));
       searchParams.set(filterField, label);
+      searchParams.set("subject", "");
+      console.log(
+        "this is filters from principal",
+        searchParams.get("year"),
+        searchParams.get("subject"),
+        label
+      );
     }
     // dispatch(updateteacherId());
     setSearchParams(searchParams);

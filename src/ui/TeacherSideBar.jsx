@@ -77,7 +77,12 @@ function TeacherSideBar({ teacherDetails }) {
       <div></div>
       <nav>
         <NavList>
-          {/* <li>{</li> */}
+          <li>
+            <StyledNavLink exact to={`/student`}>
+              <AiOutlineHome />
+              <span>HOME</span>
+            </StyledNavLink>
+          </li>
           <li>
             <div onClick={handleClick}>
               <StyledNavLink to={`/teacher/${subjectName}`}>

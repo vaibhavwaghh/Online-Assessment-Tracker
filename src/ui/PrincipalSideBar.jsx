@@ -77,6 +77,12 @@ function PrincipalSideBar({ principalDetails }) {
       <nav>
         <NavList>
           <li>
+            <StyledNavLink exact to={`/student`}>
+              <AiOutlineHome />
+              <span>HOME</span>
+            </StyledNavLink>
+          </li>
+          <li>
             {allDepartments.map((department) => (
               <>
                 <div onClick={() => handleClick(department.id)}>

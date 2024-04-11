@@ -5,7 +5,7 @@ import { useStudent } from "../features/student/useStudent";
 import { useUser } from "../features/authentication/useUser";
 import Spinner from "./Spinner";
 import { useDispatch } from "react-redux";
-import { updatestudentId } from "../redux/userSlice";
+import { updateTotalSubject, updatestudentId } from "../redux/userSlice";
 import { AiOutlineHome } from "react-icons/ai";
 import TeacherSideBar from "./TeacherSideBar";
 import HodSideBar from "./HodSideBar";
@@ -27,7 +27,7 @@ function SideBar({ curruserDetails }) {
     flex-direction: column;
     gap: 3.2rem;
   `;
-
+  const dispatch = useDispatch();
   if (curruserDetails.principalName) {
     return <PrincipalSideBar principalDetails={curruserDetails} />;
   } else if (curruserDetails[0]?.teacherName) {
@@ -48,6 +48,9 @@ function SideBar({ curruserDetails }) {
   );
   console.log("THIS IS STUDENT SUBJECT DATA", data);
   if (isLoadingStudents) return <Spinner />;
+  if (data) {
+    dispatch(updateTotalSubject(data.length));
+  }
   return (
     <StyledSideBar>
       <Logo />

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Stats from "./Stats";
-
+import { useSelector } from "react-redux";
 const StyledDashboardLayout = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
@@ -9,6 +9,7 @@ const StyledDashboardLayout = styled.div`
 `;
 
 function DashboardLayout() {
+  const totalSubj = useSelector((state) => state.student.tSubjects);
   // const { isLoading: isLoadingBooking, bookings } = useRecentBookings();
   // const {
   //   stays,
@@ -21,7 +22,12 @@ function DashboardLayout() {
   // console.log(bookings, stays, confirmedStays);
   return (
     <StyledDashboardLayout>
-      <Stats bookings={5} confirmedStays={5} numDays={4} cabinCount={3} />
+      <Stats
+        tSubjects={totalSubj}
+        tAssesment={4}
+        tSubmitted={3}
+        tApproved={3}
+      />
       {/* <div>Statistics</div> */}
       {/* <div>Todays activity</div> */}
       {/* <div>Chart stay durations</div> */}

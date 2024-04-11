@@ -15,10 +15,12 @@ function AllYearOfPrincipalHod() {
 
   const { isLoading, data } = useHod(hodId);
   const [searchParams] = useSearchParams();
+
   let year = searchParams.get("year");
   let subject = searchParams.get("subject");
   if (isLoading) return <Spinner />;
   console.log("ALL YEARS OF DEPARTMENT", data);
+
   return (
     <>
       <Row type="horizontal">
@@ -36,7 +38,7 @@ function AllYearOfPrincipalHod() {
       )}
       {year && subject && (
         <Row>
-          <AllAssesmentOfHod />
+          <AllAssesmentOfHod isPrincipal={1} />
         </Row>
       )}
     </>

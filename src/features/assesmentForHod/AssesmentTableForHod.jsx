@@ -8,7 +8,7 @@ import { useGetTeachersAllDivisions } from "../operations/useTeacherOperation";
 import { updateAllDivOfTeacher } from "../../redux/userSlice";
 import AssesmentRowHod from "./AssesmentRowForHod";
 
-function AssessmentTableForHod({ teacherId, subjectId }) {
+function AssessmentTableForHod({ teacherId, subjectId, isPrincipal }) {
   const dispatch = useDispatch();
 
   const allIds = { teacherId, subjectId };
@@ -28,9 +28,10 @@ function AssessmentTableForHod({ teacherId, subjectId }) {
   dispatch(updateAllDivOfTeacher(divArray));
 
   return (
-    <Table columns="1.5fr 1fr 1fr 1fr 2fr 1fr 1fr">
+    <Table columns="1fr 1fr 1fr 1fr 1fr 2fr 1fr 1fr">
       <Table.Header>
         <div>Name</div>
+        <div>Teacher</div>
         <div>Created</div>
         <div>Deadline</div>
         <div>Marks</div>
@@ -41,7 +42,11 @@ function AssessmentTableForHod({ teacherId, subjectId }) {
       <Table.Body
         data={data}
         render={(assesment) => (
-          <AssesmentRowHod assesment={assesment} key={assesment.id} />
+          <AssesmentRowHod
+            assesment={assesment}
+            key={assesment.id}
+            isPrincipal={isPrincipal}
+          />
         )}
       />
     </Table>

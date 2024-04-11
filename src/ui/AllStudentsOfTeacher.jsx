@@ -7,13 +7,17 @@ import ButtonText from "./ButtonText";
 import { useMoveBack } from "../hooks/useMoveBack";
 
 function AllStudentsOfTeacher() {
-  const moveBack = useMoveBack();
+  // Function to navigate to the desired URL
+  function goSomewhere() {
+    console.log("THIS IS SOMEWHERE");
+  }
+  // const moveBack = useMoveBack();
   return (
     <>
       <>
         <Row type="horizontal">
           <Heading as="h1">All Students</Heading>
-          <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
+          <ButtonText onClick={goSomewhere}>&larr; Back</ButtonText>
           <TeacherAllOperations />
         </Row>
         <Row>
