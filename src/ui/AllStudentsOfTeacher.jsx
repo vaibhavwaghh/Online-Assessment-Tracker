@@ -5,11 +5,16 @@ import TeacherAllOperations from "../features/operations/TeacherAllOperations";
 import TeacherTable from "../features/teacher/TeacherTable";
 import ButtonText from "./ButtonText";
 import { useMoveBack } from "../hooks/useMoveBack";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function AllStudentsOfTeacher() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const currentUrl = location.pathname;
+  let newUrl = currentUrl.split("/").slice(0, -1).join("/");
   // Function to navigate to the desired URL
   function goSomewhere() {
-    console.log("THIS IS SOMEWHERE");
+    navigate(newUrl);
   }
   // const moveBack = useMoveBack();
   return (

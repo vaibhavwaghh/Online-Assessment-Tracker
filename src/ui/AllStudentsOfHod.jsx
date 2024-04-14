@@ -26,7 +26,7 @@ function AllStudentsOfHod({ isPrincipal = 0 }) {
   } else {
     newpath = `?subject=${subject}`;
   }
-  const changedUrl = currentUrl.replace(/\/ASS-\d+-([A-Z]+)/, "");
+  const changedUrl = currentUrl.split("/").slice(0, -1).join("/");
 
   const newUrl = `${changedUrl}${newpath}`;
   function moveBack() {
