@@ -28,7 +28,7 @@ function AssessmentTableForHod({ teacherId, subjectId, isPrincipal }) {
   dispatch(updateAllDivOfTeacher(divArray));
 
   return (
-    <Table columns="1fr 1fr 1fr 1fr 1fr 2fr 1fr 1fr">
+    <Table columns="1.5fr 1fr 1fr 1fr 1fr 1.5fr 1fr 1fr">
       <Table.Header>
         <div>Name</div>
         <div>Teacher</div>

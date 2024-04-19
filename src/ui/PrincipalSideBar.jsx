@@ -68,6 +68,7 @@ function PrincipalSideBar({ principalDetails }) {
   // if (isLoading) return <Spinner />;
   // console.log("DATA RECIEVED FROM HOD ALL YEAR", data);
   function handleClick(departmentId) {
+    console.log("THIS IS UPDATED DEPARTMENT ID", departmentId);
     dispatch(updateHodId(departmentId));
   }
   return (

@@ -44,7 +44,6 @@ const FilterButton = styled.button`
 `;
 
 function Filter({ filterField, options, user }) {
-  console.log("THIS IS USER", user);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const dispatch = useDispatch();
@@ -61,7 +60,7 @@ function Filter({ filterField, options, user }) {
   }
 
   function handleClick(label, value, user) {
-    console.log(user);
+    console.log("THIS IS USER YEAR ID ", value);
     if (user == "teacher") {
       searchParams.set(filterField, value);
     }

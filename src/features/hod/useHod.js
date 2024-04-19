@@ -9,11 +9,12 @@ import { useDispatch } from "react-redux";
 import { updateteacherId } from "../../redux/userSlice";
 
 export function useHod(id) {
+  console.log("THIS IS HOD ID RECIEVED", id);
   const { isLoading, data } = useQuery({
-    queryKey: ["hodAllYear"],
+    queryKey: [`hodAllYear${id}`],
     queryFn: () => getHod(id),
   });
-
+  console.log("THIS IS YEAR DATA RETURNED", data);
   return { isLoading, data };
 }
 
