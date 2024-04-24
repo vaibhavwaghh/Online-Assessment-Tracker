@@ -28,6 +28,7 @@ import AllYearOfPrincipalHod from "./ui/AllYearOfPrincipalHod";
 import { DarkModeProvider } from "./features/context/DarkModeContext";
 import DashboardForStudent from "./dashboard/DashboardForStudent";
 import AssesmentDetails from "./pages/AssesmentDetails";
+import DashBoard from "./ui/DashBoard";
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 0 } },
 });
@@ -72,7 +73,7 @@ function App() {
                   </ProtectedRoute>
                 }
               >
-                <Route path="teacher" element={<DashboardForStudent />} />
+                <Route path="teacher" element={<DashBoard />} />
                 <Route
                   path="/teacher/:subjectName"
                   element={<AllAssessmentForTeacher />}
@@ -90,7 +91,7 @@ function App() {
                   </ProtectedRoute>
                 }
               >
-                <Route index element={<DashboardForStudent />} />
+                <Route index element={<DashBoard />} />
                 <Route path=":year" element={<AllSubjectsForHod />} />
                 <Route
                   path=":year/:assignmentName"
@@ -105,7 +106,7 @@ function App() {
                   </ProtectedRoute>
                 }
               >
-                <Route index element={<DashboardForStudent />} />
+                <Route index element={<DashBoard />} />
                 <Route
                   path=":departmentName"
                   element={<AllYearOfPrincipalHod />}
