@@ -77,12 +77,12 @@ function PrincipalSideBar({ principalDetails }) {
 
       <nav>
         <NavList>
-          <li>
+          {/* <li>
             <StyledNavLink exact to={`/student`}>
               <AiOutlineHome />
               <span>HOME</span>
             </StyledNavLink>
-          </li>
+          </li> */}
           <li>
             {allDepartments.map((department) => (
               <>

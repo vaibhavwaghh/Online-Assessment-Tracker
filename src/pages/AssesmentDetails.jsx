@@ -7,27 +7,28 @@ import EachAssesmentBox from "../features/assessmentForStudents/EachAssesmentBox
 import { useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-function AssesmentDetails() {
+function AssesmentDetails({ newdata, allIds }) {
   const HeadingGroup = styled.div`
     display: flex;
     gap: 2.4rem;
     align-items: center;
   `;
-  const moveBack = useMoveBack();
-  const currData = useSelector((state) => state.student.data);
-  let { assignmentName } = currData;
+  // const moveBack = useMoveBack();
+  // const currData = useSelector((state) => state.student.data);
+  // let { assignmentName } = currData;
+
   return (
     <>
       <Row type="horizontal">
         <HeadingGroup>
-          <Heading as="h1">Assesment {assignmentName}</Heading>
+          <Heading as="h1">Assesment {newdata?.assignmentName}</Heading>
           {/* <Tag type={statusToTagName[status]}>{status.replace("-", " ")}</Tag> */}
         </HeadingGroup>
-        <ButtonText onClick={moveBack}>&larr; Back</ButtonText>
+        {/* <ButtonText onClick={moveBack}>&larr; Back</ButtonText> */}
       </Row>
-      <Row>
-        <EachAssesmentBox />
-      </Row>
+      {/* <Row> */}
+      <EachAssesmentBox newdata={newdata} allIds={allIds} />
+      {/* </Row> */}
     </>
   );
 }

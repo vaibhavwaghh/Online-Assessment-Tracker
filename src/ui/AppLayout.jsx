@@ -12,6 +12,8 @@ import {
   updatestudentId,
   updateteacherId,
 } from "../redux/userSlice";
+import HeaderStudent from "./HeaderStudent";
+
 // import Logout from "../features/authentication/Logout";
 function AppLayout() {
   const StyledAppLayout = styled.div`
@@ -44,6 +46,20 @@ function AppLayout() {
     var { currstudentDetails, studentId } = details;
     curruserDetails = currstudentDetails;
     dispatch(updatestudentId(studentId));
+    return (
+      <>
+        <div>
+          <HeaderStudent curruserDetails={curruserDetails} />
+
+          {/* <SideBar curruserDetails={curruserDetails} /> */}
+          <Main>
+            <div>
+              <Outlet />
+            </div>
+          </Main>
+        </div>
+      </>
+    );
   } else if (details?.teacherId) {
     var { currteacherDetails, teacherId } = details;
     curruserDetails = currteacherDetails;

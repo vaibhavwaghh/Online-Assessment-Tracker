@@ -28,10 +28,8 @@ function AssesmentFile({ allIds }) {
     event.preventDefault();
     if (fileUploaded && file) {
       console.log("File uploaded:", file);
-      // console.log("THIS IS SUBJ ID IN ASS FILE", subjectId);
       let insertData = { file, ...allIds };
       uploadFile(insertData);
-      // Perform form submission logic
       console.log("Form submitted successfully");
     } else {
       alert("Please upload a PDF file before submitting");

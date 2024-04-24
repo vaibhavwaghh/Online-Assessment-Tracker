@@ -11,6 +11,8 @@ const Box = styled.div`
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
+  width: 100rem;
+  height: 30rem;
 `;
 
 const Column = styled.div`
@@ -29,21 +31,31 @@ const Value = styled.span`
   margin-left: 10px;
 `;
 
-function EachAssesmentBox() {
+function EachAssesmentBox({ newdata, allIds }) {
   const currData = useSelector((state) => state.student.data);
-  const allIds = useSelector((state) => state.student.allIds);
-  let { assignedMarks, description, teacherName, data } = currData;
 
+  let { assignedMarks, description, teacherName, data, assignmentInformation } =
+    newdata;
+  // let { assignedMarks, description, teacherName, data, assignmentInformation } =
+  //   currData;
   const handleDownload2 = () => {
     window.open(data?.solutionPdf, "_blank");
   };
-
+  const handleDownload1 = () => {
+    window.open(assignmentInformation, "_blank");
+  };
   return (
     <Box>
       <Column>
         <Info>
           <Label>Teacher Name:</Label>
           <Value>{teacherName}</Value>
+        </Info>
+        <Info>
+          <Label>Assigned Pdf: </Label>
+          <Value>
+            <Button onClick={handleDownload1}>View</Button>
+          </Value>
         </Info>
         <Info>
           <Label>Description:</Label>

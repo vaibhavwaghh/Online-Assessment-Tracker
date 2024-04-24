@@ -19,6 +19,7 @@ const initialState = {
   tSubjects: 1,
   currYear: 1,
   subjName: "v",
+  allSubjects: [],
 };
 
 const userSlice = createSlice({
@@ -79,6 +80,9 @@ const userSlice = createSlice({
     updateCurrentYear(state, action) {
       state.currYear = action.payload;
     },
+    updateAllSubjects(state, action) {
+      state.allSubjects = action.payload;
+    },
   },
 });
 
@@ -100,6 +104,7 @@ export const {
   updateData,
   updateCurrentYear,
   updateAllIds,
+  updateAllSubjects,
   updateTotalSubject,
 } = userSlice.actions;
 

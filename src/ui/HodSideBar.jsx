@@ -76,12 +76,12 @@ function HodSideBar({ hodDetails }) {
       <div></div>
       <nav>
         <NavList>
-          <li>
+          {/* <li>
             <StyledNavLink exact to={`/student`}>
               <AiOutlineHome />
               <span>HOME</span>
             </StyledNavLink>
-          </li>
+          </li> */}
           <li>
             {data.map((year) => (
               <>

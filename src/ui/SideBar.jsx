@@ -5,7 +5,11 @@ import { useStudent } from "../features/student/useStudent";
 import { useUser } from "../features/authentication/useUser";
 import Spinner from "./Spinner";
 import { useDispatch } from "react-redux";
-import { updateTotalSubject, updatestudentId } from "../redux/userSlice";
+import {
+  updateAllSubjects,
+  updateTotalSubject,
+  updatestudentId,
+} from "../redux/userSlice";
 import { AiOutlineHome } from "react-icons/ai";
 import TeacherSideBar from "./TeacherSideBar";
 import HodSideBar from "./HodSideBar";
@@ -50,6 +54,7 @@ function SideBar({ curruserDetails }) {
   if (isLoadingStudents) return <Spinner />;
   if (data) {
     dispatch(updateTotalSubject(data.length));
+    dispatch(updateAllSubjects(data));
   }
   return (
     <StyledSideBar>

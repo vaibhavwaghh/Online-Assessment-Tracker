@@ -15,12 +15,6 @@ function AddNewAssessment() {
         <Modal.Window name="assignment-form">
           <CreateNewAssessmentForm />
         </Modal.Window>
-        {/* <Modal.Open opens="table">
-          <Button>Show Table</Button>
-        </Modal.Open>
-        <Modal.Window name="table">
-          <CabinTable />
-        </Modal.Window> */}
       </Modal>
     </>
   );

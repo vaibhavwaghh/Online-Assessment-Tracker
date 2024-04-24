@@ -32,11 +32,11 @@ export function useUploadAssesment(allIds) {
           `statusOfAssessmentSubject_${subjectId}_Assignment_${assignmentId}_Student_${studentId}`,
         ],
       });
-      moveBack();
+      // moveBack();
     },
     onError: (err) => {
       toast.error(err.message);
-      moveBack();
+      // moveBack();
     },
   });
   return { isUploading, uploadFile };

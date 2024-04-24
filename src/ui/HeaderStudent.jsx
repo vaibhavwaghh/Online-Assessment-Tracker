@@ -6,10 +6,8 @@ import { useStudent } from "../features/student/useStudent";
 import { updateAllSubjects, updateTotalSubject } from "../redux/userSlice";
 import { useDispatch } from "react-redux";
 import Spinner from "./Spinner";
-// import HeaderMenu from "./HeaderMenu";
-// import UserAvatar from "../features/authentication/UserAvatar";
 
-function Header({ curruserDetails }) {
+function HeaderStudent({ curruserDetails }) {
   const StyledHeader = styled.header`
     background-color: var(--color-grey-0);
     padding: 1.2rem 4.8rem;
@@ -20,7 +18,23 @@ function Header({ curruserDetails }) {
     align-items: center;
     justify-content: flex-end;
   `;
-
+  const dispatch = useDispatch();
+  if (curruserDetails[0]?.studentName) {
+    var {
+      currentYear: { currentYear },
+      departmentName: { departmentName },
+    } = curruserDetails[0];
+  }
+  const { isLoading: isLoadingStudents, data } = useStudent(
+    currentYear,
+    departmentName
+  );
+  console.log("THIS IS STUDENT SUBJECT DATA", data);
+  if (isLoadingStudents) return <Spinner />;
+  if (data) {
+    dispatch(updateTotalSubject(data.length));
+    dispatch(updateAllSubjects(data));
+  }
   return (
     <StyledHeader>
       <UserAvatar curruserDetails={curruserDetails} />
@@ -29,4 +43,4 @@ function Header({ curruserDetails }) {
   );
 }
 
-export default Header;
+export default HeaderStudent;
