@@ -1,12 +1,16 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useGetStatusOfAsssessment } from "../assessmentForStudents/useAssessment";
 import Spinner from "../../ui/Spinner";
 import TeacherRow from "./TeacherRow";
 import { convertToCustomFormat } from "../../utils/helpers";
+import ExportButton from "../operations/ExportButton";
 
-function TeacherMiddleWare({ student, isTeacher }) {
+import Table from "../../ui/Table";
+
+function TeacherMiddleWare({ student, isTeacher, arr1, i }) {
+  i++;
   const { rollNo, studentName, id: studentId } = student;
-
+  const dispatch = useDispatch();
   const assignedMarks = useSelector((state) => state.student.marks);
   const asssignmentId = useSelector((state) => state.student.assignmentId);
   const subjectId = useSelector((state) => state.student.subjectId);
@@ -40,10 +44,43 @@ function TeacherMiddleWare({ student, isTeacher }) {
     studentName,
     solution,
   };
-  console.log("ALL DATA", allData);
+
+  function compareStudentName(obj1, obj2) {
+    return obj1.studentName === obj2.studentName;
+  }
+
+  // Function to remove duplicates based on studentName property
+  function removeDuplicatesByStudentName(array) {
+    return array.filter(
+      (item, index, self) =>
+        index === self.findIndex((obj) => compareStudentName(obj, item))
+    );
+  }
+
+  arr1.push(allData);
+  const uniqueData = removeDuplicatesByStudentName(arr1);
+  console.log("THIS IS UNIQUE DATA", uniqueData);
+  // console.log("THIS IS UNIQUE DATA", uniqueData);
   if (isLoading) return <Spinner />;
+  // dispatch(updateallStudentOfDivData(uniqueData));
   return (
     <>
+      {i === 1 && (
+        <>
+          {isTeacher ? <ExportButton studentData={uniqueData} /> : ""}
+
+          <Table.Header>
+            <div>Roll no</div>
+            <div>Name</div>
+            <div>Submission date</div>
+            <div>Status</div>
+            <div>Approved</div>
+            <div>Marks</div>
+            <div>STUDENTS PDF</div>
+            {isTeacher ? <div>Update Marks</div> : ""}
+          </Table.Header>
+        </>
+      )}
       <TeacherRow allData={allData} isTeacher={isTeacher} />
     </>
   );

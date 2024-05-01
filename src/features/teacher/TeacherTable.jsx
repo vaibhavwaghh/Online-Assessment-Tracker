@@ -9,6 +9,7 @@ import { useGetStatusOfAsssessment } from "../assessmentForStudents/useAssessmen
 import { useEffect, useState } from "react";
 import { useGetTeachersAllDivisions } from "../operations/useTeacherOperation";
 import { updateAllDivOfTeacher } from "../../redux/userSlice";
+import ExportButton from "../operations/ExportButton";
 
 function TeacherTable({ isTeacher = 1 }) {
   const [searchParams] = useSearchParams();
@@ -25,43 +26,46 @@ function TeacherTable({ isTeacher = 1 }) {
   const { isLoading, data: studentData } = useGetTeachersAllStudents(
     divNo || divisions[0]
   );
-  // let sort;
-  // if (searchParams?.get("sortBy")) {
-  //   sort = searchParams?.get("sortBy");
-  // }
+
+  const allStudentDivMark = useSelector(
+    (state) => state.student.allStudentOfDivData
+  );
   let columns;
   if (isTeacher) {
     columns = "1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr 1.5fr";
   } else {
     columns = "1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr ";
   }
-
+  let i = 0;
+  let arr1 = [];
   if (isLoading) return <Spinner />;
   return (
-    // <Menus>
-    <Table columns={columns}>
-      <Table.Header>
-        <div>Roll no</div>
-        <div> Name</div>
-        <div>Submission date</div>
-        <div>Status</div>
-        <div>Approved</div>
-        <div>Marks</div>
-        <div> STUDENTS PDF</div>
-        {isTeacher ? <div>Update Marks</div> : ""}
-      </Table.Header>
-      <Table.Body
-        data={studentData}
-        render={(student) => (
-          <TeacherMiddleWare
-            isTeacher={isTeacher}
-            student={student}
-            key={student.id}
-          />
-        )}
-      />
-    </Table>
-    // </Menus>
+    <>
+      <Table columns={columns}>
+        {/* <Table.Header>
+          <div>Roll no</div>
+          <div>Name</div>
+          <div>Submission date</div>
+          <div>Status</div>
+          <div>Approved</div>
+          <div>Marks</div>
+          <div>STUDENTS PDF</div>
+          {isTeacher ? <div>Update Marks</div> : ""}
+        </Table.Header> */}
+        <Table.Body
+          data={studentData}
+          render={(student, index) => (
+            <TeacherMiddleWare
+              isTeacher={isTeacher}
+              student={student}
+              key={index}
+              arr1={arr1}
+              i={index}
+            />
+          )}
+        />
+      </Table>
+    </>
   );
 }
 

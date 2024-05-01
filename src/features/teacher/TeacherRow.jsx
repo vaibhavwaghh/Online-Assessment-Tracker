@@ -10,7 +10,6 @@ import { updatestudentId } from "../../redux/userSlice";
 import { useEffect } from "react";
 
 function TeacherRow({ allData, isTeacher }) {
-  // console.log("data in st row", data);
   const {
     rollNo,
     studentName,
@@ -22,16 +21,6 @@ function TeacherRow({ allData, isTeacher }) {
     studentId,
     solution,
   } = allData;
-  // const assignedMarks1 = useSelector((state) => state.student.marks);
-  // const asssignmentId = useSelector((state) => state.student.assignmentId);
-  // const subjectId = useSelector((state) => state.student.subjectId);
-  // allData.map((student) => {
-  //   const { id: studentId } = student;
-  //   const allIds = { asssignmentId, subjectId, studentId };
-  //   const { isLoading, data } = useGetStatusOfAsssessment(allIds);
-  //   return { studentId, data, isLoading };
-  // });
-  // console.log("THIS IS ALL DATA", allData);
 
   const handleDownload = () => {
     window.open(solution, "_blank");
