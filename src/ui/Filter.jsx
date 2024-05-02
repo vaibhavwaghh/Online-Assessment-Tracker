@@ -51,7 +51,8 @@ function Filter({ filterField, options, user }) {
   let currentFilter;
   console.log("THIS IS 1ST VALUE", options[0]?.label);
   if (user == "teacher") {
-    currentFilter = searchParams.get(filterField) || options[0]?.value;
+    currentFilter = searchParams.get(filterField);
+    console.log("THIS IS CURRENT FILTER", currentFilter);
   }
   if (user == "hod" || user == "principal") {
     if (searchParams.get(filterField)) {
@@ -87,7 +88,6 @@ function Filter({ filterField, options, user }) {
         label
       );
     }
-    // dispatch(updateteacherId());
     setSearchParams(searchParams);
   }
   if (isCreating) return <Spinner />;

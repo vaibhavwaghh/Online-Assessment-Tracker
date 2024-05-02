@@ -5,7 +5,7 @@ import TeacherAllOperations from "../features/operations/TeacherAllOperations";
 import TeacherTable from "../features/teacher/TeacherTable";
 import ButtonText from "./ButtonText";
 import { useMoveBack } from "../hooks/useMoveBack";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 
 function AllStudentsOfTeacher() {
   const navigate = useNavigate();
@@ -16,6 +16,8 @@ function AllStudentsOfTeacher() {
   function goSomewhere() {
     navigate(newUrl);
   }
+  const [searchParams] = useSearchParams();
+  let division = searchParams.get("division");
   // const moveBack = useMoveBack();
   return (
     <>
@@ -25,10 +27,13 @@ function AllStudentsOfTeacher() {
           <ButtonText onClick={goSomewhere}>&larr; Back</ButtonText>
           <TeacherAllOperations />
         </Row>
-        <Row>
-          <TeacherTable />
-        </Row>
-        {/* <AddCabin /> */}
+        {division ? (
+          <Row>
+            <TeacherTable />
+          </Row>
+        ) : (
+          <h1>Select a division</h1>
+        )}
       </>
     </>
   );

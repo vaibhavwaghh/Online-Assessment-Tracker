@@ -9,13 +9,14 @@ import Spinner from "./Spinner";
 import TeacherAllOperations from "../features/operations/TeacherAllOperations";
 import TeacherTable from "../features/teacher/TeacherTable";
 import { useDispatch } from "react-redux";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 function AllStudentsOfHod({ isPrincipal = 0 }) {
   const yearId = useSelector((state) => state.student.currYearId);
   const { data, isLoading } = useHodSubject(yearId);
   const subject = useSelector((state) => state.student.subjName);
   const year = useSelector((state) => state.student.currYear);
-
+  const [searchParams] = useSearchParams();
+  let division = searchParams.get("division");
   const navigate = useNavigate();
   const location = useLocation();
   const currentUrl = location.pathname;
@@ -43,9 +44,13 @@ function AllStudentsOfHod({ isPrincipal = 0 }) {
           <div>Subject :- {subject}</div>
           <TeacherAllOperations />
         </Row>
-        <Row>
-          <TeacherTable isTeacher={0} />
-        </Row>
+        {division ? (
+          <Row>
+            <TeacherTable isTeacher={0} />
+          </Row>
+        ) : (
+          <h1>Select a division</h1>
+        )}
       </>
     </>
   );
