@@ -58,16 +58,15 @@ function TeacherMiddleWare({ student, isTeacher, arr1, i }) {
   }
 
   arr1.push(allData);
-  const uniqueData = removeDuplicatesByStudentName(arr1);
-  console.log("THIS IS UNIQUE DATA", uniqueData);
-  // console.log("THIS IS UNIQUE DATA", uniqueData);
+  const studentData = removeDuplicatesByStudentName(arr1);
+  console.log("THIS IS UNIQUE DATA", studentData);
   if (isLoading) return <Spinner />;
-  // dispatch(updateallStudentOfDivData(uniqueData));
+
   return (
     <>
       {i === 1 && (
         <>
-          {isTeacher ? <ExportButton studentData={uniqueData} /> : ""}
+          {isTeacher ? <ExportButton studentData={studentData} /> : ""}
 
           <Table.Header>
             <div>Roll no</div>

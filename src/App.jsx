@@ -13,22 +13,23 @@ import GlobalStyles from "./styles/GlobalStyles";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
 import AppLayout from "./ui/AppLayout";
-import Dashboard from "./pages/Dashboard";
 
 import Account from "./pages/Account";
 import AllAssessmentOfThisSubject from "./pages/AllAssessmentOfThisSubject";
 import AllAssessmentForTeacher from "./pages/AllAssessmentForTeacher";
 import AllStudentsOfTeacher from "./ui/AllStudentsOfTeacher";
 import AllSubjectsForHod from "./features/hod/AllSubjectsForHod";
-import AllAssesmentOfTeacher from "./pages/AllAssesmentOfHod";
-import AllAssesmentOfHod from "./pages/AllAssesmentOfHod";
+
 import AllStudentsOfHod from "./ui/AllStudentsOfHod";
 import AllYearOfHod from "./ui/AllYearOfPrincipalHod";
 import AllYearOfPrincipalHod from "./ui/AllYearOfPrincipalHod";
 import { DarkModeProvider } from "./features/context/DarkModeContext";
 import DashboardForStudent from "./dashboard/DashboardForStudent";
 import AssesmentDetails from "./pages/AssesmentDetails";
-import DashBoard from "./ui/DashBoard";
+
+import DashBoardForTeacher from "./ui/DashBoardForTeacher";
+import DashboardForHod from "./ui/DashboardForHod";
+import DashboardForPrincipal from "./ui/DashboardForPrincipal";
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 0 } },
 });
@@ -73,7 +74,7 @@ function App() {
                   </ProtectedRoute>
                 }
               >
-                <Route path="teacher" element={<DashBoard />} />
+                <Route path="teacher" element={<DashBoardForTeacher />} />
                 <Route
                   path="/teacher/:subjectName"
                   element={<AllAssessmentForTeacher />}
@@ -91,7 +92,7 @@ function App() {
                   </ProtectedRoute>
                 }
               >
-                <Route index element={<DashBoard />} />
+                <Route index element={<DashboardForHod />} />
                 <Route path=":year" element={<AllSubjectsForHod />} />
                 <Route
                   path=":year/:assignmentName"
@@ -106,7 +107,7 @@ function App() {
                   </ProtectedRoute>
                 }
               >
-                <Route index element={<DashBoard />} />
+                <Route index element={<DashboardForPrincipal />} />
                 <Route
                   path=":departmentName"
                   element={<AllYearOfPrincipalHod />}
