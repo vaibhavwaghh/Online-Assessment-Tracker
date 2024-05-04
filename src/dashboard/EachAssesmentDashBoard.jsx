@@ -16,7 +16,7 @@ const Box = styled.div`
   vertical-align: top; /* Align boxes to the top */
   border: 1px solid #ccc;
   padding: 10px;
-  width: 25rem;
+  width: 30rem;
   margin-right: 2rem; /* Add margin between boxes */
   margin-bottom: 1rem;
   border-radius: 5px;
