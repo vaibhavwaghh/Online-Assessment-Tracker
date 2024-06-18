@@ -18,10 +18,10 @@ export function useTeacherAllAssignment(allIds) {
   return { isLoading, data };
 }
 
-export function useGetTeachersAllStudents(divNo) {
+export function useGetTeachersAllStudents(divNo, year) {
   const { isLoading, data } = useQuery({
-    queryKey: [`teachersAllStudentsDiv${divNo}`],
-    queryFn: () => getAllTeachersAllStudents(divNo),
+    queryKey: [`teachersAllStudentsDiv${divNo}Year${year}`],
+    queryFn: () => getAllTeachersAllStudents(divNo, year),
   });
   return { isLoading, data };
 }

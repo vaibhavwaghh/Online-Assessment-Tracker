@@ -22,9 +22,11 @@ function TeacherTable({ isTeacher = 1 }) {
   if (searchParams?.get("division")) {
     divNo = searchParams?.get("division")[3];
   }
-
+  const currYear = useSelector((state) => state.student.currYearId);
+  console.log("THIS IS CURR YEAR ID", currYear);
   const { isLoading, data: studentData } = useGetTeachersAllStudents(
-    divNo || divisions[0]
+    divNo || divisions[0],
+    currYear
   );
 
   const allStudentDivMark = useSelector(

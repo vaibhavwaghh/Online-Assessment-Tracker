@@ -12,14 +12,6 @@ function HodAllOperation({ data }) {
         }))}
         user="hod"
       />
-      {/* <SortBy
-          filterField="discount"
-          options={[
-            { value: "rollNo", label: "Sort By Roll No " },
-            { value: "status", label: "Sort By Status " },
-            { value: "approved", label: "Sort By Approved " },
-          ]}
-        /> */}
     </TableOperations>
   );
 }

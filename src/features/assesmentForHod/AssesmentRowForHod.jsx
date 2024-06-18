@@ -46,19 +46,13 @@ function AssesmentRowHod({ assesment, isPrincipal = 0 }) {
     dispatch(updateAssignmentMarks(assignedMarks));
     dispatch(updateAssignmentId(assignmentId));
     dispatch(updateLastDate(formatDate(deadline)));
-    // searchParams.set("assesment", assignmentName);
-    // setSearchParams(searchParams);
   }
   const location = useLocation();
   const currentUrl = location.pathname;
   let subjectName = searchParams.get("subject");
 
-  let goto;
-  // if (isPrincipal) {
-  goto = `${currentUrl}/${assignmentName}`;
-  // } else {
-  // goto = `${currentUrl}${assignmentName}`;
-  // }
+  let goto = `${currentUrl}/${assignmentName}`;
+
   return (
     <Table.Row>
       <div>{assignmentName}</div>

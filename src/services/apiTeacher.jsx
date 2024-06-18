@@ -57,7 +57,7 @@ export async function getAllAssignmentOfTeacher(allIds) {
   return data;
 }
 
-export async function getAllTeachersAllStudents(divisionNo) {
+export async function getAllTeachersAllStudents(divisionNo, year) {
   /**GET THE  DIVISION ID */
   const { data, error } = await getDivIdFromDivNumber(divisionNo);
 
@@ -66,6 +66,7 @@ export async function getAllTeachersAllStudents(divisionNo) {
     .from("students")
     .select("*")
     .eq("currentDiv", data[0].id)
+    .eq("currentYear", year)
     .order("rollNo");
 
   let { data: studentData, error: error1 } = await query;
