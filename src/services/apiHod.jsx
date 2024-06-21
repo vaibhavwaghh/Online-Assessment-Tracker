@@ -12,7 +12,7 @@ export async function getHod(id) {
 
 export async function getyearOfEachDepartment(allYearsOfDepartment) {
   let query = supabase
-    .from("year") // Replace "YourTableNameHere" with the actual name of your table
+    .from("year")
     .select("id , currentYear ,currentDepartment(departmentName) ")
     .eq("currentDepartment", allYearsOfDepartment);
   let { data, error } = await query;

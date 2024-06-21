@@ -8,7 +8,7 @@ export async function getSubjectOfStudent(
 
   /**1) GET DEPARTMENT ID */
   const { data: departmentId, error1 } = await supabase
-    .from("departments")
+    .from("Hod")
     .select("id")
     .eq("departmentName", currentStudentDepartment);
   console.log(departmentId[0].id);

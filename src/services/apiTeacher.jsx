@@ -1,4 +1,3 @@
-import { fromUnixTime } from "date-fns";
 import supabase from "./supaBase";
 
 export async function getTeacher() {
@@ -28,7 +27,7 @@ export async function getTeacher() {
 
 export async function getAssignmentOfEachStudent(currentAssignmentOfSubject) {
   let query = supabase
-    .from("assignments") // Replace "YourTableNameHere" with the actual name of your table
+    .from("assignedAssignments") // Replace "YourTableNameHere" with the actual name of your table
     .select("id , assignmentName ,subjectOfAssignment(subjectName) ")
     .eq("subjectOfAssignment", currentAssignmentOfSubject);
   let { data, error } = await query;
@@ -42,7 +41,7 @@ export async function getAssignmentOfEachStudent(currentAssignmentOfSubject) {
 export async function getAllAssignmentOfTeacher(allIds) {
   const { teacherId, subjectId } = allIds;
   let query = supabase
-    .from("assignments")
+    .from("assignedAssignments")
     .select(
       "id, created_at,assignmentName,subjectOfAssignment,deadline,assignmentInformation,teacherId(teacherName),description ,assignedMarks"
     )

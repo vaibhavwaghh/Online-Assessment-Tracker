@@ -1,6 +1,6 @@
-import UpdateUserDataForm from "../features/authentication/UpdateUserDataForm";
+import UserInfo from "../features/authentication/UserInfo";
 import { useMoveBack } from "../hooks/useMoveBack";
-import Button from "../ui/Button";
+
 import ButtonText1 from "../ui/ButtonText1";
 
 import Heading from "../ui/Heading";
@@ -18,7 +18,7 @@ function Account() {
           </Heading>
         </Row>
         <Row>
-          <UpdateUserDataForm />
+          <UserInfo />
         </Row>
       </div>
     </>

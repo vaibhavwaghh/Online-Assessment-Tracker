@@ -1,5 +1,5 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { login as loginApi } from "../../services/apiAuth";
+import { loginApi } from "../../services/apiAuth";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
@@ -9,7 +9,6 @@ function useLogin() {
   const { mutate: login, isLoading } = useMutation({
     mutationFn: ({ email, password }) => loginApi({ email, password }),
     onSuccess: (user) => {
-      console.log("THIS IS FROM USE LOGIN", user?.user);
       queryClient.setQueryData(["user"], user?.user);
       if (user?.user?.user_metadata?.details?.studentId) {
         navigate("/student", { replace: true });
@@ -23,10 +22,6 @@ function useLogin() {
       if (user?.user?.user_metadata?.details?.principalId) {
         navigate("/principal", { replace: true });
       }
-      // if (user?.user?.user_metadata?.details?.teacherId) {
-      //   navigate("/teacher", { replace: true });
-      // }
-      // toast.success("SUCCESSFULLY LOGGED IN");
     },
     onError: (err) => {
       console.log(err);

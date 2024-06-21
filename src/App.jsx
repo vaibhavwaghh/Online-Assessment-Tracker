@@ -1,10 +1,4 @@
-import {
-  BrowserRouter,
-  Navigate,
-  Route,
-  Routes,
-  useSearchParams,
-} from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import PageNotFound from "./pages/PageNotFound";
 import Login from "./pages/Login";
@@ -12,34 +6,27 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import GlobalStyles from "./styles/GlobalStyles";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
-import AppLayout from "./ui/AppLayout";
-
 import Account from "./pages/Account";
-import AllAssessmentOfThisSubject from "./pages/AllAssessmentOfThisSubject";
-import AllAssessmentForTeacher from "./pages/AllAssessmentForTeacher";
-import AllStudentsOfTeacher from "./ui/AllStudentsOfTeacher";
-import AllSubjectsForHod from "./features/hod/AllSubjectsForHod";
+import AllAssessmentForTeacher from "./teacher/allAssesment/AllAssessmentForTeacher";
+import AllStudentsOfTeacher from "./teacher/teacherTable/AllStudentsOfTeacher";
+import AllSubjectsForHod from "./hod/hodSubjects/AllSubjectsForHod";
 
-import AllStudentsOfHod from "./ui/AllStudentsOfHod";
-import AllYearOfHod from "./ui/AllYearOfPrincipalHod";
-import AllYearOfPrincipalHod from "./ui/AllYearOfPrincipalHod";
+import AllStudentsOfHod from "./hod/assesmentForHod/AllStudentsOfHod";
+import AllYearOfPrincipalHod from "./principal/AllYearOfPrincipal";
 import { DarkModeProvider } from "./features/context/DarkModeContext";
-import DashboardForStudent from "./dashboard/DashboardForStudent";
-import AssesmentDetails from "./pages/AssesmentDetails";
+import DashboardForStudent from "./students/dashboard/DashboardForStudent";
 
-import DashBoardForTeacher from "./ui/DashBoardForTeacher";
-import DashboardForHod from "./ui/DashboardForHod";
+import DashBoardForTeacher from "./teacher/dashboard/DashBoardForTeacher";
+import DashboardForHod from "./hod/dashboard/DashboardForHod";
 import DashboardForPrincipal from "./ui/DashboardForPrincipal";
+import AppLayoutForStudent from "./layout/AppLayoutForStudent";
+import AppLayoutForTeacher from "./layout/AppLayoutForTeacher";
+import AppLayoutForHod from "./layout/AppLayoutForHod";
+import AppLayoutForPrincipal from "./layout/AppLayoutForPrincipal";
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 0 } },
 });
-let show = false;
 function App() {
-  // const [searchParams] = useSearchParams();
-  // let show = false;
-  // if (searchParams.get("assesment")) {
-  //   show = true;
-  // }
   return (
     <>
       <DarkModeProvider>
@@ -48,29 +35,24 @@ function App() {
           <ReactQueryDevtools initialIsOpen={false} />
           <BrowserRouter>
             <Routes>
+              <Route path="/" element={<Navigate to="login" />} />
+              <Route path="/login" element={<Login />} />
+
               <Route
                 element={
                   <ProtectedRoute>
-                    <AppLayout />
+                    <AppLayoutForStudent />
                   </ProtectedRoute>
                 }
               >
-                <Route index element={<Navigate replace to="/student" />} />
                 <Route path="student" element={<DashboardForStudent />} />
                 <Route path="account" element={<Account />} />
-                <Route
-                  path="assessment/:subjectName"
-                  element={<AllAssessmentOfThisSubject />}
-                />
-                <Route
-                  path="assessment/:subjectName/:assesmentName"
-                  element={<AssesmentDetails />}
-                />
               </Route>
+
               <Route
                 element={
                   <ProtectedRoute>
-                    <AppLayout />
+                    <AppLayoutForTeacher />
                   </ProtectedRoute>
                 }
               >
@@ -84,30 +66,32 @@ function App() {
                   element={<AllStudentsOfTeacher />}
                 />
               </Route>
+
               <Route
-                path="/hod/*"
+                path="hod/*"
                 element={
                   <ProtectedRoute>
-                    <AppLayout />
+                    <AppLayoutForHod />
                   </ProtectedRoute>
                 }
               >
-                <Route index element={<DashboardForHod />} />
+                <Route element={<DashboardForHod />} />
                 <Route path=":year" element={<AllSubjectsForHod />} />
                 <Route
                   path=":year/:assignmentName"
                   element={<AllStudentsOfHod />}
                 />
               </Route>
+
               <Route
                 path="/principal/*"
                 element={
                   <ProtectedRoute>
-                    <AppLayout />
+                    <AppLayoutForPrincipal />
                   </ProtectedRoute>
                 }
               >
-                <Route index element={<DashboardForPrincipal />} />
+                <Route element={<DashboardForPrincipal />} />
                 <Route
                   path=":departmentName"
                   element={<AllYearOfPrincipalHod />}
@@ -118,7 +102,6 @@ function App() {
                 />
               </Route>
 
-              <Route path="login" element={<Login />} />
               <Route path="*" element={<PageNotFound />} />
             </Routes>
           </BrowserRouter>
@@ -145,3 +128,14 @@ function App() {
 }
 
 export default App;
+
+{
+  /* <Route
+                  path="assessment/:subjectName"
+                  element={<AllAssessmentOfThisSubject />}
+                />
+                <Route
+                  path="assessment/:subjectName/:assesmentName"
+                  element={<AssesmentDetails />}
+                /> */
+}

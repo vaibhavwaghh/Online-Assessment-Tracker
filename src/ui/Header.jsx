@@ -1,11 +1,8 @@
 import styled from "styled-components";
-import Logout from "../features/authentication/LogOut";
+
 import HeaderMenu from "./HeaderMenu";
 import UserAvatar from "../features/authentication/UserAvatar";
-import { useStudent } from "../features/student/useStudent";
-import { updateAllSubjects, updateTotalSubject } from "../redux/userSlice";
-import { useDispatch } from "react-redux";
-import Spinner from "./Spinner";
+
 // import HeaderMenu from "./HeaderMenu";
 // import UserAvatar from "../features/authentication/UserAvatar";
 

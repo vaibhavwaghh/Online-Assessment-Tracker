@@ -12,7 +12,7 @@ export async function getAssessmentOfSubject(subjectName) {
 
     /**2) GET ALL ASSESSMENTS OF SUBJECT ALONG WITH TEACHERNAME*/
     let { data: assessmentData, error3 } = await supabase
-      .from("assignments")
+      .from("assignedAssignments")
       .select(
         "assignmentInformation , assignmentName , deadline ,id , subjectOfAssignment , teacherId(teacherName) , description,assignedMarks"
       )
@@ -117,7 +117,7 @@ export async function createNewAssignment(newAssignment) {
 
   /**2) Insert data into submitted assignment */
   const { data: data1, error } = await supabase
-    .from("assignments")
+    .from("assignedAssignments")
     .insert([{ ...newAssignment, assignmentInformation: pdfFilePath }])
     .select("*");
 

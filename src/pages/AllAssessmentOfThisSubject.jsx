@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import AssessmentTable from "../features/assessmentForStudents/assessmentTable";
+import AssessmentTable from "../students/assessmentForStudents/AssessmentTable";
 import Heading from "../ui/Heading";
 import Row from "../ui/Row";
 import { updatetotalNumberOfSubmitted } from "../redux/userSlice";
@@ -24,9 +24,6 @@ function AllAssessmentOfThisSubject() {
         <span>
           TOTAL :- <span>{totalAssesment} Assesments</span>
         </span>
-        {/* 
-        <span>SUBMITTED :- {numberOfSubmitted}</span>
-        <span>APPROVED :- {numberOfApproved}</span> */}
       </Row>
       <Row>
         <AssessmentTable />

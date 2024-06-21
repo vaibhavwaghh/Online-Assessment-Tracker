@@ -7,7 +7,7 @@ import {
   updateteacherId,
 } from "../redux/userSlice";
 import Spinner from "./Spinner";
-import { useTeacherSubject } from "../features/hod/useHod";
+import { useTeacherSubject } from "../hod/hodSubjects/useHod";
 
 const StyledFilter = styled.div`
   border: 1px solid var(--color-grey-100);
