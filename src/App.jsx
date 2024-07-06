@@ -46,7 +46,7 @@ function App() {
                 }
               >
                 <Route path="student" element={<DashboardForStudent />} />
-                <Route path="account" element={<Account />} />
+                <Route path="student/account" element={<Account />} />
               </Route>
 
               <Route
@@ -57,6 +57,7 @@ function App() {
                 }
               >
                 <Route path="teacher" element={<DashBoardForTeacher />} />
+                <Route path="teacher/account" element={<Account />} />
                 <Route
                   path="/teacher/:subjectName"
                   element={<AllAssessmentForTeacher />}
@@ -68,36 +69,36 @@ function App() {
               </Route>
 
               <Route
-                path="hod/*"
                 element={
                   <ProtectedRoute>
                     <AppLayoutForHod />
                   </ProtectedRoute>
                 }
               >
-                <Route element={<DashboardForHod />} />
-                <Route path=":year" element={<AllSubjectsForHod />} />
+                <Route path="hod" element={<DashboardForHod />} />
+                <Route path="hod/account" element={<Account />} />
+                <Route path="hod/:year" element={<AllSubjectsForHod />} />
                 <Route
-                  path=":year/:assignmentName"
+                  path="hod/:year/:assignmentName"
                   element={<AllStudentsOfHod />}
                 />
               </Route>
 
               <Route
-                path="/principal/*"
                 element={
                   <ProtectedRoute>
                     <AppLayoutForPrincipal />
                   </ProtectedRoute>
                 }
               >
-                <Route element={<DashboardForPrincipal />} />
+                <Route path="principal" element={<DashboardForPrincipal />} />
+                <Route path="principal/account" element={<Account />} />
                 <Route
-                  path=":departmentName"
+                  path="principal/:departmentName"
                   element={<AllYearOfPrincipalHod />}
                 />
                 <Route
-                  path=":subjectName/:assesment"
+                  path="principal/:subjectName/:assesment"
                   element={<AllStudentsOfHod isPrincipal={1} />}
                 />
               </Route>

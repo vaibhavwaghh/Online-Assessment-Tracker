@@ -6,6 +6,7 @@ import { useUser } from "../features/authentication/useUser";
 import { updatestudentId } from "../redux/userSlice";
 import HeaderStudent from "../students/header/HeaderStudent";
 function AppLayoutForStudent() {
+  console.log("APP LAYOUT STUDENT IS INVOKED");
   const Main = styled.main`
     background-color: var(--color-grey-50);
     padding: 5rem 0rem 5.4rem 2rem;

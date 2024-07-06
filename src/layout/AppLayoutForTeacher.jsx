@@ -7,6 +7,7 @@ import { useUser } from "../features/authentication/useUser";
 import { updateYearId, updateteacherId } from "../redux/userSlice";
 
 function AppLayoutForTeacher() {
+  console.log("APP LAYOUT TEACHER IS INVOKED");
   const StyledAppLayout = styled.div`
     display: grid;
     height: 100vh;

@@ -21,19 +21,20 @@ const Avatar = styled.img`
   outline: 2px solid var(--color-grey-100);
 `;
 function UserAvatar({ curruserDetails }) {
-  console.log("THIS IS CURRENT USER DETAILS", curruserDetails);
-  let username;
-  if (curruserDetails[0]?.studentName) {
-    username = curruserDetails[0]?.studentName;
-  }
-  if (curruserDetails[0]?.teacherName) {
-    username = curruserDetails[0]?.teacherName;
-  }
-  if (curruserDetails[0]?.hodName) {
-    username = curruserDetails[0]?.hodName;
-  }
-  if (curruserDetails?.principalName) {
-    username = curruserDetails?.principalName;
+  let username = "";
+  if (curruserDetails) {
+    if (curruserDetails[0]?.studentName) {
+      username = curruserDetails[0]?.studentName;
+    }
+    if (curruserDetails[0]?.teacherName) {
+      username = curruserDetails[0]?.teacherName;
+    }
+    if (curruserDetails[0]?.hodName) {
+      username = curruserDetails[0]?.hodName;
+    }
+    if (curruserDetails?.principalName) {
+      username = curruserDetails?.principalName;
+    }
   }
   return (
     <StyledUserAvatar>

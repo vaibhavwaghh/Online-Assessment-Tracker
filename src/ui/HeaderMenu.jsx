@@ -13,10 +13,30 @@ const StyledHeaderMenu = styled.ul`
 `;
 function HeaderMenu() {
   const navigate = useNavigate();
+  const handleNavigation = () => {
+    const currentPath = window.location.pathname;
+    let newPath;
+
+    if (currentPath.includes("student")) {
+      newPath = "student/account";
+    } else if (currentPath.includes("teacher")) {
+      newPath = "teacher/account";
+    } else if (currentPath.includes("hod")) {
+      newPath = "hod/account";
+    } else if (currentPath.includes("principal")) {
+      newPath = "principal/account";
+    }
+    console.log("THIS IS NEW PATH", newPath, currentPath);
+    if (newPath) {
+      navigate(`/${newPath}`);
+    } else {
+      console.error("Unhandled path:", currentPath);
+    }
+  };
   return (
     <StyledHeaderMenu>
       <li>
-        <ButtonIcon onClick={() => navigate("/account")}>
+        <ButtonIcon onClick={handleNavigation}>
           <HiOutlineUser />
         </ButtonIcon>
       </li>
