@@ -1,29 +1,26 @@
 import styled from "styled-components";
+import HeaderMain from "../features/authentication/HeaderMain";
+import PropTypes from "prop-types";
 
-import HeaderMenu from "./HeaderMenu";
-import UserAvatar from "../features/authentication/UserAvatar";
-
-// import HeaderMenu from "./HeaderMenu";
-// import UserAvatar from "../features/authentication/UserAvatar";
+const StyledHeader = styled.header`
+  background-color: var(--color-grey-0);
+  padding: 1.2rem 4.8rem;
+  border-bottom: 1px solid var(--color-grey-100);
+`;
 
 function Header({ curruserDetails }) {
-  const StyledHeader = styled.header`
-    background-color: var(--color-grey-0);
-    padding: 1.2rem 4.8rem;
-    border-bottom: 1px solid var(--color-grey-100);
-
-    display: flex;
-    gap: 2.4rem;
-    align-items: center;
-    justify-content: flex-end;
-  `;
-
   return (
     <StyledHeader>
-      <UserAvatar curruserDetails={curruserDetails} />
-      <HeaderMenu />
+      <HeaderMain curruserDetails={curruserDetails} />
     </StyledHeader>
   );
 }
+
+Header.propTypes = {
+  curruserDetails: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array,
+  ]).isRequired,
+};
 
 export default Header;

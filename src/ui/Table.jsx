@@ -1,5 +1,6 @@
 import { createContext, useContext } from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 // import Pagination from "./Pagination";
 
 const StyledTable = styled.div`
@@ -70,14 +71,25 @@ function Table({ columns, children }) {
     </TableContext.Provider>
   );
 }
+
+Table.propTypes = {
+  columns: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
+
 function Header({ children }) {
   const { columns } = useContext(TableContext);
   return (
-    <StyledHeader role="row" columns={columns}>
+    <StyledHeader role="row" columns={columns} as="header">
       {children}
     </StyledHeader>
   );
 }
+
+Header.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
 function Row({ children }) {
   const { columns } = useContext(TableContext);
   return (
@@ -86,10 +98,21 @@ function Row({ children }) {
     </StyledRow>
   );
 }
+
+Row.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
 function Body({ data, render }) {
-  if (data?.length === 0) return <Empty>No data to show</Empty>;
-  return <StyledBody>{data?.map(render)}</StyledBody>;
+  if (!data.length) return <Empty>No data to show at the moment</Empty>;
+
+  return <StyledBody>{data.map(render)}</StyledBody>;
 }
+
+Body.propTypes = {
+  data: PropTypes.array.isRequired,
+  render: PropTypes.func.isRequired,
+};
 
 // function Footer() {
 //   <StyledFooter>
@@ -98,8 +121,8 @@ function Body({ data, render }) {
 // }
 
 Table.Header = Header;
-Table.Row = Row;
 Table.Body = Body;
-
+Table.Row = Row;
 Table.Footer = Footer;
+
 export default Table;

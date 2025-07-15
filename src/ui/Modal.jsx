@@ -8,6 +8,7 @@ import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
 import styled from "styled-components";
 import useOutsideClick from "../hooks/useOutsideClick";
+import PropTypes from "prop-types";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -51,49 +52,53 @@ const Button = styled.button`
   & svg {
     width: 2.4rem;
     height: 2.4rem;
-    /* Sometimes we need both */
-    /* fill: var(--color-grey-500);
-    stroke: var(--color-grey-500); */
     color: var(--color-grey-500);
   }
 `;
 
-/**1) Create a conext */
 const ModalContext = createContext();
 
-/**2] CREATE A PARENT COMPONENT*/
 function Modal({ children }) {
   const [openName, setOpenName] = useState("");
+
   const close = () => setOpenName("");
+  const open = setOpenName;
 
   return (
-    <>
-      <ModalContext.Provider value={{ openName, close, setOpenName }}>
-        {children}
-      </ModalContext.Provider>
-    </>
+    <ModalContext.Provider value={{ openName, close, open }}>
+      {children}
+    </ModalContext.Provider>
   );
 }
 
-/**3] CREATE CHILD COMPONENT TO IMPLEMENT THE FEATURES*/
-function Open({ children, opens: opensWindowName }) {
-  const { setOpenName } = useContext(ModalContext);
+Modal.propTypes = {
+  children: PropTypes.node.isRequired,
+};
 
-  return cloneElement(children, {
-    onClick: () => setOpenName(opensWindowName),
-  });
+function Open({ children, opens: opensWindowName }) {
+  const { open } = useContext(ModalContext);
+
+  return cloneElement(children, { onClick: () => open(opensWindowName) });
 }
+
+Open.propTypes = {
+  children: PropTypes.node.isRequired,
+  opens: PropTypes.string.isRequired,
+};
+
 function Window({ children, name }) {
   const { openName, close } = useContext(ModalContext);
   const ref = useOutsideClick(close);
-  if (openName !== name) return null;
+
+  if (name !== openName) return null;
+
   return createPortal(
     <Overlay>
       <StyledModal ref={ref}>
         <Button onClick={close}>
           <HiXMark />
         </Button>
-        {/* <div>{children}</div> */}
+
         <div>{cloneElement(children, { onCloseModal: close })}</div>
       </StyledModal>
     </Overlay>,
@@ -101,7 +106,12 @@ function Window({ children, name }) {
   );
 }
 
-/**4] ADD CHILD COMPONENT AS PROPERTIES TO PARENT COMPONENT */
+Window.propTypes = {
+  children: PropTypes.node.isRequired,
+  name: PropTypes.string.isRequired,
+};
+
 Modal.Open = Open;
 Modal.Window = Window;
+
 export default Modal;

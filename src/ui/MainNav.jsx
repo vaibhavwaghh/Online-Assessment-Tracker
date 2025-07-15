@@ -2,6 +2,7 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { AiOutlineHome } from "react-icons/ai";
 import EachSubject from "./EachSubject";
+import PropTypes from "prop-types";
 
 const NavList = styled.ul`
   display: flex;
@@ -14,7 +15,7 @@ const StyledNavLink = styled(NavLink)`
   &:visited {
     display: flex;
     align-items: center;
-    gap: 1.2rem;+
+    gap: 1.2rem;
 
     color: var(--color-grey-600);
     font-size: 1.6rem;
@@ -66,6 +67,15 @@ function MainNav({ data }) {
     </nav>
   );
 }
+
+MainNav.propTypes = {
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      subjectName: PropTypes.string.isRequired,
+    })
+  ),
+};
 
 {
   /* 

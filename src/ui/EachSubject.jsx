@@ -1,6 +1,7 @@
 import { useDispatch } from "react-redux";
 import { updateSubjectId } from "../redux/userSlice";
 import { AiOutlineHome } from "react-icons/ai";
+import PropTypes from "prop-types";
 
 function EachSubject({ subject, StyledNavLink }) {
   const { id, subjectName } = subject;
@@ -13,15 +14,19 @@ function EachSubject({ subject, StyledNavLink }) {
   };
 
   return (
-    <>
-      <div onClick={handleClick}>
-        <StyledNavLink to={`/assessment/${subjectName}`}>
-          <AiOutlineHome />
-          <span>{subjectName}</span>
-        </StyledNavLink>
-      </div>
-    </>
+    <StyledNavLink to={`/assessment/${subjectName}`} onClick={handleClick}>
+      <AiOutlineHome />
+      <span>{subjectName}</span>
+    </StyledNavLink>
   );
 }
+
+EachSubject.propTypes = {
+  subject: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    subjectName: PropTypes.string.isRequired,
+  }).isRequired,
+  StyledNavLink: PropTypes.elementType.isRequired,
+};
 
 export default EachSubject;
