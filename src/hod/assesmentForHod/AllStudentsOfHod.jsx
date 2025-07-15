@@ -7,11 +7,10 @@ import { useHodSubject } from "../hodSubjects/useHod";
 import Spinner from "../../ui/Spinner";
 import TeacherAllOperations from "../../teacher/allAssesment/assesmentForTeachers/TeacherAllOperations";
 import TeacherTable from "../../teacher/teacherTable/TeacherTable";
-import { useDispatch } from "react-redux";
 import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 function AllStudentsOfHod({ isPrincipal = 0 }) {
   const yearId = useSelector((state) => state.student.currYearId);
-  const { data, isLoading } = useHodSubject(yearId);
+  const { isLoading } = useHodSubject(yearId);
   const subject = useSelector((state) => state.student.subjName);
   const year = useSelector((state) => state.student.currYear);
   const [searchParams] = useSearchParams();

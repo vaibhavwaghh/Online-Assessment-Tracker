@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import AssesmentFile from "./AssesmentFile";
 import Button from "../../ui/Button";
-import { useSelector } from "react-redux";
 
 // Styled components for the box
 const Box = styled.div`
@@ -32,8 +31,6 @@ const Value = styled.span`
 `;
 
 function EachAssesmentBox({ newdata, allIds }) {
-  const currData = useSelector((state) => state.student.data);
-
   let { assignedMarks, description, teacherName, data, assignmentInformation } =
     newdata;
 

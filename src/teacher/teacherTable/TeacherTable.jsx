@@ -24,16 +24,12 @@ function TeacherTable({ isTeacher = 1 }) {
     currYear
   );
 
-  const allStudentDivMark = useSelector(
-    (state) => state.student.allStudentOfDivData
-  );
   let columns;
   if (isTeacher) {
     columns = "1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr 1.5fr";
   } else {
     columns = "1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr ";
   }
-  let i = 0;
   let arr1 = [];
   if (isLoading) return <Spinner />;
   return (

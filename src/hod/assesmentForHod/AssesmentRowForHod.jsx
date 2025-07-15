@@ -5,7 +5,7 @@ import { convertToCustomFormat, formatDate } from "../../utils/helpers";
 
 import { useDispatch } from "react-redux";
 
-import { NavLink, useSearchParams, useLocation } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import {
   updateAssignmentId,
   updateAssignmentMarks,
@@ -24,7 +24,6 @@ function AssesmentRowHod({ assesment, isPrincipal = 0 }) {
     assignmentInformation,
     id: assignmentId,
   } = assesment;
-  const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   const handleDownload = () => {
     window.open(assignmentInformation, "_blank");
@@ -42,7 +41,6 @@ function AssesmentRowHod({ assesment, isPrincipal = 0 }) {
   }
   const location = useLocation();
   const currentUrl = location.pathname;
-  let subjectName = searchParams.get("subject");
 
   let goto = `${currentUrl}/${assignmentName}`;
 

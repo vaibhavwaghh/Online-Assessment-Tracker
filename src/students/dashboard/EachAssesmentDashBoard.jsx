@@ -34,10 +34,9 @@ const Box = styled.div`
   }
 `;
 
-function EachAssesmentDashBoard({ assessment, subjectId, subjectName }) {
+function EachAssesmentDashBoard({ assessment, subjectId }) {
   const {
     assignmentName,
-    deadline,
     assignmentInformation,
     id: asssignmentId,
     teacherId: { teacherName },

@@ -4,7 +4,6 @@ import styled, { css } from "styled-components";
 import {
   updateSubjectId,
   updateYearId,
-  updateteacherId,
 } from "../redux/userSlice";
 import Spinner from "./Spinner";
 import { useTeacherSubject } from "../hod/hodSubjects/useHod";

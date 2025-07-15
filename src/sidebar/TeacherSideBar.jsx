@@ -1,6 +1,6 @@
 import { AiOutlineHome } from "react-icons/ai";
 import Logo from "../ui/Logo";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 import { useDispatch } from "react-redux";

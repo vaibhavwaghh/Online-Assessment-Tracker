@@ -1,6 +1,4 @@
-import { useDispatch } from "react-redux";
 import supabase from "./supaBase";
-import { updatestudentId } from "../redux/userSlice";
 
 export async function loginApi({ email, password }) {
   /**1) CHECK WHETHER EMAIL ID AND PASSWORD IS CORRECT */
@@ -43,7 +41,7 @@ export async function loginApi({ email, password }) {
   /**3) FIND ALL DETAILS OF TEACHER */
   if (role[0].roleOfUser === "teacher") {
     console.log("INSIDE IF", role[0].roleOfUser);
-    var { data: currteacherDetails, error: error4 } = await supabase
+    var { data: currteacherDetails, error: teacherError } = await supabase
       .from("teacher")
       .select(
         "teachingInDepartment (departmentName), teachingInYear (id,currentYear),teachingSubject(id, subjectName) , teacherName"
@@ -59,7 +57,7 @@ export async function loginApi({ email, password }) {
   /**4) FIND ALL DETAILS OF HOD */
   if (role[0].roleOfUser === "hod") {
     console.log("INSIDE IF", role[0].roleOfUser);
-    var { data: currhodDetails, error: error4 } = await supabase
+    var { data: currhodDetails, error: hodError } = await supabase
       .from("Hod")
       .select("*")
       .eq("id", userId[0].hod);
@@ -101,7 +99,8 @@ export async function loginApi({ email, password }) {
     error1 ||
     error2 ||
     error3 ||
-    error4 ||
+    teacherError ||
+    hodError ||
     error5 ||
     error6 ||
     error7 ||

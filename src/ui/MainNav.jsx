@@ -1,12 +1,6 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { AiOutlineHome } from "react-icons/ai";
-import {
-  HiOutlineCalendarDays,
-  HiOutlineCog6Tooth,
-  HiOutlineHomeModern,
-  HiOutlineUser,
-} from "react-icons/hi2";
 import EachSubject from "./EachSubject";
 
 const NavList = styled.ul`

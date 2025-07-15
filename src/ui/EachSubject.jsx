@@ -1,8 +1,6 @@
 import { useDispatch } from "react-redux";
 import { updateSubjectId } from "../redux/userSlice";
 import { AiOutlineHome } from "react-icons/ai";
-import styled from "styled-components";
-import { NavLink } from "react-router-dom";
 
 function EachSubject({ subject, StyledNavLink }) {
   const { id, subjectName } = subject;

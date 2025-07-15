@@ -11,11 +11,19 @@ import HodSideBar from "./HodSideBar";
 import PrincipalSideBar from "./PrincipalSideBar";
 // import Uploader from "../data/Uploader";
 function SideBar({ curruserDetails }) {
-  const NavList = styled.ul`
-    display: flex;
-    flex-direction: column;
-    gap: 0.8rem;
-  `;
+  const dispatch = useDispatch();
+  
+  // Extract student data for hook call
+  const isStudent = curruserDetails?.[0]?.studentName;
+  const currentYear = isStudent ? curruserDetails[0]?.currentYear?.currentYear : null;
+  const departmentName = isStudent ? curruserDetails[0]?.departmentName?.departmentName : null;
+  
+  // Always call the hook at the top level
+  const { isLoading: isLoadingStudents, data } = useStudent(
+    currentYear,
+    departmentName
+  );
+
   const StyledSideBar = styled.aside`
     background-color: var(--color-grey-0);
     /* background-color: green; */
@@ -26,7 +34,8 @@ function SideBar({ curruserDetails }) {
     flex-direction: column;
     gap: 3.2rem;
   `;
-  const dispatch = useDispatch();
+  
+  // Handle different user types
   if (curruserDetails?.principalName) {
     return <PrincipalSideBar principalDetails={curruserDetails} />;
   } else if (curruserDetails[0]?.teacherName) {
@@ -35,27 +44,29 @@ function SideBar({ curruserDetails }) {
     return <HodSideBar hodDetails={curruserDetails[0]} />;
   }
 
-  if (curruserDetails[0]?.studentName) {
-    var {
-      currentYear: { currentYear },
-      departmentName: { departmentName },
-    } = curruserDetails[0];
+  // Handle student case
+  if (isStudent) {
+    console.log("THIS IS STUDENT SUBJECT DATA", data);
+    if (isLoadingStudents) return <Spinner />;
+    if (data) {
+      dispatch(updateTotalSubject(data.length));
+      dispatch(updateAllSubjects(data));
+    }
+    return (
+      <StyledSideBar>
+        <Logo />
+        <div></div>
+        <MainNav data={data} />
+      </StyledSideBar>
+    );
   }
-  const { isLoading: isLoadingStudents, data } = useStudent(
-    currentYear,
-    departmentName
-  );
-  console.log("THIS IS STUDENT SUBJECT DATA", data);
-  if (isLoadingStudents) return <Spinner />;
-  if (data) {
-    dispatch(updateTotalSubject(data.length));
-    dispatch(updateAllSubjects(data));
-  }
+
+  // Fallback return
   return (
     <StyledSideBar>
       <Logo />
       <div></div>
-      <MainNav data={data} />
+      <MainNav data={[]} />
     </StyledSideBar>
   );
 }

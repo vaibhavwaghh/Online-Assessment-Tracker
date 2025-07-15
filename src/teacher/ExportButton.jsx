@@ -1,4 +1,3 @@
-import React from "react";
 import { convertToCSV } from "../utils/CSVUtils";
 
 function ExportButton({ studentData }) {

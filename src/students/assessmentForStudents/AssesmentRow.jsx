@@ -14,33 +14,8 @@ import {
 
 import { useNavigate } from "react-router-dom";
 import { HiEye } from "react-icons/hi2";
-import styled from "styled-components";
 
-function AssesmentRow({ assesment, numberOfSubmitted }) {
-  const StyledButton = styled.button`
-    width: 100%;
-    text-align: left;
-    background: none;
-    border: none;
-    padding: 1.2rem 2.4rem;
-    font-size: 1.4rem;
-    transition: all 0.2s;
-
-    display: flex;
-    align-items: center;
-    gap: 1.6rem;
-
-    &:hover {
-      background-color: var(--color-grey-50);
-    }
-
-    & svg {
-      width: 1.6rem;
-      height: 1.6rem;
-      color: var(--color-grey-400);
-      transition: all 0.3s;
-    }
-  `;
+function AssesmentRow({ assesment }) {
   const {
     assignmentName,
     deadline,
@@ -58,7 +33,7 @@ function AssesmentRow({ assesment, numberOfSubmitted }) {
 
   let allIds = { asssignmentId, subjectId, studentId };
 
-  const { isLoading, data } = useGetStatusOfAsssessment(allIds);
+  const { data } = useGetStatusOfAsssessment(allIds);
 
   const handleDownload1 = () => {
     window.open(assignmentInformation, "_blank");

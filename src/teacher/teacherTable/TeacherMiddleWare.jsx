@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useGetStatusOfAsssessment } from "../../students/assessmentForStudents/useAssessment";
 import Spinner from "../../ui/Spinner";
 import TeacherRow from "./TeacherRow";
@@ -9,7 +9,6 @@ import Table from "../../ui/Table";
 function TeacherMiddleWare({ student, isTeacher, arr1, i }) {
   i++;
   const { rollNo, studentName, id: studentId } = student;
-  const dispatch = useDispatch();
   const assignedMarks = useSelector((state) => state.student.marks);
   const asssignmentId = useSelector((state) => state.student.assignmentId);
   const subjectId = useSelector((state) => state.student.subjectId);

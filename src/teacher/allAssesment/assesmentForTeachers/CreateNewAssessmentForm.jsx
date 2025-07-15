@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import useCreateAssesment from "./useCreateAssesment";
 
 function CreateNewAssessmentForm({ onCloseModal }) {
-  const { register, handleSubmit, reset, getValues, formState } = useForm();
+  const { register, handleSubmit, reset, formState } = useForm();
   const { errors } = formState;
   console.log("ERRORS FROM FORMSTATE", errors);
 
