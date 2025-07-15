@@ -1,5 +1,6 @@
 import Filter from "../ui/Filter";
 import TableOperations from "../ui/TableOperations";
+import PropTypes from "prop-types";
 
 function PrincipalAllOpeartion({ data }) {
   return (
@@ -15,5 +16,9 @@ function PrincipalAllOpeartion({ data }) {
     </TableOperations>
   );
 }
+
+PrincipalAllOpeartion.propTypes = {
+  data: PropTypes.array.isRequired,
+};
 
 export default PrincipalAllOpeartion;

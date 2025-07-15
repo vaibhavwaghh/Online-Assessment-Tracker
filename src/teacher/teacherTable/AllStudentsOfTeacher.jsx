@@ -1,6 +1,6 @@
 import Row from "../../ui/Row";
 import Heading from "../../ui/Heading";
-import TeacherAllOperations from "../allAssesment/assesmentForTeachers/TeacherAllOperations";
+import TeacherAllOperations from "../allAssessment/assessmentForTeachers/TeacherAllOperations";
 import TeacherTable from "./TeacherTable";
 import ButtonText from "../../ui/ButtonText";
 

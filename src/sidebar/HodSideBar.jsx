@@ -4,6 +4,7 @@ import { NavLink } from "react-router-dom";
 import { useHod } from "../hod/hodSubjects/useHod";
 import Spinner from "../ui/Spinner";
 import { AiOutlineHome } from "react-icons/ai";
+import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { updateYearId } from "../redux/userSlice";
 
@@ -92,5 +93,9 @@ function HodSideBar({ hodDetails }) {
     </StyledSideBar>
   );
 }
+
+HodSideBar.propTypes = {
+  hodDetails: PropTypes.object.isRequired,
+};
 
 export default HodSideBar;

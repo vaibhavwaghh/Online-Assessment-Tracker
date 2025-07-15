@@ -94,7 +94,7 @@ export async function getTeachersDivNumberUsingTeacherId(teacherId) {
   if (data) {
     for (let i = 0; i < data.length; i++) {
       // Assuming you want to loop over the first 3 elements
-      const { data: data1, error: error1 } = await getTeachersAllDivisionNumber(
+      const { data: data1 } = await getTeachersAllDivisionNumber(
         data[i].divisionId
       );
       allDiv.push(data1);

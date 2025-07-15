@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
-import Table from "../../ui/Table";
-import { useGetTeachersAllStudents } from "./useTeacher";
-import Spinner from "../../ui/Spinner";
-
+import { useGetTeachersAllStudents } from "../../services/apiTeacher";
 import { useSearchParams } from "react-router-dom";
+import Spinner from "../../ui/Spinner";
+import Table from "../../ui/Table";
 import TeacherMiddleWare from "./TeacherMiddleWare";
+import PropTypes from "prop-types";
 
 function TeacherTable({ isTeacher = 1 }) {
   const [searchParams] = useSearchParams();
@@ -24,16 +24,16 @@ function TeacherTable({ isTeacher = 1 }) {
     currYear
   );
 
-  const allStudentDivMark = useSelector(
-    (state) => state.student.allStudentOfDivData
-  );
+  // const allStudentDivMark = useSelector(
+  //   (state) => state.student.allStudentOfDivData
+  // );
   let columns;
   if (isTeacher) {
     columns = "1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr 1.5fr";
   } else {
     columns = "1fr 1fr 1.5fr 1fr 1fr 1fr 1.5fr ";
   }
-  let i = 0;
+  // let i = 0;
   let arr1 = [];
   if (isLoading) return <Spinner />;
   return (
@@ -55,5 +55,9 @@ function TeacherTable({ isTeacher = 1 }) {
     </>
   );
 }
+
+TeacherTable.propTypes = {
+  isTeacher: PropTypes.bool.isRequired,
+};
 
 export default TeacherTable;

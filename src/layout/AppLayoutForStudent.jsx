@@ -18,13 +18,13 @@ function AppLayoutForStudent() {
     },
   } = useUser();
   const dispatch = useDispatch();
-  let curruserDetails;
+  let currentUserDetails;
   var { currstudentDetails, studentId } = details;
-  curruserDetails = currstudentDetails;
+  currentUserDetails = currstudentDetails;
   dispatch(updatestudentId(studentId));
   return (
     <div>
-      <HeaderStudent curruserDetails={curruserDetails} />
+              <HeaderStudent currentUserDetails={currentUserDetails} />
       <Main>
         <div>
           <Outlet />

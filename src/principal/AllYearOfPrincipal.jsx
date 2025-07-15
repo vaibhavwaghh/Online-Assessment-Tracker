@@ -7,7 +7,7 @@ import { useHod } from "../hod/hodSubjects/useHod";
 import PrincipalAllOpeartion from "./PrincipalAllOpeartion";
 
 import PrincipalEachYear from "./PrincipalEachYear";
-import AllAssesmentOfHod from "../hod/assesmentForHod/AllAssesmentOfHod";
+import AllAssessmentOfHod from "../hod/assessmentForHod/AllAssessmentOfHod";
 
 function AllYearOfPrincipal() {
   const { departmentName } = useParams();
@@ -38,7 +38,7 @@ function AllYearOfPrincipal() {
       )}
       {year && subject && (
         <Row>
-          <AllAssesmentOfHod isPrincipal={1} />
+          <AllAssessmentOfHod isPrincipal={1} />
         </Row>
       )}
     </>

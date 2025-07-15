@@ -1,5 +1,6 @@
 import { createContext, useContext } from "react";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 // import Pagination from "./Pagination";
 
 const StyledTable = styled.div`
@@ -96,6 +97,24 @@ function Body({ data, render }) {
 //     <Pagination />
 //   </StyledFooter>;
 // }
+
+Table.propTypes = {
+  columns: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+};
+
+Header.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+Row.propTypes = {
+  children: PropTypes.node.isRequired,
+};
+
+Body.propTypes = {
+  data: PropTypes.array.isRequired,
+  render: PropTypes.func.isRequired,
+};
 
 Table.Header = Header;
 Table.Row = Row;

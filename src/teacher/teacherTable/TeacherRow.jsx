@@ -1,7 +1,8 @@
 import Button from "../../ui/Button";
 import Table from "../../ui/Table";
 
-import UpdateStudentAssesment from "../allAssesment/assesmentForTeachers/UpdateStudentAssesment";
+import UpdateStudentAssessment from "../allAssessment/assessmentForTeachers/UpdateStudentAssessment";
+import PropTypes from "prop-types";
 
 function TeacherRow({ allData, isTeacher }) {
   const {
@@ -43,7 +44,7 @@ function TeacherRow({ allData, isTeacher }) {
         )}
         {isTeacher ? (
           solution !== "" ? (
-            <UpdateStudentAssesment studentId={studentId} />
+            <UpdateStudentAssessment studentId={studentId} />
           ) : (
             <div>-</div>
           )
@@ -54,5 +55,10 @@ function TeacherRow({ allData, isTeacher }) {
     </>
   );
 }
+
+TeacherRow.propTypes = {
+  allData: PropTypes.object.isRequired,
+  isTeacher: PropTypes.bool.isRequired,
+};
 
 export default TeacherRow;

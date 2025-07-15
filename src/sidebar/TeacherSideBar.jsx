@@ -1,7 +1,8 @@
 import { AiOutlineHome } from "react-icons/ai";
 import Logo from "../ui/Logo";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 import { useDispatch } from "react-redux";
 import { updateSubjectId } from "../redux/userSlice";
@@ -94,5 +95,9 @@ function TeacherSideBar({ teacherDetails }) {
     </StyledSideBar>
   );
 }
+
+TeacherSideBar.propTypes = {
+  teacherDetails: PropTypes.object.isRequired,
+};
 
 export default TeacherSideBar;

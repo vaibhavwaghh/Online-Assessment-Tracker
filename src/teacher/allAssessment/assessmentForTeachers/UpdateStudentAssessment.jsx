@@ -1,8 +1,9 @@
 import Button from "../../../ui/Button";
 import Modal from "../../../ui/Modal";
 import UpdateStudentForm from "./UpdateStudentForm";
+import PropTypes from "prop-types";
 
-function UpdateStudentAssesment({ studentId }) {
+function UpdateStudentAssessment({ studentId }) {
   return (
     <>
       <Modal>
@@ -18,4 +19,8 @@ function UpdateStudentAssesment({ studentId }) {
   );
 }
 
-export default UpdateStudentAssesment;
+UpdateStudentAssessment.propTypes = {
+  studentId: PropTypes.number.isRequired,
+};
+
+export default UpdateStudentAssessment;

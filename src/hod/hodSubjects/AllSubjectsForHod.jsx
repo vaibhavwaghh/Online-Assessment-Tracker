@@ -6,7 +6,7 @@ import Heading from "../../ui/Heading";
 import { useParams, useSearchParams } from "react-router-dom";
 
 import Row from "../../ui/Row";
-import AllAssesmentOfHod from "../assesmentForHod/AllAssesmentOfHod";
+import AllAssessmentOfHod from "../assessmentForHod/AllAssessmentOfHod";
 
 function AllSubjectsForHod() {
   const yearId = useSelector((state) => state.student.currYearId);
@@ -26,7 +26,7 @@ function AllSubjectsForHod() {
       <hr />
       {subjectName && (
         <Row>
-          <AllAssesmentOfHod />
+          <AllAssessmentOfHod />
         </Row>
       )}
     </>

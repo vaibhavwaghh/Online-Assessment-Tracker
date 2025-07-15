@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import toast from "react-hot-toast";
 import { createNewAssignment } from "../../../services/apiAssessment";
-function useCreateAssesment() {
+function useCreateAssessment() {
   const queryClient = useQueryClient();
   const { isLoading: isCreating, mutate: createAssignment } = useMutation({
     mutationFn: (newAssignment) => createNewAssignment(newAssignment),
@@ -25,4 +25,4 @@ function useCreateAssesment() {
   return { isCreating, createAssignment };
 }
 
-export default useCreateAssesment;
+export default useCreateAssessment;

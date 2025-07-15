@@ -2,12 +2,9 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { AiOutlineHome } from "react-icons/ai";
 import {
-  HiOutlineCalendarDays,
-  HiOutlineCog6Tooth,
-  HiOutlineHomeModern,
-  HiOutlineUser,
 } from "react-icons/hi2";
 import EachSubject from "./EachSubject";
+import PropTypes from "prop-types";
 
 const NavList = styled.ul`
   display: flex;
@@ -98,4 +95,7 @@ function MainNav({ data }) {
    </StyledNavLink>
  </li>; */
 }
+MainNav.propTypes = {
+  data: PropTypes.array,
+};
 export default MainNav;

@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import AssesmentFile from "./AssesmentFile";
+import AssessmentFile from "./AssessmentFile";
 import Button from "../../ui/Button";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 // Styled components for the box
 const Box = styled.div`
@@ -32,7 +33,7 @@ const Value = styled.span`
 `;
 
 function EachAssesmentBox({ newdata, allIds }) {
-  const currData = useSelector((state) => state.student.data);
+  // const currData = useSelector((state) => state.student.data);
 
   let { assignedMarks, description, teacherName, data, assignmentInformation } =
     newdata;
@@ -106,7 +107,7 @@ function EachAssesmentBox({ newdata, allIds }) {
           <Info style={{ display: "flex", alignItems: "center" }}>
             <Label>Upload File:</Label>
             <Value>
-              <AssesmentFile allIds={allIds} />
+              <AssessmentFile allIds={allIds} />
             </Value>
           </Info>
         )}
@@ -114,5 +115,10 @@ function EachAssesmentBox({ newdata, allIds }) {
     </Box>
   );
 }
+
+EachAssesmentBox.propTypes = {
+  newdata: PropTypes.object.isRequired,
+  allIds: PropTypes.object.isRequired,
+};
 
 export default EachAssesmentBox;

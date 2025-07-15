@@ -1,8 +1,7 @@
 import { useDispatch } from "react-redux";
 import { updateSubjectId } from "../redux/userSlice";
 import { AiOutlineHome } from "react-icons/ai";
-import styled from "styled-components";
-import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
 
 function EachSubject({ subject, StyledNavLink }) {
   const { id, subjectName } = subject;
@@ -25,5 +24,10 @@ function EachSubject({ subject, StyledNavLink }) {
     </>
   );
 }
+
+EachSubject.propTypes = {
+  subject: PropTypes.object.isRequired,
+  StyledNavLink: PropTypes.elementType.isRequired,
+};
 
 export default EachSubject;

@@ -31,17 +31,17 @@ function AppLayoutForPrincipal() {
     },
   } = useUser();
   const dispatch = useDispatch();
-  let curruserDetails;
+  let currentUserDetails;
   var { currPrincipalDepartments, principalId, principalName } = details;
-  curruserDetails = { currPrincipalDepartments, principalName };
-  console.log("VAIBHAV", details, curruserDetails);
+  currentUserDetails = { currPrincipalDepartments, principalName };
+  console.log("VAIBHAV", details, currentUserDetails);
   dispatch(updatePrincipalId(principalId));
   return (
     <>
       <StyledAppLayout>
-        <Header curruserDetails={curruserDetails} />
+        <Header currentUserDetails={currentUserDetails} />
 
-        <SideBar curruserDetails={curruserDetails} />
+        <SideBar currentUserDetails={currentUserDetails} />
         <Main>
           <Container>
             <Outlet />

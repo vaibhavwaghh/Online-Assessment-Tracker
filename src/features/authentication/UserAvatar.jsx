@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const StyledUserAvatar = styled.div`
   display: flex;
@@ -20,20 +21,20 @@ const Avatar = styled.img`
   border-radius: 50%;
   outline: 2px solid var(--color-grey-100);
 `;
-function UserAvatar({ curruserDetails }) {
+function UserAvatar({ currentUserDetails }) {
   let username = "";
-  if (curruserDetails) {
-    if (curruserDetails[0]?.studentName) {
-      username = curruserDetails[0]?.studentName;
+  if (currentUserDetails) {
+    if (currentUserDetails[0]?.studentName) {
+      username = currentUserDetails[0]?.studentName;
     }
-    if (curruserDetails[0]?.teacherName) {
-      username = curruserDetails[0]?.teacherName;
+    if (currentUserDetails[0]?.teacherName) {
+      username = currentUserDetails[0]?.teacherName;
     }
-    if (curruserDetails[0]?.hodName) {
-      username = curruserDetails[0]?.hodName;
+    if (currentUserDetails[0]?.hodName) {
+      username = currentUserDetails[0]?.hodName;
     }
-    if (curruserDetails?.principalName) {
-      username = curruserDetails?.principalName;
+    if (currentUserDetails?.principalName) {
+      username = currentUserDetails?.principalName;
     }
   }
   return (
@@ -43,5 +44,12 @@ function UserAvatar({ curruserDetails }) {
     </StyledUserAvatar>
   );
 }
+
+UserAvatar.propTypes = {
+  currentUserDetails: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array
+  ]).isRequired,
+};
 
 export default UserAvatar;

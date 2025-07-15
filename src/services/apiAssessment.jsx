@@ -45,7 +45,7 @@ export async function submitNewAssessment(data) {
     import.meta.env.VITE_SUPABASE_URL
   }/storage/v1/object/public/studentUploadedAssignments/${pdfFileName}`;
 
-  const { error: storageError } = await supabase.storage
+  await supabase.storage
     .from("studentUploadedAssignments")
     .upload(pdfFileName, file);
 
@@ -111,12 +111,12 @@ export async function createNewAssignment(newAssignment) {
     import.meta.env.VITE_SUPABASE_URL
   }/storage/v1/object/public/studentUploadedAssignments/${pdfFileName}`;
 
-  const { error: storageError } = await supabase.storage
+  await supabase.storage
     .from("studentUploadedAssignments")
     .upload(pdfFileName, file);
 
   /**2) Insert data into submitted assignment */
-  const { data: data1, error } = await supabase
+  const { data: data1 } = await supabase
     .from("assignedAssignments")
     .insert([{ ...newAssignment, assignmentInformation: pdfFilePath }])
     .select("*");

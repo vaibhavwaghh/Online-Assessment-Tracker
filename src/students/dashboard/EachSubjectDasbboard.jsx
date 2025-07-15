@@ -1,6 +1,7 @@
 import { useGetAllAssessment } from "../assessmentForStudents/useAssessment";
 import Spinner from "../../ui/Spinner";
-import EachAssesmentDashBoard from "./EachAssesmentDashBoard";
+import EachAssessmentDashBoard from "./EachAssessmentDashBoard";
+import PropTypes from "prop-types";
 
 function EachSubjectDasbboard({ subject }) {
   console.log("THIS IS EACH SUBJECT ID", subject);
@@ -14,7 +15,7 @@ function EachSubjectDasbboard({ subject }) {
       <h1>{subject.subjectName}</h1>
       {assessmentData.map((assessment) => (
         <>
-          <EachAssesmentDashBoard
+          <EachAssessmentDashBoard
             assessment={assessment}
             subjectId={subject.id}
             subjectName={subject.subjectName}
@@ -24,5 +25,9 @@ function EachSubjectDasbboard({ subject }) {
     </div>
   );
 }
+
+EachSubjectDasbboard.propTypes = {
+  subject: PropTypes.object.isRequired,
+};
 
 export default EachSubjectDasbboard;

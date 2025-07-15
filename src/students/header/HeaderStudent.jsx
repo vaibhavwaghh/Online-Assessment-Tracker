@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 import HeaderMenu from "../../ui/HeaderMenu";
 import UserAvatar from "../../features/authentication/UserAvatar";
@@ -7,7 +8,7 @@ import { updateAllSubjects, updateTotalSubject } from "../../redux/userSlice";
 import { useDispatch } from "react-redux";
 import Spinner from "../../ui/Spinner";
 
-function HeaderStudent({ curruserDetails }) {
+function HeaderStudent({ currentUserDetails }) {
   const StyledHeader = styled.header`
     background-color: var(--color-grey-0);
     padding: 1.2rem 4.8rem;
@@ -19,11 +20,11 @@ function HeaderStudent({ curruserDetails }) {
     justify-content: flex-end;
   `;
   const dispatch = useDispatch();
-  if (curruserDetails[0]?.studentName) {
+  if (currentUserDetails[0]?.studentName) {
     var {
       currentYear: { currentYear },
       departmentName: { departmentName },
-    } = curruserDetails[0];
+    } = currentUserDetails[0];
   }
   const { isLoading: isLoadingStudents, data } = useStudent(
     currentYear,
@@ -37,10 +38,14 @@ function HeaderStudent({ curruserDetails }) {
   }
   return (
     <StyledHeader>
-      <UserAvatar curruserDetails={curruserDetails} />
+              <UserAvatar currentUserDetails={currentUserDetails} />
       <HeaderMenu />
     </StyledHeader>
   );
 }
+
+HeaderStudent.propTypes = {
+  currentUserDetails: PropTypes.array.isRequired,
+};
 
 export default HeaderStudent;

@@ -2,7 +2,7 @@ import Table from "../../../ui/Table";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../../../ui/Spinner";
 import { useTeacherAllAssignment } from "../../teacherTable/useTeacher";
-import AssesmentRowTeacher from "./AssesmentRowTeacher";
+import AssessmentRowTeacher from "./AssessmentRowTeacher";
 import { useGetTeachersAllDivisions } from "../../useTeacherOperation";
 import { updateAllDivOfTeacher } from "../../../redux/userSlice";
 
@@ -45,8 +45,8 @@ function AssessmentTableForTeacher() {
       </Table.Header>
       <Table.Body
         data={data}
-        render={(assesment) => (
-          <AssesmentRowTeacher assesment={assesment} key={assesment.id} />
+                  render={(assessment) => (
+            <AssessmentRowTeacher assessment={assessment} key={assessment.id} />
         )}
       />
     </Table>

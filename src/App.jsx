@@ -7,11 +7,11 @@ import GlobalStyles from "./styles/GlobalStyles";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import { Toaster } from "react-hot-toast";
 import Account from "./pages/Account";
-import AllAssessmentForTeacher from "./teacher/allAssesment/AllAssessmentForTeacher";
+import AllAssessmentForTeacher from "./teacher/allAssessment/AllAssessmentForTeacher";
 import AllStudentsOfTeacher from "./teacher/teacherTable/AllStudentsOfTeacher";
 import AllSubjectsForHod from "./hod/hodSubjects/AllSubjectsForHod";
 
-import AllStudentsOfHod from "./hod/assesmentForHod/AllStudentsOfHod";
+import AllStudentsOfHod from "./hod/assessmentForHod/AllStudentsOfHod";
 import AllYearOfPrincipalHod from "./principal/AllYearOfPrincipal";
 import { DarkModeProvider } from "./features/context/DarkModeContext";
 import DashboardForStudent from "./students/dashboard/DashboardForStudent";
@@ -98,7 +98,7 @@ function App() {
                   element={<AllYearOfPrincipalHod />}
                 />
                 <Route
-                  path="principal/:subjectName/:assesment"
+                  path="principal/:subjectName/:assessment"
                   element={<AllStudentsOfHod isPrincipal={1} />}
                 />
               </Route>
@@ -136,7 +136,7 @@ export default App;
                   element={<AllAssessmentOfThisSubject />}
                 />
                 <Route
-                  path="assessment/:subjectName/:assesmentName"
-                  element={<AssesmentDetails />}
+                  path="assessment/:subjectName/:assessmentName"
+                  element={<AssessmentDetails />}
                 /> */
 }

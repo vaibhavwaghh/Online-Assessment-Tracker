@@ -1,13 +1,14 @@
 import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
+import AssessmentTableForHod from "./AssessmentTableForHod";
 import Heading from "../../ui/Heading";
 import Row from "../../ui/Row";
-import { useSearchParams } from "react-router-dom";
+import PropTypes from "prop-types";
 
-import AssessmentTableForHod from "./AssesmentTableForHod";
 import { useDispatch } from "react-redux";
 import { updateSubjectName } from "../../redux/userSlice";
 
-function AllAssesmentOfHod({ isPrincipal }) {
+function AllAssessmentOfHod({ isPrincipal }) {
   const [searchParams] = useSearchParams();
   const subject = searchParams.get("subject");
   const teacherId = useSelector((state) => state.student.teacherId);
@@ -31,4 +32,8 @@ function AllAssesmentOfHod({ isPrincipal }) {
   );
 }
 
-export default AllAssesmentOfHod;
+AllAssessmentOfHod.propTypes = {
+  isPrincipal: PropTypes.number,
+};
+
+export default AllAssessmentOfHod;

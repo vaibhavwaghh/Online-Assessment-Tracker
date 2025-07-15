@@ -32,17 +32,17 @@ function AppLayoutForTeacher() {
     },
   } = useUser();
   const dispatch = useDispatch();
-  let curruserDetails;
+  let currentUserDetails;
   var { currteacherDetails, teacherId } = details;
-  curruserDetails = currteacherDetails;
-  dispatch(updateYearId(curruserDetails[0]?.teachingInYear.id));
+  currentUserDetails = currteacherDetails;
+  dispatch(updateYearId(currentUserDetails[0]?.teachingInYear.id));
   dispatch(updateteacherId(teacherId));
   return (
     <>
       <StyledAppLayout>
-        <Header curruserDetails={curruserDetails} />
+        <Header currentUserDetails={currentUserDetails} />
 
-        <SideBar curruserDetails={curruserDetails} />
+        <SideBar currentUserDetails={currentUserDetails} />
         <Main>
           <Container>
             <Outlet />

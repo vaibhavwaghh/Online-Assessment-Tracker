@@ -31,16 +31,16 @@ function AppLayoutForHod() {
     },
   } = useUser();
   const dispatch = useDispatch();
-  let curruserDetails;
+  let currentUserDetails;
   var { currhodDetails, hodId } = details;
-  curruserDetails = currhodDetails;
+  currentUserDetails = currhodDetails;
   dispatch(updateHodId(hodId));
   return (
     <>
       <StyledAppLayout>
-        <Header curruserDetails={curruserDetails} />
+        <Header currentUserDetails={currentUserDetails} />
 
-        <SideBar curruserDetails={curruserDetails} />
+        <SideBar currentUserDetails={currentUserDetails} />
         <Main>
           <Container>
             <Outlet />

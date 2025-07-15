@@ -4,10 +4,10 @@ import styled, { css } from "styled-components";
 import {
   updateSubjectId,
   updateYearId,
-  updateteacherId,
 } from "../redux/userSlice";
 import Spinner from "./Spinner";
 import { useTeacherSubject } from "../hod/hodSubjects/useHod";
+import PropTypes from "prop-types";
 
 const StyledFilter = styled.div`
   border: 1px solid var(--color-grey-100);
@@ -110,5 +110,11 @@ function Filter({ filterField, options, user }) {
     </StyledFilter>
   );
 }
+
+Filter.propTypes = {
+  filterField: PropTypes.string.isRequired,
+  options: PropTypes.array.isRequired,
+  user: PropTypes.string.isRequired,
+};
 
 export default Filter;

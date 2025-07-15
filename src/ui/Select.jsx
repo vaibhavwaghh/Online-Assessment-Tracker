@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const StyledSelect = styled.select`
   font-size: 1.4rem;
@@ -25,5 +26,11 @@ function Select({ options, value, onChange }) {
     </StyledSelect>
   );
 }
+
+Select.propTypes = {
+  options: PropTypes.array.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]).isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default Select;

@@ -2,11 +2,12 @@ import styled from "styled-components";
 
 import HeaderMenu from "./HeaderMenu";
 import UserAvatar from "../features/authentication/UserAvatar";
+import PropTypes from "prop-types";
 
 // import HeaderMenu from "./HeaderMenu";
 // import UserAvatar from "../features/authentication/UserAvatar";
 
-function Header({ curruserDetails }) {
+function Header({ currentUserDetails }) {
   const StyledHeader = styled.header`
     background-color: var(--color-grey-0);
     padding: 1.2rem 4.8rem;
@@ -20,10 +21,17 @@ function Header({ curruserDetails }) {
 
   return (
     <StyledHeader>
-      <UserAvatar curruserDetails={curruserDetails} />
+              <UserAvatar currentUserDetails={currentUserDetails} />
       <HeaderMenu />
     </StyledHeader>
   );
 }
+
+Header.propTypes = {
+  currentUserDetails: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.array
+  ]).isRequired,
+};
 
 export default Header;

@@ -15,7 +15,7 @@ export function useGetAllAssessment(subjectName) {
   return { isLoading, assessmentData };
 }
 
-export function useUploadAssesment(allIds) {
+export function useUploadAssessment(allIds) {
   const { studentId, subjectId, asssignmentId: assignmentId } = allIds;
 
   console.log("THIS IS UPLOADED ASSESMENT", allIds);

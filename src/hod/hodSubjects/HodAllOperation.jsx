@@ -1,5 +1,6 @@
 import Filter from "../../ui/Filter";
 import TableOperations from "../../ui/TableOperations";
+import PropTypes from "prop-types";
 
 function HodAllOperation({ data }) {
   return (
@@ -15,5 +16,9 @@ function HodAllOperation({ data }) {
     </TableOperations>
   );
 }
+
+HodAllOperation.propTypes = {
+  data: PropTypes.array.isRequired,
+};
 
 export default HodAllOperation;

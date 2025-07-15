@@ -2,6 +2,7 @@
 import Logo from "../ui/Logo";
 import styled from "styled-components";
 import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import { AiOutlineHome } from "react-icons/ai";
 import { useDispatch } from "react-redux";
@@ -92,5 +93,9 @@ function PrincipalSideBar({ principalDetails }) {
     </StyledSideBar>
   );
 }
+
+PrincipalSideBar.propTypes = {
+  principalDetails: PropTypes.object.isRequired,
+};
 
 export default PrincipalSideBar;

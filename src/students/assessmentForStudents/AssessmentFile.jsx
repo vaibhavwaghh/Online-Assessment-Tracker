@@ -1,13 +1,14 @@
 import { useState } from "react";
 import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
-import { useUploadAssesment } from "./useAssessment";
+import { useUploadAssessment } from "./useAssessment";
 import Spinner from "../../ui/Spinner";
+import PropTypes from "prop-types";
 
-function AssesmentFile({ allIds }) {
+function AssessmentFile({ allIds }) {
   const [fileUploaded, setFileUploaded] = useState(false);
   const [file, setFile] = useState(null);
-  const { isUploading, uploadFile } = useUploadAssesment(allIds);
+  const { isUploading, uploadFile } = useUploadAssessment(allIds);
 
   const handleFileChange = (event) => {
     if (event.target.files.length > 0) {
@@ -48,4 +49,8 @@ function AssesmentFile({ allIds }) {
   );
 }
 
-export default AssesmentFile;
+AssessmentFile.propTypes = {
+  allIds: PropTypes.object.isRequired,
+};
+
+export default AssessmentFile;

@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
 import Table from "../../ui/Table";
 
-import AssesmentRow from "./AssesmentRow";
+import AssessmentRow from "./AssessmentRow";
 import Spinner from "../../ui/Spinner";
 import { useGetAllAssessment } from "./useAssessment";
 import { useDispatch, useSelector } from "react-redux";
-import { updatetotalNumberOfAssesment } from "../../redux/userSlice";
+import { updatetotalNumberOfAssessment } from "../../redux/userSlice";
 
 function AssessmentTable() {
   const { subjectName } = useParams();
@@ -17,7 +17,7 @@ function AssessmentTable() {
   const { assessmentData, isLoading } = useGetAllAssessment(subjectName);
   console.log("THIS IS ASSESMENT DATA LENGTH", assessmentData);
   if (assessmentData) {
-    dispatch(updatetotalNumberOfAssesment(assessmentData?.length));
+    dispatch(updatetotalNumberOfAssessment(assessmentData?.length));
   }
   if (isLoading) return <Spinner />;
 
@@ -36,11 +36,11 @@ function AssessmentTable() {
       </Table.Header>
       <Table.Body
         data={assessmentData}
-        render={(assesment) => (
-          <AssesmentRow
-            numberOfSubmitted={numberOfSubmitted}
-            assesment={assesment}
-            key={assesment.id}
+                  render={(assessment) => (
+            <AssessmentRow
+              numberOfSubmitted={numberOfSubmitted}
+              assessment={assessment}
+              key={assessment.id}
           />
         )}
       />

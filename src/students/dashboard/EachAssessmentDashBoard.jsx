@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 import DetailsModel from "./DetailsModel";
 import { useSelector } from "react-redux";
+import PropTypes from "prop-types";
 
 const Box = styled.div`
   display: inline-block; /* Display boxes inline */
@@ -34,10 +35,9 @@ const Box = styled.div`
   }
 `;
 
-function EachAssesmentDashBoard({ assessment, subjectId, subjectName }) {
+function EachAssesmentDashBoard({ assessment, subjectId }) {
   const {
     assignmentName,
-    deadline,
     assignmentInformation,
     id: asssignmentId,
     teacherId: { teacherName },
@@ -89,5 +89,10 @@ function EachAssesmentDashBoard({ assessment, subjectId, subjectName }) {
     </>
   );
 }
+
+EachAssesmentDashBoard.propTypes = {
+  assessment: PropTypes.object.isRequired,
+  subjectId: PropTypes.number.isRequired,
+};
 
 export default EachAssesmentDashBoard;

@@ -1,5 +1,5 @@
-import React from "react";
 import { convertToCSV } from "../utils/CSVUtils";
+import PropTypes from "prop-types";
 
 function ExportButton({ studentData }) {
   const buttonStyle = {
@@ -32,5 +32,9 @@ function ExportButton({ studentData }) {
     </button>
   );
 }
+
+ExportButton.propTypes = {
+  studentData: PropTypes.array.isRequired,
+};
 
 export default ExportButton;

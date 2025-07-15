@@ -1,6 +1,7 @@
-import AssesmentDetails from "../../pages/AssesmentDetails";
+import AssessmentDetails from "../../pages/AssessmentDetails";
 import Button from "../../ui/Button";
 import Modal from "../../ui/Modal";
+import PropTypes from "prop-types";
 
 function DetailsModel({ newdata, allIds }) {
   return (
@@ -10,10 +11,15 @@ function DetailsModel({ newdata, allIds }) {
       </Modal.Open>
 
       <Modal.Window name="assignment-form">
-        <AssesmentDetails newdata={newdata} allIds={allIds} />
+        <AssessmentDetails newdata={newdata} allIds={allIds} />
       </Modal.Window>
     </Modal>
   );
 }
+
+DetailsModel.propTypes = {
+  newdata: PropTypes.object.isRequired,
+  allIds: PropTypes.object.isRequired,
+};
 
 export default DetailsModel;

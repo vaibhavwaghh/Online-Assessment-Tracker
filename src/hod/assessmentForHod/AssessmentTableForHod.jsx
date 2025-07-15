@@ -4,7 +4,8 @@ import Spinner from "../../ui/Spinner";
 import { useTeacherAllAssignment } from "../../teacher/teacherTable/useTeacher";
 import { useGetTeachersAllDivisions } from "../../teacher/useTeacherOperation";
 import { updateAllDivOfTeacher } from "../../redux/userSlice";
-import AssesmentRowHod from "./AssesmentRowForHod";
+import AssessmentRowHod from "./AssessmentRowForHod";
+import PropTypes from "prop-types";
 
 function AssessmentTableForHod({ teacherId, subjectId, isPrincipal }) {
   const dispatch = useDispatch();
@@ -39,10 +40,10 @@ function AssessmentTableForHod({ teacherId, subjectId, isPrincipal }) {
       </Table.Header>
       <Table.Body
         data={data}
-        render={(assesment) => (
-          <AssesmentRowHod
-            assesment={assesment}
-            key={assesment.id}
+        render={(assessment) => (
+          <AssessmentRowHod
+            assessment={assessment}
+            key={assessment.id}
             isPrincipal={isPrincipal}
           />
         )}
@@ -50,5 +51,11 @@ function AssessmentTableForHod({ teacherId, subjectId, isPrincipal }) {
     </Table>
   );
 }
+
+AssessmentTableForHod.propTypes = {
+  teacherId: PropTypes.number.isRequired,
+  subjectId: PropTypes.number.isRequired,
+  isPrincipal: PropTypes.number,
+};
 
 export default AssessmentTableForHod;

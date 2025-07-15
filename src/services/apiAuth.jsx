@@ -1,6 +1,4 @@
-import { useDispatch } from "react-redux";
 import supabase from "./supaBase";
-import { updatestudentId } from "../redux/userSlice";
 
 export async function loginApi({ email, password }) {
   /**1) CHECK WHETHER EMAIL ID AND PASSWORD IS CORRECT */
@@ -59,7 +57,7 @@ export async function loginApi({ email, password }) {
   /**4) FIND ALL DETAILS OF HOD */
   if (role[0].roleOfUser === "hod") {
     console.log("INSIDE IF", role[0].roleOfUser);
-    var { data: currhodDetails, error: error4 } = await supabase
+    var { data: currhodDetails } = await supabase
       .from("Hod")
       .select("*")
       .eq("id", userId[0].hod);

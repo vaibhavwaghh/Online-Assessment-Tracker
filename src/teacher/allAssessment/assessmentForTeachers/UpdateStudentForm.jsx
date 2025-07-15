@@ -3,12 +3,13 @@ import FormRow from "../../../ui/FormRow";
 import Input from "../../../ui/Input";
 import { useForm } from "react-hook-form";
 import Button from "../../../ui/Button";
+import PropTypes from "prop-types";
 
 import { useSelector } from "react-redux";
-import useUpdateAssesment from "./useUpdateAssignment";
+import useUpdateAssessment from "./useUpdateAssignment";
 
 function UpdateStudentForm({ onCloseModal, studentId }) {
-  const { register, handleSubmit, reset, getValues, formState } = useForm();
+  const { register, handleSubmit, reset, formState } = useForm();
   const { errors } = formState;
   console.log("ERRORS FROM FORMSTATE", errors);
   const assignedMarks = useSelector((state) => state.student.marks);
@@ -16,7 +17,7 @@ function UpdateStudentForm({ onCloseModal, studentId }) {
 
   const assignmentId = useSelector((state) => state.student.assignmentId);
 
-  const { isUpdating, updateAssignment } = useUpdateAssesment();
+  const { isUpdating, updateAssignment } = useUpdateAssessment();
   const allIds = { subjectId, assignmentId, studentId };
 
   function submitFn(data) {
@@ -91,5 +92,10 @@ function UpdateStudentForm({ onCloseModal, studentId }) {
     </div>
   );
 }
+
+UpdateStudentForm.propTypes = {
+  onCloseModal: PropTypes.func.isRequired,
+  studentId: PropTypes.number.isRequired,
+};
 
 export default UpdateStudentForm;

@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 import { updateCurrentAssignment } from "../../../services/apiAssessment";
 
-function useUpdateAssesment() {
+function useUpdateAssessment() {
   const queryClient = useQueryClient();
   const { isLoading: isUpdating, mutate: updateAssignment } = useMutation({
     mutationFn: (insertedData) => updateCurrentAssignment(insertedData),
@@ -28,4 +28,4 @@ function useUpdateAssesment() {
   return { isUpdating, updateAssignment };
 }
 
-export default useUpdateAssesment;
+export default useUpdateAssessment;

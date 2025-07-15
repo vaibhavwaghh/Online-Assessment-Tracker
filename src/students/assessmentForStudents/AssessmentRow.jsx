@@ -14,33 +14,33 @@ import {
 
 import { useNavigate } from "react-router-dom";
 import { HiEye } from "react-icons/hi2";
-import styled from "styled-components";
+import PropTypes from "prop-types";
 
-function AssesmentRow({ assesment, numberOfSubmitted }) {
-  const StyledButton = styled.button`
-    width: 100%;
-    text-align: left;
-    background: none;
-    border: none;
-    padding: 1.2rem 2.4rem;
-    font-size: 1.4rem;
-    transition: all 0.2s;
+function AssessmentRow({ assessment }) {
+  // const StyledButton = styled.button`
+  //   width: 100%;
+  //   text-align: left;
+  //   background: none;
+  //   border: none;
+  //   padding: 1.2rem 2.4rem;
+  //   font-size: 1.4rem;
+  //   transition: all 0.2s;
 
-    display: flex;
-    align-items: center;
-    gap: 1.6rem;
+  //   display: flex;
+  //   align-items: center;
+  //   gap: 1.6rem;
 
-    &:hover {
-      background-color: var(--color-grey-50);
-    }
+  //   &:hover {
+  //     background-color: var(--color-grey-50);
+  //   }
 
-    & svg {
-      width: 1.6rem;
-      height: 1.6rem;
-      color: var(--color-grey-400);
-      transition: all 0.3s;
-    }
-  `;
+  //   & svg {
+  //     width: 1.6rem;
+  //     height: 1.6rem;
+  //     color: var(--color-grey-400);
+  //     transition: all 0.3s;
+  //   }
+  // `;
   const {
     assignmentName,
     deadline,
@@ -49,7 +49,7 @@ function AssesmentRow({ assesment, numberOfSubmitted }) {
     teacherId: { teacherName },
     description,
     assignedMarks,
-  } = assesment;
+  } = assessment;
   const dispatch = useDispatch();
   dispatch(updateAssignmentId(asssignmentId));
   const navigate = useNavigate();
@@ -58,7 +58,7 @@ function AssesmentRow({ assesment, numberOfSubmitted }) {
 
   let allIds = { asssignmentId, subjectId, studentId };
 
-  const { isLoading, data } = useGetStatusOfAsssessment(allIds);
+  const { data } = useGetStatusOfAsssessment(allIds);
 
   const handleDownload1 = () => {
     window.open(assignmentInformation, "_blank");
@@ -106,4 +106,8 @@ function AssesmentRow({ assesment, numberOfSubmitted }) {
   );
 }
 
-export default AssesmentRow;
+AssessmentRow.propTypes = {
+  assessment: PropTypes.object.isRequired,
+};
+
+export default AssessmentRow;

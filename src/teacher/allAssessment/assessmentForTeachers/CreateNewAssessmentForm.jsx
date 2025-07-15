@@ -6,17 +6,18 @@ import Textarea from "../../../ui/Textarea";
 import { useForm } from "react-hook-form";
 import FormRow from "../../../ui/FormRow";
 import { useSelector } from "react-redux";
-import useCreateAssesment from "./useCreateAssesment";
+import useCreateAssessment from "./useCreateAssessment";
+import PropTypes from "prop-types";
 
 function CreateNewAssessmentForm({ onCloseModal }) {
-  const { register, handleSubmit, reset, getValues, formState } = useForm();
+  const { register, handleSubmit, reset, formState } = useForm();
   const { errors } = formState;
   console.log("ERRORS FROM FORMSTATE", errors);
 
   const subjectOfAssignment = useSelector((state) => state.student.subjectId);
   const teacherId = useSelector((state) => state.student.teacherId);
 
-  const { isCreating, createAssignment } = useCreateAssesment();
+  const { isCreating, createAssignment } = useCreateAssessment();
 
   function submitFn(data) {
     const file = data.assignmentInformation[0];
@@ -124,5 +125,9 @@ function CreateNewAssessmentForm({ onCloseModal }) {
     </Form>
   );
 }
+
+CreateNewAssessmentForm.propTypes = {
+  onCloseModal: PropTypes.func.isRequired,
+};
 
 export default CreateNewAssessmentForm;
